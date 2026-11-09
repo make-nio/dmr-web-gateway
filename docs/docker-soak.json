@@ -1,0 +1,787 @@
+{
+  "passed": true,
+  "elapsedSeconds": 602.384,
+  "unexpectedReconnects": 0,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "gateway": {
+        "memory": 20074496,
+        "cpu": 177813,
+        "cpuPercent": 0
+      },
+      "simulator": {
+        "memory": 19161088,
+        "cpu": 143537,
+        "cpuPercent": 0
+      }
+    },
+    {
+      "seconds": 10.26,
+      "gateway": {
+        "memory": 18542592,
+        "cpu": 290884,
+        "cpuPercent": 1.1030928880273263
+      },
+      "simulator": {
+        "memory": 18563072,
+        "cpu": 229121,
+        "cpuPercent": 0.839508180652701
+      }
+    },
+    {
+      "seconds": 20.455,
+      "gateway": {
+        "memory": 18386944,
+        "cpu": 386891,
+        "cpuPercent": 0.9419938016366545
+      },
+      "simulator": {
+        "memory": 18395136,
+        "cpu": 295537,
+        "cpuPercent": 0.6511163812595983
+      }
+    },
+    {
+      "seconds": 30.654,
+      "gateway": {
+        "memory": 18448384,
+        "cpu": 483363,
+        "cpuPercent": 0.9453780837037402
+      },
+      "simulator": {
+        "memory": 18468864,
+        "cpu": 364793,
+        "cpuPercent": 0.679024157660852
+      }
+    },
+    {
+      "seconds": 40.856,
+      "gateway": {
+        "memory": 19451904,
+        "cpu": 581325,
+        "cpuPercent": 0.9592589067580866
+      },
+      "simulator": {
+        "memory": 18436096,
+        "cpu": 434709,
+        "cpuPercent": 0.6855026155406702
+      }
+    },
+    {
+      "seconds": 51.052,
+      "gateway": {
+        "memory": 19443712,
+        "cpu": 677394,
+        "cpuPercent": 0.9434190797432639
+      },
+      "simulator": {
+        "memory": 18579456,
+        "cpu": 502152,
+        "cpuPercent": 0.6635592182798757
+      }
+    },
+    {
+      "seconds": 61.218,
+      "gateway": {
+        "memory": 20373504,
+        "cpu": 784803,
+        "cpuPercent": 1.0549287134856753
+      },
+      "simulator": {
+        "memory": 20545536,
+        "cpu": 580163,
+        "cpuPercent": 0.761597755394222
+      }
+    },
+    {
+      "seconds": 71.466,
+      "gateway": {
+        "memory": 20320256,
+        "cpu": 908398,
+        "cpuPercent": 1.2058021905811493
+      },
+      "simulator": {
+        "memory": 18849792,
+        "cpu": 660402,
+        "cpuPercent": 0.7867211756585202
+      }
+    },
+    {
+      "seconds": 81.675,
+      "gateway": {
+        "memory": 20422656,
+        "cpu": 1023940,
+        "cpuPercent": 1.133554817371394
+      },
+      "simulator": {
+        "memory": 19095552,
+        "cpu": 737437,
+        "cpuPercent": 0.7555259817125441
+      }
+    },
+    {
+      "seconds": 91.863,
+      "gateway": {
+        "memory": 20402176,
+        "cpu": 1152646,
+        "cpuPercent": 1.2613120991357238
+      },
+      "simulator": {
+        "memory": 18821120,
+        "cpu": 814389,
+        "cpuPercent": 0.7545483209533635
+      }
+    },
+    {
+      "seconds": 102.056,
+      "gateway": {
+        "memory": 20402176,
+        "cpu": 1259929,
+        "cpuPercent": 1.0523877755781867
+      },
+      "simulator": {
+        "memory": 18849792,
+        "cpu": 892295,
+        "cpuPercent": 0.7633058635839709
+      }
+    },
+    {
+      "seconds": 112.277,
+      "gateway": {
+        "memory": 20389888,
+        "cpu": 1381125,
+        "cpuPercent": 1.1872674114790598
+      },
+      "simulator": {
+        "memory": 19177472,
+        "cpu": 971894,
+        "cpuPercent": 0.7808596782996364
+      }
+    },
+    {
+      "seconds": 122.461,
+      "gateway": {
+        "memory": 25751552,
+        "cpu": 1499627,
+        "cpuPercent": 1.1630650728894203
+      },
+      "simulator": {
+        "memory": 19025920,
+        "cpu": 1041601,
+        "cpuPercent": 0.6833989417678398
+      }
+    },
+    {
+      "seconds": 132.653,
+      "gateway": {
+        "memory": 25763840,
+        "cpu": 1597117,
+        "cpuPercent": 0.957507701421377
+      },
+      "simulator": {
+        "memory": 19161088,
+        "cpu": 1112923,
+        "cpuPercent": 0.6992077693924806
+      }
+    },
+    {
+      "seconds": 142.856,
+      "gateway": {
+        "memory": 25939968,
+        "cpu": 1698077,
+        "cpuPercent": 0.9896899600294864
+      },
+      "simulator": {
+        "memory": 19124224,
+        "cpu": 1187002,
+        "cpuPercent": 0.7262709969562259
+      }
+    },
+    {
+      "seconds": 153.059,
+      "gateway": {
+        "memory": 25935872,
+        "cpu": 1806058,
+        "cpuPercent": 1.0570280916074484
+      },
+      "simulator": {
+        "memory": 19013632,
+        "cpu": 1269427,
+        "cpuPercent": 0.8075175326499169
+      }
+    },
+    {
+      "seconds": 163.269,
+      "gateway": {
+        "memory": 25870336,
+        "cpu": 1928014,
+        "cpuPercent": 1.195702413515032
+      },
+      "simulator": {
+        "memory": 19025920,
+        "cpu": 1341986,
+        "cpuPercent": 0.7117134581618221
+      }
+    },
+    {
+      "seconds": 173.458,
+      "gateway": {
+        "memory": 25927680,
+        "cpu": 2031676,
+        "cpuPercent": 1.0166806956299261
+      },
+      "simulator": {
+        "memory": 19234816,
+        "cpu": 1414290,
+        "cpuPercent": 0.7088439264736669
+      }
+    },
+    {
+      "seconds": 183.66,
+      "gateway": {
+        "memory": 25935872,
+        "cpu": 2144031,
+        "cpuPercent": 1.101622100927768
+      },
+      "simulator": {
+        "memory": 19046400,
+        "cpu": 1491731,
+        "cpuPercent": 0.7590667819822787
+      }
+    },
+    {
+      "seconds": 193.862,
+      "gateway": {
+        "memory": 26013696,
+        "cpu": 2242124,
+        "cpuPercent": 0.9614769897810967
+      },
+      "simulator": {
+        "memory": 19099648,
+        "cpu": 1563351,
+        "cpuPercent": 0.7023924786494353
+      }
+    },
+    {
+      "seconds": 204.061,
+      "gateway": {
+        "memory": 25997312,
+        "cpu": 2338032,
+        "cpuPercent": 0.9409912681097181
+      },
+      "simulator": {
+        "memory": 19161088,
+        "cpu": 1633201,
+        "cpuPercent": 0.6848912521873454
+      }
+    },
+    {
+      "seconds": 214.263,
+      "gateway": {
+        "memory": 24653824,
+        "cpu": 2441559,
+        "cpuPercent": 1.0144870818045697
+      },
+      "simulator": {
+        "memory": 22487040,
+        "cpu": 1715398,
+        "cpuPercent": 0.8055656923246332
+      }
+    },
+    {
+      "seconds": 224.464,
+      "gateway": {
+        "memory": 24784896,
+        "cpu": 2541257,
+        "cpuPercent": 0.9777140839422632
+      },
+      "simulator": {
+        "memory": 22827008,
+        "cpu": 1786744,
+        "cpuPercent": 0.6997515767046409
+      }
+    },
+    {
+      "seconds": 234.651,
+      "gateway": {
+        "memory": 24735744,
+        "cpu": 2645724,
+        "cpuPercent": 1.0229229540310654
+      },
+      "simulator": {
+        "memory": 22528000,
+        "cpu": 1856833,
+        "cpuPercent": 0.6867989450822273
+      }
+    },
+    {
+      "seconds": 244.863,
+      "gateway": {
+        "memory": 22818816,
+        "cpu": 2751330,
+        "cpuPercent": 1.0341711133426317
+      },
+      "simulator": {
+        "memory": 27627520,
+        "cpu": 1939111,
+        "cpuPercent": 0.8062932706964459
+      }
+    },
+    {
+      "seconds": 255.08,
+      "gateway": {
+        "memory": 22798336,
+        "cpu": 2858259,
+        "cpuPercent": 1.0489847108534243
+      },
+      "simulator": {
+        "memory": 27639808,
+        "cpu": 2009629,
+        "cpuPercent": 0.6920016330053623
+      }
+    },
+    {
+      "seconds": 265.257,
+      "gateway": {
+        "memory": 22790144,
+        "cpu": 2971662,
+        "cpuPercent": 1.1131182033963043
+      },
+      "simulator": {
+        "memory": 27688960,
+        "cpu": 2083423,
+        "cpuPercent": 0.723490473866469
+      }
+    },
+    {
+      "seconds": 275.458,
+      "gateway": {
+        "memory": 20070400,
+        "cpu": 3068481,
+        "cpuPercent": 0.9497440358142613
+      },
+      "simulator": {
+        "memory": 31199232,
+        "cpu": 2162069,
+        "cpuPercent": 0.7709771589803798
+      }
+    },
+    {
+      "seconds": 285.665,
+      "gateway": {
+        "memory": 20287488,
+        "cpu": 3180566,
+        "cpuPercent": 1.0973639872548016
+      },
+      "simulator": {
+        "memory": 31444992,
+        "cpu": 2236771,
+        "cpuPercent": 0.7324616278417876
+      }
+    },
+    {
+      "seconds": 295.856,
+      "gateway": {
+        "memory": 20275200,
+        "cpu": 3292196,
+        "cpuPercent": 1.0951541747671547
+      },
+      "simulator": {
+        "memory": 31428608,
+        "cpu": 2307917,
+        "cpuPercent": 0.6972902795786243
+      }
+    },
+    {
+      "seconds": 306.06,
+      "gateway": {
+        "memory": 18468864,
+        "cpu": 3398733,
+        "cpuPercent": 1.0341350437753698
+      },
+      "simulator": {
+        "memory": 35393536,
+        "cpu": 2389789,
+        "cpuPercent": 0.7950497058981643
+      }
+    },
+    {
+      "seconds": 316.361,
+      "gateway": {
+        "memory": 18214912,
+        "cpu": 3499871,
+        "cpuPercent": 0.9923519981542069
+      },
+      "simulator": {
+        "memory": 35135488,
+        "cpu": 2459877,
+        "cpuPercent": 0.6871038852972703
+      }
+    },
+    {
+      "seconds": 326.558,
+      "gateway": {
+        "memory": 18427904,
+        "cpu": 3598196,
+        "cpuPercent": 0.9636552392382794
+      },
+      "simulator": {
+        "memory": 35160064,
+        "cpu": 2533563,
+        "cpuPercent": 0.722458742089466
+      }
+    },
+    {
+      "seconds": 336.754,
+      "gateway": {
+        "memory": 16756736,
+        "cpu": 3704838,
+        "cpuPercent": 1.0447096374594078
+      },
+      "simulator": {
+        "memory": 38944768,
+        "cpu": 2615177,
+        "cpuPercent": 0.8001456438027007
+      }
+    },
+    {
+      "seconds": 346.96,
+      "gateway": {
+        "memory": 16990208,
+        "cpu": 3803907,
+        "cpuPercent": 0.9713118838313398
+      },
+      "simulator": {
+        "memory": 38985728,
+        "cpu": 2689087,
+        "cpuPercent": 0.7242348644536241
+      }
+    },
+    {
+      "seconds": 357.16,
+      "gateway": {
+        "memory": 17018880,
+        "cpu": 3905089,
+        "cpuPercent": 0.9925440642586567
+      },
+      "simulator": {
+        "memory": 39284736,
+        "cpu": 2761314,
+        "cpuPercent": 0.7084492977098162
+      }
+    },
+    {
+      "seconds": 367.355,
+      "gateway": {
+        "memory": 17260544,
+        "cpu": 4003645,
+        "cpuPercent": 0.9596266761734238
+      },
+      "simulator": {
+        "memory": 37076992,
+        "cpu": 2831539,
+        "cpuPercent": 0.6818402604307359
+      }
+    },
+    {
+      "seconds": 377.656,
+      "gateway": {
+        "memory": 17121280,
+        "cpu": 4104976,
+        "cpuPercent": 0.9905180062459898
+      },
+      "simulator": {
+        "memory": 37076992,
+        "cpu": 2902788,
+        "cpuPercent": 0.6984603267764257
+      }
+    },
+    {
+      "seconds": 387.87,
+      "gateway": {
+        "memory": 17289216,
+        "cpu": 4212335,
+        "cpuPercent": 1.0499836704168455
+      },
+      "simulator": {
+        "memory": 37306368,
+        "cpu": 2977631,
+        "cpuPercent": 0.7336193565064878
+      }
+    },
+    {
+      "seconds": 398.059,
+      "gateway": {
+        "memory": 23986176,
+        "cpu": 4318481,
+        "cpuPercent": 1.0346118639298272
+      },
+      "simulator": {
+        "memory": 33443840,
+        "cpu": 3055406,
+        "cpuPercent": 0.7549045696365069
+      }
+    },
+    {
+      "seconds": 408.363,
+      "gateway": {
+        "memory": 24399872,
+        "cpu": 4419317,
+        "cpuPercent": 0.9873218279793072
+      },
+      "simulator": {
+        "memory": 33492992,
+        "cpu": 3128566,
+        "cpuPercent": 0.7171155520668472
+      }
+    },
+    {
+      "seconds": 418.567,
+      "gateway": {
+        "memory": 24383488,
+        "cpu": 4519841,
+        "cpuPercent": 0.9846011538316725
+      },
+      "simulator": {
+        "memory": 33603584,
+        "cpu": 3205003,
+        "cpuPercent": 0.7497289324147278
+      }
+    },
+    {
+      "seconds": 428.773,
+      "gateway": {
+        "memory": 28831744,
+        "cpu": 4645113,
+        "cpuPercent": 1.2252001959389585
+      },
+      "simulator": {
+        "memory": 33280000,
+        "cpu": 3277510,
+        "cpuPercent": 0.710036348697445
+      }
+    },
+    {
+      "seconds": 438.978,
+      "gateway": {
+        "memory": 28971008,
+        "cpu": 4757736,
+        "cpuPercent": 1.1057338419577576
+      },
+      "simulator": {
+        "memory": 31002624,
+        "cpu": 3353565,
+        "cpuPercent": 0.7460286641066779
+      }
+    },
+    {
+      "seconds": 449.171,
+      "gateway": {
+        "memory": 28811264,
+        "cpu": 4868658,
+        "cpuPercent": 1.0878609782381052
+      },
+      "simulator": {
+        "memory": 30912512,
+        "cpu": 3439512,
+        "cpuPercent": 0.8432602119180276
+      }
+    },
+    {
+      "seconds": 459.362,
+      "gateway": {
+        "memory": 32628736,
+        "cpu": 4977999,
+        "cpuPercent": 1.0706588186251467
+      },
+      "simulator": {
+        "memory": 28262400,
+        "cpu": 3518903,
+        "cpuPercent": 0.7777378262685204
+      }
+    },
+    {
+      "seconds": 469.574,
+      "gateway": {
+        "memory": 32542720,
+        "cpu": 5085550,
+        "cpuPercent": 1.055272702241143
+      },
+      "simulator": {
+        "memory": 28340224,
+        "cpu": 3596101,
+        "cpuPercent": 0.7570749092811979
+      }
+    },
+    {
+      "seconds": 479.761,
+      "gateway": {
+        "memory": 32595968,
+        "cpu": 5187152,
+        "cpuPercent": 0.9984215383134322
+      },
+      "simulator": {
+        "memory": 28405760,
+        "cpu": 3669085,
+        "cpuPercent": 0.7158669450654995
+      }
+    },
+    {
+      "seconds": 489.961,
+      "gateway": {
+        "memory": 32985088,
+        "cpu": 5293766,
+        "cpuPercent": 1.0425410785140776
+      },
+      "simulator": {
+        "memory": 27635712,
+        "cpu": 3745436,
+        "cpuPercent": 0.7483637114832377
+      }
+    },
+    {
+      "seconds": 500.161,
+      "gateway": {
+        "memory": 33128448,
+        "cpu": 5395284,
+        "cpuPercent": 0.9976462583653513
+      },
+      "simulator": {
+        "memory": 27459584,
+        "cpu": 3818962,
+        "cpuPercent": 0.7209941361173996
+      }
+    },
+    {
+      "seconds": 510.361,
+      "gateway": {
+        "memory": 33280000,
+        "cpu": 5500336,
+        "cpuPercent": 1.0301243075937576
+      },
+      "simulator": {
+        "memory": 27512832,
+        "cpu": 3897516,
+        "cpuPercent": 0.7694445556504824
+      }
+    },
+    {
+      "seconds": 520.568,
+      "gateway": {
+        "memory": 33607680,
+        "cpu": 5602152,
+        "cpuPercent": 0.9959411184451875
+      },
+      "simulator": {
+        "memory": 26988544,
+        "cpu": 3976732,
+        "cpuPercent": 0.7772835092008318
+      }
+    },
+    {
+      "seconds": 530.76,
+      "gateway": {
+        "memory": 34004992,
+        "cpu": 5704142,
+        "cpuPercent": 1.001727609647891
+      },
+      "simulator": {
+        "memory": 26959872,
+        "cpu": 4046714,
+        "cpuPercent": 0.6859910942813311
+      }
+    },
+    {
+      "seconds": 540.963,
+      "gateway": {
+        "memory": 35016704,
+        "cpu": 5809029,
+        "cpuPercent": 1.0265759123025275
+      },
+      "simulator": {
+        "memory": 26320896,
+        "cpu": 4124709,
+        "cpuPercent": 0.764830801838911
+      }
+    },
+    {
+      "seconds": 551.156,
+      "gateway": {
+        "memory": 42622976,
+        "cpu": 5911350,
+        "cpuPercent": 1.005481246570545
+      },
+      "simulator": {
+        "memory": 26226688,
+        "cpu": 4196416,
+        "cpuPercent": 0.7030211632976952
+      }
+    },
+    {
+      "seconds": 561.357,
+      "gateway": {
+        "memory": 42688512,
+        "cpu": 6008138,
+        "cpuPercent": 0.9481043635264741
+      },
+      "simulator": {
+        "memory": 26497024,
+        "cpu": 4272653,
+        "cpuPercent": 0.7472639229001105
+      }
+    },
+    {
+      "seconds": 571.558,
+      "gateway": {
+        "memory": 42422272,
+        "cpu": 6118427,
+        "cpuPercent": 1.0776188442157908
+      },
+      "simulator": {
+        "memory": 25735168,
+        "cpu": 4343873,
+        "cpuPercent": 0.6975632541558469
+      }
+    },
+    {
+      "seconds": 581.771,
+      "gateway": {
+        "memory": 42672128,
+        "cpu": 6219604,
+        "cpuPercent": 0.9946100274113132
+      },
+      "simulator": {
+        "memory": 26054656,
+        "cpu": 4423636,
+        "cpuPercent": 0.7829200957579215
+      }
+    },
+    {
+      "seconds": 591.958,
+      "gateway": {
+        "memory": 42545152,
+        "cpu": 6325949,
+        "cpuPercent": 1.0432617576396237
+      },
+      "simulator": {
+        "memory": 26247168,
+        "cpu": 4499144,
+        "cpuPercent": 0.7402191954004377
+      }
+    },
+    {
+      "seconds": 602.162,
+      "gateway": {
+        "memory": 43474944,
+        "cpu": 6465928,
+        "cpuPercent": 1.372337684233868
+      },
+      "simulator": {
+        "memory": 25407488,
+        "cpu": 4575848,
+        "cpuPercent": 0.7516803662015875
+      }
+    }
+  ]
+}
