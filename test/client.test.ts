@@ -14,6 +14,10 @@ test('wire fixtures, big endian id, fixed config widths and SHA256', () => {
   assert.equal(packet('RPTL',1234567).toString('hex'),'5250544c0012d687');
   assert.equal(configuration().length,294);
   assert.equal(configuration().subarray(0,8).toString(),'N0CALL  ');
+  assert.equal(configuration().subarray(8,30).toString(),'0000000000000000000101');
+  assert.equal(configuration().subarray(30,50).toString(),'0.00000000.000000000');
+  assert.equal(configuration()[89],52);
+  assert.equal(packet('RPTC',1234567,configuration()).length,302);
   assert.equal(digest(Buffer.from('ab'),Buffer.from('c')).toString('hex'),'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
   assert.throws(() => new Client({port:0,password}));
 });

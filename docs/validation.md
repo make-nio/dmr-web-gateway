@@ -11,7 +11,12 @@ Entorno: Windows, Node.js v22.22.1, npm 10.9.4.
   errores de arranque sin revelar rutas ni contenido.
 - La ejecución restringida inicialmente bloqueó UDP local y produjo timeouts;
   la ejecución con acceso loopback pasó.
-- Sesión de aceptación de 600 s: en curso; resultado se registra antes del PR.
+- `npm run soak`: pasó con más de 600 s continuos en ready, cero reconexiones
+  tras establecer sesión y salida 0. Resultado literal:
+  `{"test":"600s UDP soak","success":true,"failures":0,"elapsedMs":610436}`.
+  Se corrigió una colisión de puerto entre el intento restringido inicial y
+  el primer intento prolongado; ambos fueron descartados. La prueba válida
+  usa un puerto aleatorio aislado y reporta progreso cada 10 s.
 - Docker no está instalado en esta máquina. Dockerfile/Compose revisados
   estáticamente; build, healthcheck y límites en contenedor pendientes de SRE.
 - No se usaron secretos reales, BrandMeister, RF ni infraestructura SRE.
