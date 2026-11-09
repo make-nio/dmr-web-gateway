@@ -12,7 +12,7 @@ services:
     pids_limit: 64
     restart: "on-failure:5"
     healthcheck:
-      disable: true
+      test: ["CMD", "node", "dist/src/simulator-healthcheck.js"]
     secrets: [dmr_password]
   gateway:
     build: .

@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { Client } from './client.js';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -8,7 +8,11 @@ try {
   const password = readFileSync(process.env.DMR_HOTSPOT_PASSWORD_FILE ?? '/run/secrets/dmr_password');
   const client = new Client({port: Number(process.env.DMR_MASTER_PORT ?? 62031), password, log: line => console.log(line)});
   const heartbeat = () => {
-    try { writeFileSync(join(tmpdir(),'dmr-health.json'), JSON.stringify({ready:client.state === 'ready',time:Date.now()})); }
+    try {
+      const path = join(tmpdir(),'dmr-health.json');
+      writeFileSync(path + '.new', JSON.stringify({ready:client.state === 'ready',time:Date.now()}));
+      renameSync(path + '.new',path);
+    }
     catch { console.error(JSON.stringify({event:'health_write_failed'})); clearInterval(timer); client.stop(); process.exitCode = 1; }
   };
   const timer = setInterval(heartbeat, 1000);

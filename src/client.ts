@@ -24,6 +24,9 @@ export class Client {
     if (!Number.isInteger(options.port) || options.port < 1 || options.port > 65535) throw new Error('invalid_port');
     if (!Number.isInteger(options.id ?? 1234567) || (options.id ?? 1234567) < 1 || (options.id ?? 1234567) > 0xffffffff) throw new Error('invalid_id');
     if (!options.password.length || options.password.length > 1024) throw new Error('invalid_password');
+    for (const value of [options.timeout, options.ping, options.retry]) {
+      if (value !== undefined && (!Number.isInteger(value) || value < 1 || value > 30000)) throw new Error('invalid_timer');
+    }
   }
   private transition(state: State) {
     this.state = state;

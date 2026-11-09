@@ -1,0 +1,14 @@
+services:
+  tests:
+    build:
+      context: .
+      target: test
+    network_mode: none
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    cpus: 1
+    mem_limit: 512m
+    pids_limit: 64
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=8m,uid=1000,gid=1000,mode=0700"]

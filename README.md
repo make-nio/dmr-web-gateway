@@ -34,3 +34,21 @@ No se ejecutó esta receta sobre pve-dev, LXC 300 ni Raspberry. No modificar el
 stack de SRE para probarla. El despliegue real queda a cargo de SRE por commit.
 
 Ver [protocolo y revisión](docs/homebrew.md) y [resultados](docs/validation.md).
+
+## Validación Docker local (WSL2)
+
+Desde Ubuntu WSL2, en la raíz del repositorio:
+
+```sh
+docker compose -p dmr-pr9-tests -f compose.test.yaml build
+docker compose -p dmr-pr9-tests -f compose.test.yaml run --rm tests
+python3 scripts/validate-docker.py
+```
+
+El script crea un marcador aleatorio, construye y arranca exclusivamente el
+proyecto `dmr-pr9-validation`, comprueba seguridad/límites, pausa el simulador,
+espera unhealthy, lo reanuda y exige healthy. Luego verifica SIGTERM y retira
+sus contenedores y marcador. Rechaza un marcador o proyecto ya existente.
+No ejecutar simultáneamente con otro uso de ese proyecto. Las imágenes quedan
+en la caché local. La sonda del simulador realiza un handshake offline completo;
+la del gateway comprueba su heartbeat atómico, sin abrir un puerto.

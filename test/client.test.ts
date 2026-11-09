@@ -6,6 +6,14 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { Client, packet, configuration, digest } from '../src/client.js';
 
 const password = Buffer.from('offline-fixture-only');
+test('immediate stop during asynchronous connect is safe and idempotent', async () => {
+  const client = new Client({port:62048,password});
+  client.start();
+  client.stop();
+  client.stop();
+  await delay(30);
+  assert.equal(client.state,'stopped');
+});
 async function until(predicate: () => boolean, timeout = 3000) {
   const deadline = Date.now() + timeout;
   while (!predicate()) { assert.ok(Date.now() < deadline, 'condition timed out'); await delay(10); }
@@ -20,6 +28,7 @@ test('wire fixtures, big endian id, fixed config widths and SHA256', () => {
   assert.equal(packet('RPTC',1234567,configuration()).length,302);
   assert.equal(digest(Buffer.from('ab'),Buffer.from('c')).toString('hex'),'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
   assert.throws(() => new Client({port:0,password}));
+  for (const value of [0,-1,NaN,Infinity,0.5,30001]) assert.throws(() => new Client({port:62031,password,timeout:value}));
 });
 test('UDP handshake, invalid frames, ping loss, reconnect, master close, NAK and client close; safe logs', async context => {
   const master = createSocket('udp4');

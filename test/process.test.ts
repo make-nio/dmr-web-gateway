@@ -28,8 +28,9 @@ test('file secret and portless healthcheck with real processes', async context =
   }
   assert.ok(healthy);
   assert.ok(!output.includes('local-marker-only'));
-  writeFileSync(join(directory,'dmr-health.json'),JSON.stringify({ready:true,time:0}));
-  assert.equal(spawnSync(process.execPath,['dist/src/healthcheck.js'],{env}).status,1);
+  const staleDirectory = mkdtempSync(join(directory,'stale-'));
+  writeFileSync(join(staleDirectory,'dmr-health.json'),JSON.stringify({ready:true,time:0}));
+  assert.equal(spawnSync(process.execPath,['dist/src/healthcheck.js'],{env:{...env,TMP:staleDirectory,TEMP:staleDirectory,TMPDIR:staleDirectory}}).status,1);
 });
 test('startup errors never echo environment paths or values', () => {
   const result = spawnSync(process.execPath,['dist/src/main.js'],{env:{...process.env,DMR_HOTSPOT_PASSWORD_FILE:'private-marker-missing-file'},encoding:'utf8'});
