@@ -12,7 +12,7 @@ No se modificó el gateway estable. Banco reproducible en
 | Funcionalidad de API/stream | Encode/decode, roundtrip y cross-decode completados | Encode/decode, roundtrip y cross-decode completados |
 | Estabilidad | 600.0019 s, 30001 frames/dirección, 0 fallos, 0 deadlines >20 ms | Misma duración y conteo, 0 fallos, 0 deadlines >20 ms |
 | Rendimiento medido | Compatible con un canal de 50 frames/s en este host | Compatible con un canal de 50 frames/s en este host |
-| Calidad audible | NO aprobada: falta escucha humana y hay diferencias de nivel | NO aprobada: falta escucha humana y hay diferencias de nivel |
+| Calidad audible | Rechazada en esta muestra cuando codifica; su decoder entiende BLIP25 con artefactos | Roundtrip valorado positivamente por el usuario en esta muestra |
 | Interoperabilidad DMR | NO demostrada por referencia independiente | NO demostrada por referencia independiente |
 | Redistribución/producción | NO autorizada por este estudio | NO autorizada por este estudio |
 
@@ -104,7 +104,7 @@ no se ejecutó/contó como aprobado. Los goldens públicos del propio códec no 
 usaron como oráculo independiente. La búsqueda no obtuvo un vector redistribuible
 independiente en las fuentes revisadas; no implica que no exista en otros lugares.
 
-## Audio: diagnóstico objetivo, escucha pendiente
+## Audio: diagnóstico objetivo y escucha del usuario
 
 WAVs de 20 s generados: original, ambos roundtrips y ambos cruces. No se normalizó
 ganancia, filtró ni editó para hacer pasar una prueba. Valores del corpus de voz:
@@ -128,9 +128,32 @@ no cero pueden ser ruido de confort. Los extremos int16 son un detector limitado
 no detecta un limitador interno con techo menor ni toda distorsión. La proporción
 de ceros, DC y RMS se registra, no se usa como sustituto de inteligibilidad.
 
-**Escucha humana no realizada: calidad audible pendiente.** No hay MOS ni una
-afirmación de voz inteligible. Los WAVs y atribución se entregan para A/B; registrar
-palabras reconocibles, ruido, clics, nivel y artefactos antes de decidir producción.
+### Evaluación humana recibida después del baseline
+
+El usuario escuchó los WAVs entregados y reportó el 2026-11-09:
+
+| Archivo / ruta | Observación del usuario |
+| --- | --- |
+| blip25-to-blip25-speech.wav | Percibido idéntico al original, calidad impecable y mismo volumen |
+| blip25-to-opendmr-speech.wav | Voz comprensible, ganancia excesiva, saturación percibida, ruido de fondo y plops |
+| opendmr-to-blip25-speech.wav | Ininteligible, ruido digital |
+| opendmr-to-opendmr-speech.wav | Ininteligible, ruido digital |
+
+Es una escucha subjetiva de un usuario sobre esta muestra, no una prueba ciega,
+MOS ni igualdad de muestras PCM. Equipo, nivel de reproducción y condiciones no
+se registraron. La observación de volumen igual no reemplaza el RMS medido.
+Los resultados automáticos crudos conservan su estado original, anterior a esta
+escucha; esta sección es la actualización humana, no una medición retrospectiva.
+
+Interpretación: las dos rutas que fallan comparten el origen OpenDMR. Priorizar
+revisión de su cadena de encode, preparación PCM y empaquetado/adaptador; no
+atribuir todavía el defecto exclusivamente al códec upstream. Que su decoder
+reproduzca BLIP25 inteligiblemente acota el problema, pero no valida todos sus
+parámetros ni demuestra que bajar ganancia elimine los artefactos. No corregir
+un fallo de codificación/formato mediante normalización de volumen.
+
+BLIP25 pasa la evaluación audible informal de su roundtrip en esta muestra;
+interoperabilidad independiente y evaluación legal permanecen sin resolver.
 
 ## Evaluación legal independiente
 
@@ -155,13 +178,15 @@ CREDITS/encabezados de OpenDMR y ATTRIBUTION.md/PATENT_NOTICE.md/Cargo.toml de B
 
 ## Recomendación Sprint 1
 
-Viable continuar el experimento software x86-64: ambos tienen margen de rendimiento
-para el canal probado. BLIP25 muestra menor coste de encode en este host; OpenDMR
-mantiene la ventaja de ABI C sencilla. **No seleccionar todavía proveedor de
-producción ni integrar el gateway**: revisar audio, conseguir oráculo independiente
-y resolver evaluación de redistribución/procedencia por separado.
+Priorizar BLIP25 como candidato técnico para la siguiente investigación: tiene
+margen de rendimiento y evaluación humana positiva del roundtrip de esta muestra.
+OpenDMR queda bloqueado como candidato bidireccional hasta diagnosticar su cadena
+de encode/adaptador; su build y soak exitosos no compensan voz ininteligible.
+**No seleccionar todavía proveedor de producción ni integrar el gateway**:
+conseguir oráculo independiente y resolver redistribución/procedencia por separado.
 
-Siguiente paso acotado: revisión humana A/B de los WAVs; vectores independientes
+Siguiente paso acotado: diagnóstico de encode/packing OpenDMR y ampliar escucha
+con más voces/muestras; vectores independientes
 autorizados para validar parámetros/ganancia/FEC; pruebas de aislamiento y
 sanitizers antes de un addon. Sanitizers y carga multicanal no ejecutados en este
 baseline y no se presentan como aprobados. Mantener PR Draft para arquitectura.
