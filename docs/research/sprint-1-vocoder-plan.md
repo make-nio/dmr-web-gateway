@@ -1,5 +1,9 @@
 # Sprint 1 — investigación inicial y plan experimental
 
+Actualización: la ejecución posterior del baseline de Fase B y sus resultados
+se encuentran en [sprint-1-vocoder-results.md](sprint-1-vocoder-results.md).
+Las declaraciones de estado de este plan describen la entrega inicial de Fase A.
+
 Fecha: 2026-11-09. Base: dbed6177dff0bb647b1b399b3e1ba550637f7b68.
 Estado: inspección de fuentes; NO se ejecutaron compilaciones, mediciones,
 escuchas ni pruebas de interoperabilidad en esta fase. Este documento presenta

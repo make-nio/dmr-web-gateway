@@ -1,0 +1,10 @@
+*
+!Dockerfile
+!bench.py
+!test_workers.py
+!opendmr-worker.cpp
+!rust-worker/
+!rust-worker/Cargo.toml
+!rust-worker/Cargo.lock
+!rust-worker/src/
+!rust-worker/src/main.rs

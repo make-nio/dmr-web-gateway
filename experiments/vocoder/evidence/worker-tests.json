@@ -1,0 +1,16 @@
+{
+  "opendmr": {
+    "invalidLengthsRejected": 7,
+    "singleBitPerturbationsNoCrash": 72,
+    "randomFramesNoCrash": 100,
+    "resetAndResume": true,
+    "fecCorrectness": "not asserted; no independent reference"
+  },
+  "blip25": {
+    "invalidLengthsRejected": 7,
+    "singleBitPerturbationsNoCrash": 72,
+    "randomFramesNoCrash": 100,
+    "resetAndResume": true,
+    "fecCorrectness": "not asserted; no independent reference"
+  }
+}
