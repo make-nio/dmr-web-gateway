@@ -86,7 +86,7 @@ callbacks de sockets anteriores, cancelación de timers y cierre. El caso de
 stop inmediato no reprodujo un fallo. Se verificó recuperación con pérdida
 real de respuestas del simulador en contenedores separados.
 
-Pendientes y recomendación arquitectónica:
+Pendientes de la primera revisión (actualizados por el cierre inferior):
 
 - Aprobar este paso de validación offline local para revisión del arquitecto;
   no equivale a autorización de despliegue o conexión a un master real.
@@ -99,3 +99,55 @@ Pendientes y recomendación arquitectónica:
 - La etiqueta Node 22 Alpine es mutable; el digest usado quedó registrado, pero
   falta política de pinning/actualización antes de producción.
 - PR debe permanecer en borrador y la issue abierta hasta decisión arquitectónica.
+
+## Cierre de condiciones arquitectónicas — 2026-11-09
+
+`python3 scripts/validate-docker.py --soak` pasó en Docker Compose: **602.384 s**
+continuos, 60 muestras aproximadamente cada 10.2 s. Ambos servicios healthy y
+gateway ready en todas las muestras; cero reinicios, OOM o reconexiones
+inesperadas. También se revisaron logs de transiciones. Salida final 0.
+Evidencia íntegra: [docker-soak.json](docker-soak.json).
+
+| Servicio | Pico memoria muestreado | Pico CPU por intervalo | Media CPU muestreada |
+| --- | ---: | ---: | ---: |
+| Gateway | 41.46 MiB | 1.37% | 1.03% |
+| Simulador | 37.46 MiB | 0.84% | 0.72% |
+
+Mediciones de cgroups v2 incluyen sondas y procesos de observación. CPU se
+calcula con diferencias de usage_usec (100%=un núcleo); primera muestra CPU=0
+por no tener intervalo anterior. Memoria es memory.current, no solo RSS.
+Son muestras, no máximos instantáneos garantizados ni pruebas de saturación.
+Los límites de 0.75 CPU/384 MiB y 0.25 CPU/128 MiB se verificaron nuevamente.
+
+Después de los 600 s se pausó el simulador: readiness falló y permaneció así
+otros 35 s; el gateway siguió healthy. Al reanudar recuperó readiness. SIGTERM
+exit 0; contenedores y marcador retirados. Esta semántica sustituye la anterior
+que asociaba unhealthy a master caído.
+
+Liveness usa heartbeat atómico cada 1 s, alive=true y timestamp numérico no
+futuro de menos de 30 s; Docker sondea cada 10 s con tres fallos consecutivos.
+Readiness (`node dist/src/healthcheck.js --ready`) exige además sesión conectada.
+El timeout de pong activa reconexión y readiness=fallo, sin declarar enfermo
+un proceso que continúa trabajando. README explica tiempos y reinicios.
+
+Suite final en Compose: **9/9 tests**, salida 0. Nueva regresión: heartbeat con
+retraso de 8 s, conectividad perdida con proceso sano, edad mayor de 30 s,
+timestamp futuro y proceso detenido. La tolerancia se probó con timestamps
+controlados, no inyectando una pausa real del event loop.
+
+Ambos FROM fijados al índice OCI
+`sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202`.
+Verificado mediante `docker buildx imagetools inspect node:22-alpine@sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202`.
+El registro confirmó índice y manifest linux/amd64
+`sha256:947e5454e08bfe0b8ddda604915ad76275276c774f47da90d0137252c793a778`.
+Las imágenes de esta prueba se construyeron con ese pin. README documenta
+verificación, cambio de ambos FROM, pruebas y revisión para actualizarlo.
+
+No se cambió Homebrew ni el tratamiento de ACKs. Su limitación de duplicados
+retrasados permanece documentada en docs/homebrew.md. Fuera de este spike:
+interoperabilidad real, voz, recreación de namespace, saturación/OOM y política
+operativa de alertas/reinicio por liveness.
+
+Recomendación técnica: condiciones satisfechas; apto para merge del alcance
+offline tras decisión del arquitecto. PR permanece en borrador, sin merge;
+ninguna autorización de red real ni despliegue está implícita.

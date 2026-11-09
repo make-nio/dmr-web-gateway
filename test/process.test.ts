@@ -24,7 +24,7 @@ test('file secret and portless healthcheck with real processes', async context =
   let healthy = false;
   for (let attempt = 0; attempt < 50; attempt++) {
     await delay(100);
-    if (existsSync(join(directory,'dmr-health.json')) && spawnSync(process.execPath,['dist/src/healthcheck.js'],{env}).status === 0) {healthy = true;break;}
+    if (existsSync(join(directory,'dmr-health.json')) && spawnSync(process.execPath,['dist/src/healthcheck.js','--ready'],{env}).status === 0) {healthy = true;break;}
   }
   assert.ok(healthy);
   assert.ok(!output.includes('local-marker-only'));
@@ -36,4 +36,18 @@ test('startup errors never echo environment paths or values', () => {
   const result = spawnSync(process.execPath,['dist/src/main.js'],{env:{...process.env,DMR_HOTSPOT_PASSWORD_FILE:'private-marker-missing-file'},encoding:'utf8'});
   assert.equal(result.status,1);
   assert.equal(result.stderr.trim(),'{"event":"startup_failed"}');
+});
+test('liveness tolerates brief lag and differs from readiness', () => {
+  const directory = mkdtempSync(join(tmpdir(),'dmr-health-test-'));
+  const env = {...process.env,TMP:directory,TEMP:directory,TMPDIR:directory};
+  try {
+    for (const [age,alive,ready,expectedLive,expectedReady] of [
+      [8000,true,true,0,0], [1000,true,false,0,1], [31000,true,true,1,1],
+      [-10000,true,true,1,1], [1000,false,true,1,1]
+    ] as const) {
+      writeFileSync(join(directory,'dmr-health.json'),JSON.stringify({alive,ready,time:Date.now()-age}));
+      assert.equal(spawnSync(process.execPath,['dist/src/healthcheck.js'],{env}).status,expectedLive);
+      assert.equal(spawnSync(process.execPath,['dist/src/healthcheck.js','--ready'],{env}).status,expectedReady);
+    }
+  } finally {rmSync(directory,{recursive:true});}
 });

@@ -10,7 +10,7 @@ try {
   const heartbeat = () => {
     try {
       const path = join(tmpdir(),'dmr-health.json');
-      writeFileSync(path + '.new', JSON.stringify({ready:client.state === 'ready',time:Date.now()}));
+      writeFileSync(path + '.new', JSON.stringify({alive:client.state !== 'stopped',ready:client.state === 'ready',time:Date.now()}));
       renameSync(path + '.new',path);
     }
     catch { console.error(JSON.stringify({event:'health_write_failed'})); clearInterval(timer); client.stop(); process.exitCode = 1; }
