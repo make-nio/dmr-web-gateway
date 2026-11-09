@@ -1,0 +1,35 @@
+services:
+  simulator:
+    build: .
+    command: ["node", "dist/src/simulator.js"]
+    network_mode: none
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    cpus: 0.25
+    mem_limit: 128m
+    pids_limit: 64
+    restart: "on-failure:5"
+    healthcheck:
+      disable: true
+    secrets: [dmr_password]
+  gateway:
+    build: .
+    network_mode: "service:simulator"
+    depends_on: [simulator]
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    cpus: 0.75
+    mem_limit: 384m
+    pids_limit: 64
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=1m,uid=1000,gid=1000,mode=0700"]
+    restart: "on-failure:5"
+    secrets: [dmr_password]
+    environment:
+      DMR_HOTSPOT_PASSWORD_FILE: /run/secrets/dmr_password
+secrets:
+  dmr_password:
+    file: ./offline.secret
