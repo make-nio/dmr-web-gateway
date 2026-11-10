@@ -144,6 +144,89 @@ Próxima microtarea recomendada, sujeta a autorización: trazar b[9] → bits49 
 trama72 con funciones originales para comprobar la hipótesis de orden de
 parámetros, sin corregir packing ni algoritmo. C1 no autoriza iniciarla.
 
+## C2 — Traza de parámetros (tramas 0–3 de C1)
+
+**Se confirma una incompatibilidad interna de orden.** En la trama 0, los siete
+bits que empaquetó el encoder para b0 representan 90. Se recuperan intactos.
+Al leer las posiciones que especifica el decoder para b0, el valor es 91.
+Aparece además una discrepancia durante el recorrido de protección y
+recuperación del bloque B, antes de interpretar los parámetros.
+
+**Muestra.** Se eligió el prefijo consecutivo de cuatro tramas para conservar
+el estado inicial de C1 sin procesar sus 1000 tramas. Son 80 ms, 1280 bytes
+PCM s16le, SHA-256 `d22334ef46cb58959b7c90e4d75ae4488bcd4ef768f5470563b13c0b2d3ddc43`.
+Se comprobó por trama el hash del PCM y la igualdad de los nueve bytes
+generados con la evidencia CLI guardada en C1.
+
+**Empaquetado.** La sonda observa b[9] a la salida de `encode_dmr_params` y
+llama a `encode_ambe_frame` y `decode_ambe_frame` originales. Para acceder a
+estas funciones estáticas compila la unidad original dentro de la sonda.
+En la traza, `packed49FromWidths` se calcula desde los b[9] observados según
+los anchos y el bucle MSB primero de la fuente. `frameHex` y `recovered49`
+son salidas directas de las dos funciones originales.
+
+**Protección.** En la trama de 72 bits, A ocupa 0–23 (12 bits de información
+con Golay), B ocupa 24–46 (12 con Golay y máscara derivada de A) y C ocupa
+47–71 (25 sin protección). Tras recuperar los 49 bits, las cuatro tramas
+preservan las posiciones 0–11 y 24–48. Todas presentan cambios exclusivamente
+en 12–23, correspondientes a B. En la trama 0 difieren los índices
+13, 15, 18, 19, 20, 21 y 22. El ensayo localiza la diferencia en el recorrido
+de B sobre tramas limpias. Queda sin aislar la operación concreta que la causa.
+
+**Interpretación.** Posiciones de información numeradas desde cero, de mayor a
+menor peso dentro de cada parámetro. La columna del decoder proviene de las
+asignaciones de `ambe_d` en `decoder/ambe3600x2450.c`, ordenadas según el
+desplazamiento de destino. Se verificó la cobertura única de las 49 posiciones.
+
+| Parámetro | Posiciones al empaquetar | Posiciones que lee el decoder | Original, trama 0 | Recuperado con posiciones del encoder | Interpretado con índices del decoder |
+|---|---|---|---:|---:|---:|
+| b0 | 0–6 | 0,1,2,3,37,38,39 | 90 | 90 | 91 |
+| b1 | 7–11 | 4,5,6,7,35 | 0 | 0 | 8 |
+| b2 | 12–16 | 8,9,10,11,36 | 6 | 12 | 0 |
+| b3 | 17–25 | 12,13,14,15,16,17,18,19,40 | 87 | 175 | 197 |
+| b4 | 26–32 | 20,21,22,23,41,42,43 | 78 | 78 | 91 |
+| b5 | 33–37 | 24,25,26,27,44 | 8 | 8 | 28 |
+| b6 | 38–41 | 28,29,30,45 | 14 | 14 | 7 |
+| b7 | 42–45 | 31,32,33,46 | 13 | 13 | 8 |
+| b8 | 46–48 | 34,47,48 | 1 | 1 | 5 |
+
+| Trama de C1 | Salida original de 72 bits (hex) | Bits cambiados al recuperar 49 | Parámetros distintos al interpretar |
+|---:|---|---:|---:|
+| 0 | b4093082e209ce4769 | 7 | 9 |
+| 1 | 94065878bc614e176f | 7 | 9 |
+| 2 | 0d0d2426bc5b1b0019 | 5 | 8 |
+| 3 | 0305aabd52be520001 | 8 | 8 |
+
+En b0, tanto las posiciones emitidas como las leídas quedan fuera del bloque B.
+Eso permite atribuir la diferencia 90 → 91 al orden de lectura incluso en
+presencia de la discrepancia de B. La evidencia alcanza para confirmar el
+desacuerdo entre ambos caminos de esta revisión. Su impacto audible y el orden
+normativo DMR quedan fuera del experimento. Investigación detenida en este
+punto para revisión arquitectónica.
+
+### Reproducción offline
+
+Desde la raíz del repositorio en WSL2, con la imagen de C1 disponible
+localmente. Es la invocación realizada vía `wsl -d Ubuntu-24.04`, expresada
+con rutas relativas al checkout para repetirla en otro equipo.
+
+```sh
+docker run --rm --pull never --network none --read-only --user 1000:1000 \
+  --cap-drop ALL --security-opt no-new-privileges --cpus 1 --memory 512m \
+  --tmpfs /tmp:rw,exec,size=32m \
+  --mount "type=bind,src=$PWD/experiments/vocoder/c2,dst=/c2,readonly" \
+  --mount "type=bind,src=$PWD/experiments/vocoder/evidence/c1,dst=/c1,readonly" \
+  sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab \
+  python3 /c2/trace.py
+```
+
+Linux x86-64 WSL2, G++ 12.2.0, OpenDMR `d28164b39ba4d91ad5948ff22707937f8944f70f`.
+El [JSON de la corrida](../../experiments/vocoder/evidence/c2/trace.json)
+registra la orden de compilación, hashes de fuentes y biblioteca, estado por
+trama, bloques A/B/C en binario, posiciones de cada bit distinto y las dos
+lecturas de los parámetros. La [sonda y el analizador](../../experiments/vocoder/c2)
+solo producen trazas numéricas.
+
 ## B. Decode OpenDMR: ganancia y recorte
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
@@ -198,7 +281,7 @@ PCM/AMBE de voz ni pruebas independientes ejecutadas de FEC/errores/packing DMR.
 
 ## Reanudación y cierre
 
-- C1 de A completada; queda pendiente la traza de parámetros y el diagnóstico B.
+- C1 y C2 completadas. Discrepancias documentadas para revisión arquitectónica.
 - Implementar C con pruebas automatizadas y paquete WAV/manifiesto.
 - Acotar D y registrar referencias descartadas y motivos.
 - Actualizar informe/README/PR con resultados reales y omisiones explícitas.
