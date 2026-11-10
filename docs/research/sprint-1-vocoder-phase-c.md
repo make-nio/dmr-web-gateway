@@ -454,7 +454,77 @@ La [sonda y el verificador](../../experiments/vocoder/c5) registran el
 comando de compilación, revisión upstream, hashes y mapa de posiciones en
 el manifiesto. C5 termina con la entrega de los archivos para revisión.
 
-## B. Decode OpenDMR: ganancia y recorte
+## C6 — Ganancia y recorte al convertir a PCM
+
+**Escucha C5.** El usuario informó que Clip A era completamente ininteligible.
+Clip B era inteligible, con distorsión, volumen elevado y ruido considerable.
+La valoración subjetiva de Clip B fue 3,5/9.
+
+**Captura validada.** Se reconstruyeron exclusivamente las 1000 tramas
+adaptadas de C5 en orden 0…999 y se verificó el SHA-256 de los 9000 bytes.
+El enlazador interceptó la llamada del CLI original a `mbe_floattoshort`.
+La sonda guardó los 160 floats recibidos por llamada y pasó el mismo buffer
+a la función original. Un solo proceso sintetizó toda la secuencia. Los hashes
+del PCM y del WAV de control coincidieron con C5 Clip B. SHA-256 del WAV:
+`e3c774d55bd646feeb9f03190a6ab1da0cb5f80c758c900c61ca65defed9958e`.
+
+La ruta escalar de la revisión fijada multiplica por ocho, limita a
+±31128,650390625 en float y trunca hacia cero al convertir a int16. La
+reconstrucción de esas operaciones sobre la captura coincidió con las 160000
+muestras originales. Para la única salida experimental se aplicó la misma
+limitación y truncamiento directamente al float con ganancia unitaria.
+Ambas salidas comparten exactamente la síntesis y el estado del decoder.
+
+| Etapa | RMS | Pico absoluto | p95 de amplitud absoluta | Saltos >12000 entre tramas / dentro |
+|---|---:|---:|---:|---:|
+| Float antes de convertir | 2904,60 | 19000,85 | 7523,02 | 0 / 21 |
+| Float ×8 antes del limitador | 23236,82 | 152006,78 | 60184,19 | 76 / 12370 |
+| PCM control ×8 | 13995,61 | 31128 | 31128 | 34 / 5928 |
+| PCM experimental ×1 | 2904,35 | 19000 | 7523 | 0 / 21 |
+
+Hay 999 saltos entre tramas y 159000 dentro. El umbral de salto es absoluto,
+por lo que sus conteos dependen del nivel. La distribución de amplitud y de
+saltos en cada etapa incluye p50/p90/p95/p99/máximo en el manifiesto.
+
+**Atribución numérica.** Con ×8, cualquier float con magnitud superior a
+3891,0813 activa el limitador. Lo excedieron 10685 muestras positivas y
+10615 negativas: **21300/160000 (13,3125 %)**. Se contaron sobre el float
+antes de limitar. Con ×1, **0/160000** sufrieron recorte en esta conversión.
+La diferencia entre la señal ×8 ideal y la señal ×8 limitada, ambas en
+float, tuvo RMS 11639,72 y pico 120878,13 unidades PCM. El RMS de ese
+residuo equivale al 50,09 % del RMS de la señal ×8 ideal. El error RMS
+adicional por truncar a int16 fue 0,588. La razón de RMS cuantifica el
+cambio de forma de onda en esta etapa. La atribución perceptual del ruido
+y la distorsión requiere la escucha de C6 con los niveles de salida conservados.
+
+### Evidencia y reproducción offline
+
+[Manifiesto, hashes y métricas](../../experiments/vocoder/evidence/c6/manifest.json)
+· [Captura float32 little-endian comprimida](../../experiments/vocoder/evidence/c6/pre.f32le.gz)
+· [Toma 01](../../experiments/vocoder/evidence/c6/Toma-01.wav)
+· [Toma 02](../../experiments/vocoder/evidence/c6/Toma-02.wav).
+Fuente de voz: Open Speech Repository, OSR_us_000_0010_8k.wav, primeros 20 s.
+La entrada del ensayo fue la secuencia AMBE archivada en C5.
+[Sonda y analizador](../../experiments/vocoder/c6).
+
+Desde la raíz del checkout en WSL2, con la imagen ya presente localmente:
+
+```sh
+v="$PWD/experiments/vocoder"
+mkdir -p "$v/results/c6"
+docker run --rm --pull never --network none --read-only --user 1000:1000 \
+  --cap-drop ALL --security-opt no-new-privileges --cpus 1 --memory 512m \
+  --tmpfs /tmp:rw,exec,size=32m -v "$v/c6:/c6:ro" \
+  -v "$v/evidence/c5:/ref:ro" -v "$v/results/c6:/results" \
+  sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab \
+  python3 /c6/run.py
+```
+
+En la corrida publicada se montó `evidence/c6` como salida. La revisión
+upstream, el argumento de enlace, las fuentes y la biblioteca están
+identificados en el manifiesto. C6 queda en revisión auditiva.
+
+## B. Decode OpenDMR: ganancia y recorte (hipótesis previa a C6)
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
 `mbe_floattoshort` multiplica por 8 y limita a `32767 * 0.95`; al convertir a
