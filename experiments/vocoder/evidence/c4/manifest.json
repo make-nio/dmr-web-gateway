@@ -1,0 +1,144 @@
+{
+  "upstream": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "build": [
+    "g++",
+    "-O3",
+    "-std=c++11",
+    "-Wall",
+    "-fPIC",
+    "-I/lab/opendmr",
+    "-I/lab/opendmr/encoder",
+    "-I/lab/opendmr/decoder",
+    "/c4/pack.cpp",
+    "/lab/opendmr/libopendmr.a",
+    "-lm",
+    "-o",
+    "/tmp/c4"
+  ],
+  "compiler": "12.2.0",
+  "corpus": "Open Speech Repository, OSR_us_000_0010_8k.wav, first 20 seconds",
+  "wavFormat": "8 kHz mono signed 16-bit PCM",
+  "inputPcmSha256": "677d09d1c91e7cae74c0a5dc3e5e3bcd3ded3634ed471bcbca6dd65ea82e2279",
+  "inputMetrics": {
+    "samples": 160000,
+    "rms": 1570.7552517360082,
+    "dc": -0.30654375,
+    "peak": 10751,
+    "min": -7651,
+    "max": 10751,
+    "int16Rails": 0,
+    "atOpenDmrLimit": 0,
+    "frameBoundary": {
+      "n": 999,
+      "max": 3455,
+      "p95": 1167,
+      "above12000": 0
+    },
+    "withinFrame": {
+      "n": 159000,
+      "max": 7136,
+      "p95": 1125,
+      "above12000": 0
+    }
+  },
+  "sweep": {
+    "frames": 4096,
+    "wireAandCEqual": 4096,
+    "recoveredAandCMatchInput": 4096,
+    "controlB": 2,
+    "variantB": 4096,
+    "differentWireBits": 47104,
+    "differentInformationBits": 24576,
+    "differentWireFrames": 4095
+  },
+  "speech": {
+    "frames": 1000,
+    "wireAandCEqual": 1000,
+    "recoveredAandCMatchInput": 1000,
+    "controlB": 0,
+    "variantB": 1000,
+    "differentWireBits": 11478,
+    "differentInformationBits": 5992,
+    "differentWireFrames": 1000,
+    "decoderParameterChanges": [
+      0,
+      0,
+      0,
+      1000,
+      932,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "audio": {
+    "control": {
+      "wav": "Muestra-02.wav",
+      "wavSha256": "9ac985fe1529746b6cf37998cde30d0abbeab74326cc729f15a4de615e54853e",
+      "pcmSha256": "4f71eb3ecadf5e4d0cb2af294915f6bce063a8fffb37cdac781748e6a7219e2e",
+      "framesSha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717",
+      "metrics": {
+        "samples": 160000,
+        "rms": 5638.549313191071,
+        "dc": 6.139525,
+        "peak": 31128,
+        "min": -31128,
+        "max": 31128,
+        "int16Rails": 0,
+        "atOpenDmrLimit": 1740,
+        "frameBoundary": {
+          "n": 999,
+          "max": 62256,
+          "p95": 18886,
+          "above12000": 78
+        },
+        "withinFrame": {
+          "n": 159000,
+          "max": 62256,
+          "p95": 20003,
+          "above12000": 14097
+        }
+      }
+    },
+    "variant": {
+      "wav": "Muestra-01.wav",
+      "wavSha256": "cc28ac487710030cea67ae66abb8ddd057df30f6158005a415f0ce1f61d0341c",
+      "pcmSha256": "850de962dfba2d2006b5141111d85ceb8dc49b070d9a0e09c562dd59d77d5fa7",
+      "framesSha256": "4c06c87e7bf0c2b7a1cde7bf6baa708dbedcf800823aebe7963d692c13e01920",
+      "metrics": {
+        "samples": 160000,
+        "rms": 4823.288678416159,
+        "dc": 7.6891,
+        "peak": 31128,
+        "min": -31128,
+        "max": 31128,
+        "int16Rails": 0,
+        "atOpenDmrLimit": 843,
+        "frameBoundary": {
+          "n": 999,
+          "max": 62256,
+          "p95": 13245,
+          "above12000": 54
+        },
+        "withinFrame": {
+          "n": 159000,
+          "max": 62256,
+          "p95": 13279,
+          "above12000": 9194
+        }
+      }
+    }
+  },
+  "fileHashes": {
+    "/lab/opendmr/dmr_codec": "009100b1cf5bc457a905e5c770e563c86432cd6020fb1218c50e5fb4930cd4c8",
+    "/lab/opendmr/libopendmr.a": "ae3b85afe75f77e222eec9114a874dd00f70ee2416dd6ad74bf357f908399590",
+    "/lab/opendmr/opendmr.cpp": "2d16bfa4305dbc08c40fcdc8d88a2e27e54740f20b8f740a153255caa427b83a",
+    "/lab/speech.wav": "a4bf9becd046d7aedb6d05b6e12347a6294a44f74d263089c636fb0a2b1e6561",
+    "/c4/pack.cpp": "c08a6bf251336e2f89c6b18c429a11447245021cc43ba73e25e461825d6d624a",
+    "/c4/run.py": "cc543efdac3e1df80dcd5b16b4da46d38573277346aaafe672ce54cb9ce6130d",
+    "/c2/trace.json": "ffcfd59810a1bd26d16b8eca5724b96cc7cbe9bed8b4f415b6d0d4695a241f79"
+  },
+  "framesJsonlSha256": "ed1c202243f76dd669b8fff818ba55c4a8817a764d7a331a62ddc3a99bebf5e1"
+}

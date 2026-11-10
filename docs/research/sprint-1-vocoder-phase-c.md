@@ -310,6 +310,77 @@ de la revisión fijada: [tabla y funciones Golay](https://github.com/MW0MWZ/Open
 y [selección de bits de B](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/opendmr.cpp#L313).
 Investigación detenida en el diagnóstico para revisión arquitectónica.
 
+## C4 — Efecto aislado de la alineación de B sobre una muestra
+
+La variante recuperó los 4096 valores B en tramas limpias. El control recuperó
+2. Para cada B se usó un A y un C deterministas y variables. Se comprobó
+igualdad de los bloques transmitidos A y C y de su información recuperada
+respecto de la entrada en los 4096 casos, antes de procesar voz.
+
+La sonda genera una única secuencia de parámetros desde el PCM. Para cada
+trama bifurca los mismos nueve valores: el control llama al empaquetador
+original y la variante copia esa trama y reemplaza exclusivamente sus posiciones
+24–46 con los 23 bits de `(encode23127(B) >> 1) ^ máscara(A)`. Así ambos
+caminos comparten exactamente el estado del encoder y el orden original de
+los parámetros. Cada secuencia completa se decodificó en un proceso recién
+iniciado del mismo CLI original, con estado continuo durante las 1000 tramas.
+Se volcaron los PCM directamente a WAV mono s16le, 8000 Hz.
+
+**Voz.** Se usaron los mismos 20 s de Open Speech Repository que en C1. El
+hash del control coincide con la secuencia CLI publicada en C1. B se recuperó
+en 0/1000 tramas del control y en 1000/1000 de la variante. Cambiaron 11478
+bits transmitidos (todos en B) y 5992 bits de información (todos en 12–23).
+A y C se preservaron en las 1000 tramas. Interpretando ambos vectores con los
+índices del decoder documentados en C2, cambió b3 en 1000 tramas y b4 en 932.
+Los otros siete parámetros interpretados coincidieron en todas. El XOR de
+72 bits, las posiciones de información diferentes y los dos vectores de
+parámetros interpretados se registran por trama.
+
+| Medida (unidades PCM s16) | Entrada | Control | Variante |
+|---|---:|---:|---:|
+| RMS | 1570,76 | 5638,55 | 4823,29 |
+| Pico absoluto | 10751 | 31128 | 31128 |
+| Muestras en ±31128 (160000 en total) | 0 | 1740 | 843 |
+| Muestras en extremos int16 | 0 | 0 | 0 |
+| Saltos absolutos >12000 entre tramas (999 pares) | 0 | 78 | 54 |
+| Saltos absolutos >12000 dentro de tramas (159000 pares) | 0 | 14097 | 9194 |
+| Salto máximo entre tramas | 3455 | 62256 | 62256 |
+
+Las muestras en ±31128 miden contactos con el límite interno del decoder.
+El umbral de salto caracteriza diferencias entre muestras consecutivas. La
+variante redujo RMS, contactos con el límite y frecuencia de saltos grandes
+en esta muestra. La evaluación de inteligibilidad queda pendiente de escucha
+humana posterior a la revisión. Continúa vigente la discrepancia de orden de C2.
+
+### Artefactos y reproducción
+
+[Manifiesto con hashes, correspondencia de nombres, entorno y métricas](../../experiments/vocoder/evidence/c4/manifest.json)
+· [Evidencia por trama](../../experiments/vocoder/evidence/c4/frames.jsonl)
+· [Muestra 01](../../experiments/vocoder/evidence/c4/Muestra-01.wav)
+· [Muestra 02](../../experiments/vocoder/evidence/c4/Muestra-02.wav).
+Fuente de voz: **Open Speech Repository**, OSR_us_000_0010_8k.wav.
+El manifiesto registra los hashes SHA-256 del WAV fuente, PCM de entrada,
+ambas secuencias codificadas, ambos PCM decodificados y ambos WAV. Se conservó
+el nivel del decoder, sin posprocesar las muestras.
+
+Desde la raíz del checkout en WSL2, con la imagen local de C1 disponible:
+
+```sh
+mkdir -p experiments/vocoder/results/c4
+docker run --rm --pull never --network none --read-only --user 1000:1000 \
+  --cap-drop ALL --security-opt no-new-privileges --cpus 1 --memory 512m \
+  --tmpfs /tmp:rw,exec,size=32m \
+  --mount "type=bind,src=$PWD/experiments/vocoder/c4,dst=/c4,readonly" \
+  --mount "type=bind,src=$PWD/experiments/vocoder/evidence/c2,dst=/c2,readonly" \
+  --mount "type=bind,src=$PWD/experiments/vocoder/results/c4,dst=/results" \
+  sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab \
+  python3 /c4/run.py
+```
+
+En la corrida publicada se montó `evidence/c4` como destino de resultados.
+La variante y la instrumentación residen en el [banco C4](../../experiments/vocoder/c4).
+OpenDMR `d28164b39ba4d91ad5948ff22707937f8944f70f`, G++ 12.2.0.
+
 ## B. Decode OpenDMR: ganancia y recorte
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
