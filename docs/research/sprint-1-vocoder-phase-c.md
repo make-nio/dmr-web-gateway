@@ -381,6 +381,79 @@ En la corrida publicada se montó `evidence/c4` como destino de resultados.
 La variante y la instrumentación residen en el [banco C4](../../experiments/vocoder/c4).
 OpenDMR `d28164b39ba4d91ad5948ff22707937f8944f70f`, G++ 12.2.0.
 
+## C5 — Correspondencia de los nueve parámetros
+
+**Antecedente auditivo de C4.** El usuario escuchó ambas muestras y calificó
+las dos como completamente ininteligibles. El manifiesto identifica Muestra-01
+como variante B corregida y Muestra-02 como OpenDMR original. C5 usa Muestra-01
+como control y mantiene la corrección B en ambos caminos.
+
+**Prueba de correspondencia.** Se numeraron de 0 a 48 los bits de los nueve
+parámetros en orden contiguo, del bit de mayor al de menor peso en cada
+parámetro. Para cada índice de origen k se escribió su bit en el destino P[k],
+tomado de la tabla de C2. Al concatenar sus nueve filas, los 49 destinos
+ordenados son exactamente 0…48, cada uno una vez. Por ello P tiene inversa
+en todo el espacio de vectores de 49 bits: leer los destinos en el orden
+P[0]…P[48] recupera el vector de origen. Se contrastaron además las 49
+posiciones y pesos contra las asignaciones de la revisión fijada del decoder.
+
+**Verificación previa al audio.** Un solo encoder con estado continuo produjo
+los nueve valores compartidos por ambas rutas para cada trama del PCM de C4.
+Tras empaquetar y proteger cada distribución, se recuperaron los 49 bits con
+la función original y se interpretaron con los índices del decoder. Los
+nueve valores coincidieron simultáneamente en **1000/1000** tramas adaptadas y
+**0/1000** del control. La lista de excepciones de la variante está vacía.
+Ambas rutas recuperaron su propio B (posiciones 12–23) en **1000/1000**.
+La permutación cambia qué bits entran en cada bloque. Sobre toda la secuencia
+cambiaron 21380 bits de información y 32725 bits de la trama protegida.
+
+Los nueve valores originales se conservan en la traza junto a las dos lecturas
+por trama. Solo tras verificar toda la secuencia se ejecutó el CLI original
+en un proceso nuevo por ruta para generar los WAV s16le mono a 8000 Hz.
+Cada trama de control coincidió con la variante archivada en C4. El WAV de
+control también reprodujo exactamente su SHA-256 completo.
+
+| Medida sobre 20 s | Control B corregido | B corregido + correspondencia |
+|---|---:|---:|
+| RMS | 4823,29 | 13995,61 |
+| Pico absoluto | 31128 | 31128 |
+| Muestras en ±31128, de 160000 | 843 (0,53 %) | 21300 (13,31 %) |
+| Muestras en extremos int16 | 0 | 0 |
+| Saltos >12000 entre tramas, de 999 | 54 | 34 |
+| Saltos >12000 dentro de tramas, de 159000 | 9194 | 5928 |
+
+La correspondencia explica la pérdida de identidad de los parámetros del
+control. El efecto sobre la inteligibilidad queda pendiente de escucha humana
+de C5. Los WAV conservan sus niveles de salida originales.
+
+[Manifiesto con rutas, hashes y métricas](../../experiments/vocoder/evidence/c5/manifest.json)
+· [Diferencias por trama](../../experiments/vocoder/evidence/c5/frames.jsonl)
+· [Clip A](../../experiments/vocoder/evidence/c5/Clip-A.wav)
+· [Clip B](../../experiments/vocoder/evidence/c5/Clip-B.wav).
+Fuente: **Open Speech Repository**, primeros 20 s de OSR_us_000_0010_8k.wav.
+
+### Reproducir C5
+
+Desde la raíz del checkout en WSL2, con la imagen local de C4. La corrida
+publicada montó `evidence/c5` como salida. Para escribir una copia local:
+
+```sh
+v="$PWD/experiments/vocoder"
+mkdir -p "$v/results/c5"
+docker run --rm --pull never --network none --read-only --user 1000:1000 \
+  --cap-drop ALL --security-opt no-new-privileges --cpus 1 --memory 512m \
+  --tmpfs /tmp:rw,exec,size=32m \
+  -v "$v/c5:/c5:ro" -v "$v/c4:/c4:ro" \
+  -v "$v/evidence/c2:/ref2:ro" -v "$v/evidence/c4:/ref4:ro" \
+  -v "$v/results/c5:/results" \
+  sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab \
+  python3 -B /c5/experiment.py
+```
+
+La [sonda y el verificador](../../experiments/vocoder/c5) registran el
+comando de compilación, revisión upstream, hashes y mapa de posiciones en
+el manifiesto. C5 termina con la entrega de los archivos para revisión.
+
 ## B. Decode OpenDMR: ganancia y recorte
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),

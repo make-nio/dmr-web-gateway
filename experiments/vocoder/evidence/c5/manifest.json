@@ -1,0 +1,202 @@
+{
+  "upstream": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "build": [
+    "g++",
+    "-O3",
+    "-std=c++11",
+    "-Wall",
+    "-fPIC",
+    "-I/lab/opendmr",
+    "-I/lab/opendmr/encoder",
+    "-I/lab/opendmr/decoder",
+    "/c5/pack.cpp",
+    "/lab/opendmr/libopendmr.a",
+    "-lm",
+    "-o",
+    "/tmp/c5"
+  ],
+  "inputPcmSha256": "677d09d1c91e7cae74c0a5dc3e5e3bcd3ded3634ed471bcbca6dd65ea82e2279",
+  "corpus": "Open Speech Repository, OSR_us_000_0010_8k.wav, first 20 seconds",
+  "format": "8 kHz mono signed 16-bit PCM",
+  "controlsFrom": "C4 variant",
+  "frames": 1000,
+  "destinationsMSBFirst": [
+    [
+      0,
+      1,
+      2,
+      3,
+      37,
+      38,
+      39
+    ],
+    [
+      4,
+      5,
+      6,
+      7,
+      35
+    ],
+    [
+      8,
+      9,
+      10,
+      11,
+      36
+    ],
+    [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      40
+    ],
+    [
+      20,
+      21,
+      22,
+      23,
+      41,
+      42,
+      43
+    ],
+    [
+      24,
+      25,
+      26,
+      27,
+      44
+    ],
+    [
+      28,
+      29,
+      30,
+      45
+    ],
+    [
+      31,
+      32,
+      33,
+      46
+    ],
+    [
+      34,
+      47,
+      48
+    ]
+  ],
+  "BMatches": {
+    "control": 1000,
+    "adapted": 1000
+  },
+  "controlAllNine": 0,
+  "controlMatchesByParameter": [
+    135,
+    40,
+    16,
+    1,
+    10,
+    30,
+    66,
+    69,
+    520
+  ],
+  "adaptedAllNine": 1000,
+  "exceptions": [],
+  "changedWireBits": 32725,
+  "changedInfoBits": 21380,
+  "inputMetrics": {
+    "samples": 160000,
+    "rms": 1570.7552517360082,
+    "dc": -0.30654375,
+    "peak": 10751,
+    "min": -7651,
+    "max": 10751,
+    "int16Rails": 0,
+    "atOpenDmrLimit": 0,
+    "frameBoundary": {
+      "n": 999,
+      "max": 3455,
+      "p95": 1167,
+      "above12000": 0
+    },
+    "withinFrame": {
+      "n": 159000,
+      "max": 7136,
+      "p95": 1125,
+      "above12000": 0
+    }
+  },
+  "audio": {
+    "control": {
+      "wav": "Clip-A.wav",
+      "wavSha256": "cc28ac487710030cea67ae66abb8ddd057df30f6158005a415f0ce1f61d0341c",
+      "pcmSha256": "850de962dfba2d2006b5141111d85ceb8dc49b070d9a0e09c562dd59d77d5fa7",
+      "framesSha256": "4c06c87e7bf0c2b7a1cde7bf6baa708dbedcf800823aebe7963d692c13e01920",
+      "metrics": {
+        "samples": 160000,
+        "rms": 4823.288678416159,
+        "dc": 7.6891,
+        "peak": 31128,
+        "min": -31128,
+        "max": 31128,
+        "int16Rails": 0,
+        "atOpenDmrLimit": 843,
+        "frameBoundary": {
+          "n": 999,
+          "max": 62256,
+          "p95": 13245,
+          "above12000": 54
+        },
+        "withinFrame": {
+          "n": 159000,
+          "max": 62256,
+          "p95": 13279,
+          "above12000": 9194
+        }
+      }
+    },
+    "adapted": {
+      "wav": "Clip-B.wav",
+      "wavSha256": "e3c774d55bd646feeb9f03190a6ab1da0cb5f80c758c900c61ca65defed9958e",
+      "pcmSha256": "76c782a8160f5f843d269e676268d05b6bc8da438ac441c8d17c4fa43a5466a5",
+      "framesSha256": "51561a0b64256cfbde739c59893e7614604d64d0927b9c45199aee9c51433ce6",
+      "metrics": {
+        "samples": 160000,
+        "rms": 13995.606942828077,
+        "dc": 25.2732875,
+        "peak": 31128,
+        "min": -31128,
+        "max": 31128,
+        "int16Rails": 0,
+        "atOpenDmrLimit": 21300,
+        "frameBoundary": {
+          "n": 999,
+          "max": 35997,
+          "p95": 9807,
+          "above12000": 34
+        },
+        "withinFrame": {
+          "n": 159000,
+          "max": 62256,
+          "p95": 10242,
+          "above12000": 5928
+        }
+      }
+    }
+  },
+  "traceSha256": "263371c9be6f9ec41ede2316e161cec6e51f8f78c22651e4eb4bc0375a363a54",
+  "hashes": {
+    "/lab/opendmr/decoder/ambe3600x2450.c": "c7bb3b2341f2ae750fc41744c95a6a50ed2bf6ca6c3f84c295990c879699fade",
+    "/lab/opendmr/dmr_codec": "009100b1cf5bc457a905e5c770e563c86432cd6020fb1218c50e5fb4930cd4c8",
+    "/lab/opendmr/libopendmr.a": "ae3b85afe75f77e222eec9114a874dd00f70ee2416dd6ad74bf357f908399590",
+    "/c5/pack.cpp": "884b90b44531ccf237b0f247857d477dc72b92086dcf112dc92a21312da2a2c9",
+    "/c5/experiment.py": "0b44cd3eadbe1b0b00dfdc409176b246b7eb862aafef6842019388084dae2f36",
+    "/c4/run.py": "cc543efdac3e1df80dcd5b16b4da46d38573277346aaafe672ce54cb9ce6130d"
+  }
+}
