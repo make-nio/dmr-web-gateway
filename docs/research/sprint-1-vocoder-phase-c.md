@@ -227,6 +227,89 @@ trama, bloques A/B/C en binario, posiciones de cada bit distinto y las dos
 lecturas de los parámetros. La [sonda y el analizador](../../experiments/vocoder/c2)
 solo producen trazas numéricas.
 
+## C3 — Alineación Golay del bloque B
+
+**La primera diferencia aparece al usar el retorno de `CGolay24128::encode23127(B)`
+como palabra alineada a los 23 bits bajos.** La función devuelve directamente
+`ENCODING_TABLE_23127[B]`. En las 4096 entradas posibles ese entero equivale
+a la palabra que acepta el decoder desplazada un bit hacia la izquierda.
+Los bits útiles ocupan 23…1. En `encode_ambe_frame`, el llamador aplica XOR
+con una máscara alineada a 22…0 y el bucle de escritura lee exactamente
+`(b_codeword >> (22 - i)) & 1` para i = 0…22. Esa selección transmite el
+bit 0 de relleno y omite el bit 23. El primer límite incompatible es el
+uso del valor de tabla en el llamador, antes de la máscara. El bucle
+materializa la selección en la trama. El propio decoder entrega los valores
+alterados al recuperar las tramas limpias.
+
+**Aislamiento de la sonda.** Se tomaron los bits 12–23 del vector pre-FEC
+de C2 y los nueve bytes ya registrados para cada trama. Para las cuatro,
+el B en la trama coincide exactamente con los 23 bits bajos del XOR
+calculado. El A original y el recuperado por Golay dan máscaras idénticas.
+Al quitar la máscara se recuperan exactamente los 23 bits bajos de la tabla
+en el mismo orden. La lectura MSB primero coincide con el bloque B publicado
+en C2. Tanto la llamada directa a `decode23127` como `decode_ambe_frame`
+original sobre los nueve bytes reproducen el resultado de C2. Esto sitúa la
+discrepancia en la representación que intercambian las funciones upstream.
+XOR, inversión del orden de transmisión y extracción por la sonda quedan
+descartados como explicación en estas tramas.
+
+| Trama | B antes de Golay | B recuperado por upstream | B recuperado en control de alineación |
+|---:|---|---|---|
+| 0 | 001100010101 | 011000101011 | 001100010101 |
+| 1 | 001000010110 | 010000101101 | 001000010110 |
+| 2 | 111101101000 | 111011010000 | 111101101000 |
+| 3 | 010010000101 | 100100001010 | 010010000101 |
+
+Por ejemplo, para la trama 2 el retorno de tabla es
+`111101101000010000000000`. El valor descramblado que entra al decoder es
+`11101101000010000000000`. Se ve la pérdida del 1 superior y la permanencia
+del 0 inferior. La evidencia registra para cada trama las palabras binarias
+de A/B, Golay, ambas máscaras, XOR, campo transmitido, campo recuperado y
+salida final.
+
+**Reversibilidad.** Se ensayaron todos los B de 0 a 4095 con las funciones
+originales. Como control de representación se usó la convención del propio
+`decode24128`, que llama a `decode23127(code >> 1)`. Denominando
+`control23 = encode24128(B) >> 1`, se observaron estos conteos:
+
+| Comprobación sobre 4096 valores de B | Resultado |
+|---|---:|
+| Retorno de encode23127 igual a control23 desplazado a la izquierda un bit | 4096 |
+| Retorno de encode23127 con el bit 23 en 1 | 2048 |
+| Palabras distintas al retener los 23 bits bajos del retorno | 4096 |
+| decode23127 sobre esos 23 bits bajos devuelve B | 2 |
+| decode23127 sobre control23 devuelve B | 4096 |
+
+El mapeo limpio a los 23 bits bajos sigue siendo **inyectivo** en el dominio
+de 12 bits. Sin embargo, el decoder actual solo preserva B para 2/4096
+entradas. La alineación usada en el control basta para la ida y vuelta
+numérica de las 4096 entradas. El control solo calcula enteros en la sonda.
+La conformidad externa del código Golay, la corrección ante errores de canal
+y el efecto audible quedan fuera de C3.
+
+### Reproducir C3
+
+Se reutilizó la imagen local de C1 en WSL2 x86-64, G++ 12.2.0 y OpenDMR
+`d28164b39ba4d91ad5948ff22707937f8944f70f`. Comando equivalente desde la
+raíz del checkout en WSL:
+
+```sh
+docker run --rm --pull never --network none --read-only --user 1000:1000 \
+  --cap-drop ALL --security-opt no-new-privileges --cpus 1 --memory 512m \
+  --tmpfs /tmp:rw,exec,size=32m \
+  --mount "type=bind,src=$PWD/experiments/vocoder/c3,dst=/c3,readonly" \
+  --mount "type=bind,src=$PWD/experiments/vocoder/evidence/c2,dst=/c2,readonly" \
+  sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab \
+  python3 /c3/trace.py
+```
+
+[Traza binaria, hashes SHA-256 y orden de compilación](../../experiments/vocoder/evidence/c3/trace.json)
+y [sonda reproducible](../../experiments/vocoder/c3). El identificador
+`canonical23` del JSON designa el control interno descrito arriba. Fuentes
+de la revisión fijada: [tabla y funciones Golay](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/encoder/cgolay24128.cpp#L1072)
+y [selección de bits de B](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/opendmr.cpp#L313).
+Investigación detenida en el diagnóstico para revisión arquitectónica.
+
 ## B. Decode OpenDMR: ganancia y recorte
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
@@ -281,7 +364,7 @@ PCM/AMBE de voz ni pruebas independientes ejecutadas de FEC/errores/packing DMR.
 
 ## Reanudación y cierre
 
-- C1 y C2 completadas. Discrepancias documentadas para revisión arquitectónica.
+- C1, C2 y C3 completadas. La alineación del bloque B quedó localizada en C3.
 - Implementar C con pruebas automatizadas y paquete WAV/manifiesto.
 - Acotar D y registrar referencias descartadas y motivos.
 - Actualizar informe/README/PR con resultados reales y omisiones explícitas.
