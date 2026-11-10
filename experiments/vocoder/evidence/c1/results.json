@@ -1,0 +1,120 @@
+{
+  "scope": "C1 encode only; fresh process per run; no reset commands",
+  "environment": {
+    "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+    "byteorder": "little",
+    "python": "3.11.2",
+    "g++": "g++ (Debian 12.2.0-14) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "gcc": "gcc (Debian 12.2.0-14) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "upstreamCommit": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+    "upstreamTrackedDiff": "",
+    "cliLdd": "linux-vdso.so.1 (0x00007ffcfebe1000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f0b832a0000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f0b831c0000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f0b831a0000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f0b82fbf000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007f0b834f7000)",
+    "workerLdd": "linux-vdso.so.1 (0x00007fff7aaf3000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f98dc92a000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f98dc84a000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f98dc82a000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f98dc649000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007f98dcb82000)"
+  },
+  "files": {
+    "/lab/opendmr/dmr_codec": "009100b1cf5bc457a905e5c770e563c86432cd6020fb1218c50e5fb4930cd4c8",
+    "/lab/opendmr-worker": "393496cdb6d5baac8ad2530318ae0bafaad2062db9f909e276d830b5b426e0a5",
+    "/lab/opendmr/libopendmr.a": "ae3b85afe75f77e222eec9114a874dd00f70ee2416dd6ad74bf357f908399590",
+    "/lab/opendmr-worker.cpp": "68100b4d2476ec03dcc265dba0cf42354194bb673133bd09f2ec56fee954edd0",
+    "/lab/opendmr/opendmr.cpp": "2d16bfa4305dbc08c40fcdc8d88a2e27e54740f20b8f740a153255caa427b83a"
+  },
+  "input": {
+    "source": "Open Speech Repository, OSR_us_000_0010_8k.wav",
+    "wavSha256": "a4bf9becd046d7aedb6d05b6e12347a6294a44f74d263089c636fb0a2b1e6561",
+    "pcmSha256": "677d09d1c91e7cae74c0a5dc3e5e3bcd3ded3634ed471bcbca6dd65ea82e2279",
+    "format": "8000 Hz mono s16le",
+    "seconds": 20,
+    "bytes": 320000,
+    "frames": 1000,
+    "minSample": -7651,
+    "maxSample": 10751
+  },
+  "runs": [
+    {
+      "name": "cli-1",
+      "command": [
+        "/lab/opendmr/dmr_codec",
+        "encode",
+        "/results/input.s16le",
+        "/results/cli-1.ambe"
+      ],
+      "exitCode": 0,
+      "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+    },
+    {
+      "name": "wrapper-1",
+      "command": [
+        "/lab/opendmr-worker"
+      ],
+      "stdin": "1000 E hex-PCM lines, then EOF; no D/R",
+      "exitCode": 0,
+      "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+    },
+    {
+      "name": "cli-2",
+      "command": [
+        "/lab/opendmr/dmr_codec",
+        "encode",
+        "/results/input.s16le",
+        "/results/cli-2.ambe"
+      ],
+      "exitCode": 0,
+      "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+    },
+    {
+      "name": "wrapper-2",
+      "command": [
+        "/lab/opendmr-worker"
+      ],
+      "stdin": "1000 E hex-PCM lines, then EOF; no D/R",
+      "exitCode": 0,
+      "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+    }
+  ],
+  "comparisons": {
+    "cli-1 vs wrapper-1": {
+      "equal": true,
+      "bytesCompared": 9000,
+      "bitsCompared": 72000,
+      "differentBytes": 0,
+      "differentBits": 0,
+      "differentFrames": 0,
+      "firstDifferentFrameZeroBased": null,
+      "firstDifferentByteZeroBased": null,
+      "firstDifferentBitZeroBasedMSB": null
+    },
+    "cli-2 vs wrapper-2": {
+      "equal": true,
+      "bytesCompared": 9000,
+      "bitsCompared": 72000,
+      "differentBytes": 0,
+      "differentBits": 0,
+      "differentFrames": 0,
+      "firstDifferentFrameZeroBased": null,
+      "firstDifferentByteZeroBased": null,
+      "firstDifferentBitZeroBasedMSB": null
+    },
+    "cli-1 vs cli-2": {
+      "equal": true,
+      "bytesCompared": 9000,
+      "bitsCompared": 72000,
+      "differentBytes": 0,
+      "differentBits": 0,
+      "differentFrames": 0,
+      "firstDifferentFrameZeroBased": null,
+      "firstDifferentByteZeroBased": null,
+      "firstDifferentBitZeroBasedMSB": null
+    },
+    "wrapper-1 vs wrapper-2": {
+      "equal": true,
+      "bytesCompared": 9000,
+      "bitsCompared": 72000,
+      "differentBytes": 0,
+      "differentBits": 0,
+      "differentFrames": 0,
+      "firstDifferentFrameZeroBased": null,
+      "firstDifferentByteZeroBased": null,
+      "firstDifferentBitZeroBasedMSB": null
+    }
+  }
+}
