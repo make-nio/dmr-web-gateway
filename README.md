@@ -100,3 +100,12 @@ de seguridad ni constituye una auditoría de vulnerabilidades.
 reconexiones inesperadas; caída y recuperación del simulador verificadas.
 Picos muestreados: gateway 41.46 MiB/1.37% CPU; simulador 37.46 MiB/0.84% CPU
 (100% equivale a un núcleo). Detalles y límites de medición en `docs/validation.md`.
+
+## Estado del Sprint 1 · vocoder experimental
+
+Al 11/11/2026, el objetivo D3 queda cerrado documental y técnicamente en el
+PR #10 en borrador. Ambos cruces OpenDMR corregido ↔ BLIP25 completaron los
+dos pasajes offline. Escucha exploratoria en español positiva; prueba formal
+inglesa pendiente. Ambos motores continúan como candidatos experimentales.
+La interfaz común y su ensayo aislado esperan aprobación arquitectónica.
+[Cierre consolidado, evidencia, riesgos y siguiente objetivo](docs/research/sprint-1-vocoder-d3-cierre.md).
