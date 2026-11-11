@@ -601,6 +601,18 @@ La corrida publicada escribió en `evidence/c7`. La conservación de los
 parámetros quedó verificada para el corpus ensayado; la valoración perceptual
 de la segunda voz, los niveles y los silencios requiere escuchar los pares.
 
+## Cierre de la investigación audible local y paso a Fase D
+
+Arquitectura aprobó C7. El usuario oyó voz clara en Par-04-B; en Par-06-B
+oyó voz clara a mayor volumen sin saturación perceptible; en Par-08-B
+oyó transiciones correctas sin artefactos perceptibles. Los tres archivos B
+corresponden a las salidas procesadas según el manifiesto de C7. La referencia
+C6 mantiene 7,5/9. Se cierra esta línea de calidad audible para el sprint.
+
+El [informe D1](sprint-1-vocoder-d1.md) documenta las representaciones de
+49/72 bits, el par de silencio y las referencias candidatas. D2 queda propuesto
+para revisión arquitectónica. La interoperabilidad de voz sigue pendiente.
+
 ## B. Decode OpenDMR: ganancia y recorte (hipótesis previa a C6)
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
