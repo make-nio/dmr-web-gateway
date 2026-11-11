@@ -623,6 +623,12 @@ pendientes. [Informe y evidencia](sprint-1-vocoder-d1.md).
 en 100/100 inversiones sin protección. El [informe D2b](sprint-1-vocoder-d1.md)
 enlaza el banco y los 292 registros. Pendiente de revisión arquitectónica.
 
+**D2 cerrado por arquitectura.** D2b aprobado con 292/292 casos satisfactorios.
+El [informe D3a](sprint-1-vocoder-d3a.md) identifica referencias para voz,
+distingue RX de TX y propone un D3b offline. La validación de fabricante
+queda condicionada a material/perfil y permisos verificables. D3b pendiente
+de revisión y ejecución.
+
 ## B. Decode OpenDMR: ganancia y recorte (hipótesis previa a C6)
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
