@@ -1,0 +1,202 @@
+{
+  "revisions": {
+    "opendmr": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+    "blip25": "d1762813b7142c021f4105c832bf7f060d1249fa"
+  },
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "commands": [
+    [
+      "rustc",
+      "--edition=2021",
+      "-O",
+      "-L",
+      "dependency=/lab/rust-worker/target/release/deps",
+      "--extern",
+      "blip25_vocoder=/lab/rust-worker/target/release/deps/libblip25_vocoder-5c042adddf75e192.rlib",
+      "/bank/d3b/check.rs",
+      "-o",
+      "/tmp/check-blip"
+    ],
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-I/lab/opendmr",
+      "-I/lab/opendmr/encoder",
+      "-I/lab/opendmr/decoder",
+      "/bank/d3b/check.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-lm",
+      "-o",
+      "/tmp/check-open"
+    ],
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-Wall",
+      "-fPIC",
+      "-I/lab/opendmr",
+      "/lab/opendmr/dmr_codec.cpp",
+      "/bank/c6/tap.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-Wl,--wrap=mbe_floattoshort",
+      "-lm",
+      "-o",
+      "/tmp/cli-tap"
+    ]
+  ],
+  "source": "Open Speech Repository, OSR_us_000_0010_8k.wav, first 20 s",
+  "inputPcmSha256": "677d09d1c91e7cae74c0a5dc3e5e3bcd3ded3634ed471bcbca6dd65ea82e2279",
+  "inputMetrics": {
+    "n": 160000,
+    "rms": 1570.7552517360082,
+    "min": -7651,
+    "max": 10751,
+    "absAmplitude": {
+      "p50": 328,
+      "p90": 2624,
+      "p95": 3729,
+      "p99": 6056,
+      "p100": 10751
+    },
+    "abovePositiveLimit": 0,
+    "belowNegativeLimit": 0,
+    "atIntLimit": 0,
+    "boundaryJumps": {
+      "n": 999,
+      "above12000": 0,
+      "p50": 52,
+      "p90": 807,
+      "p95": 1167,
+      "p99": 2168,
+      "p100": 3455
+    },
+    "withinJumps": {
+      "n": 159000,
+      "above12000": 0,
+      "p50": 56,
+      "p90": 773,
+      "p95": 1125,
+      "p99": 1964,
+      "p100": 7136
+    }
+  },
+  "c5TraceSha256": "263371c9be6f9ec41ede2316e161cec6e51f8f78c22651e4eb4bc0375a363a54",
+  "keySha256": "f42d6bf4887914a3707fc46a1ad13153b1d79f2125236757b64624d942a6b36a",
+  "components": {
+    "/lab/rust-worker/target/release/vocoder-spike-worker": "8ce2adc97d23de3bbe88cef01e4c2188f04474507cfd5791a6b22213afc1a4b4",
+    "/lab/rust-worker/target/release/deps/libblip25_vocoder-5c042adddf75e192.rlib": "cc1481eebf74efebc9a0d003662b37419e57b5cb7eda9f8daa1e7a7163ac8ac8",
+    "/lab/opendmr/libopendmr.a": "ae3b85afe75f77e222eec9114a874dd00f70ee2416dd6ad74bf357f908399590",
+    "/bank/c6/tap.cpp": "9e97881cfa21570de9f2f433cedf7403a13f6a6612699b8dafc2bb3b44fefa4f",
+    "/bank/c5/pack.cpp": "884b90b44531ccf237b0f247857d477dc72b92086dcf112dc92a21312da2a2c9",
+    "/bank/d3b/check.cpp": "477df4831f34c9fe43842a6ef85a4143cf3f26100c7d44b676d935ef58508fba",
+    "/bank/d3b/check.rs": "c5073608aa0ea5ebc6ff5a6569ee074a5cff378dd0b659161278a1c5bfcb76a0"
+  },
+  "routes": {
+    "RX": {
+      "frames": 1000,
+      "samples": 160000,
+      "sampleRate": 8000,
+      "channels": 1,
+      "seconds": 20,
+      "errors": 0,
+      "frameFormatMatches": 1000,
+      "blipFecErrors": 0,
+      "decoderLog": "Decoded 1000 frames (20.00 seconds)\nTotal bit errors corrected: 0",
+      "outputMetrics": {
+        "n": 160000,
+        "rms": 1686.077108366118,
+        "min": -10514,
+        "max": 10630,
+        "absAmplitude": {
+          "p50": 171,
+          "p90": 2870,
+          "p95": 4280,
+          "p99": 6440,
+          "p100": 10630
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 61,
+          "p90": 726,
+          "p95": 1071,
+          "p99": 2146,
+          "p100": 6247
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 0,
+          "p50": 60,
+          "p90": 719,
+          "p95": 1085,
+          "p99": 2186,
+          "p100": 8484
+        }
+      },
+      "unityLimitClips": 0,
+      "int16Rails": 0,
+      "pcmSha256": "0111693a18d4f4df40b2b51bebcdb818103c768ee94a8574aba83ff4ec6fe780",
+      "bitstreamSha256": "0f91b335bb99e01e8112faf63224319ba53928f6f23eb21f6bfe678f6fe32ad2",
+      "wavSha256": "1e6b7576e7c4802316f23cf8da350a6d504cca446fed7c7fbc687ca0d59a313b",
+      "traceSha256": "10beb549eab8144d39326fa132b93c98737796b89d83943409935b4816e76a77",
+      "humanResult": "pending"
+    },
+    "TX": {
+      "frames": 1000,
+      "samples": 160000,
+      "sampleRate": 8000,
+      "channels": 1,
+      "seconds": 20,
+      "errors": 0,
+      "frameFormatMatches": 1000,
+      "blipFecErrors": 0,
+      "decoderLog": "1000 valid 320-byte PCM replies, exit 0",
+      "outputMetrics": {
+        "n": 160000,
+        "rms": 3023.3729317715256,
+        "min": -18060,
+        "max": 26060,
+        "absAmplitude": {
+          "p50": 294,
+          "p90": 5092,
+          "p95": 7168,
+          "p99": 12039,
+          "p100": 26060
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 131,
+          "p90": 1444,
+          "p95": 2273,
+          "p99": 4538,
+          "p100": 7667
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 0,
+          "p50": 120,
+          "p90": 1398,
+          "p95": 2149,
+          "p99": 3957,
+          "p100": 10638
+        }
+      },
+      "unityLimitClips": null,
+      "int16Rails": 0,
+      "pcmSha256": "15d77074df13c01f988b9f9e9fa214d4d59d64113cb14d540a494980abd6a35e",
+      "bitstreamSha256": "51561a0b64256cfbde739c59893e7614604d64d0927b9c45199aee9c51433ce6",
+      "wavSha256": "f56d3a7bbf44bce396eaca672fb97c0e26bce680a8a0b97c37ad39ab9976fcc1",
+      "traceSha256": "f924ad9571190dcb21f0fe504134ffa4ba6d11db1aba67fb927f591b5b911c90",
+      "humanResult": "pending"
+    }
+  }
+}

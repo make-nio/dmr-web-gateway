@@ -629,6 +629,11 @@ distingue RX de TX y propone un D3b offline. La validación de fabricante
 queda condicionada a material/perfil y permisos verificables. D3b pendiente
 de revisión y ejecución.
 
+**D3b ejecutada tras aprobación de D3a.** El [informe D3b](sprint-1-vocoder-d3b.md)
+documenta el pase técnico de RX y TX con 1000 tramas limpias por sentido y
+dos WAV de 20 segundos. Los resultados auditivos siguen pendientes por oyente
+y por sentido. Se solicita revisión arquitectónica y evaluación humana.
+
 ## B. Decode OpenDMR: ganancia y recorte (hipótesis previa a C6)
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
