@@ -129,7 +129,35 @@ en Docker sin red. El manifiesto registra los hashes y herramientas reales.
 [Banco y reproducción](../../experiments/vocoder/d2a/README.md) ·
 [Manifiesto de la comparación](../../experiments/vocoder/evidence/d2a/manifest.json).
 
-## Propuesta D2 original (solo la primera etapa ejecutada en D2a)
+## D2b ejecutada · cuatro tramas y errores simples
+
+Se contrastaron los índices 0–3 de C5, sobre la información y la trama
+adaptadas archivadas. Los slots de canal coincidieron bit a bit al codificar
+con ambos motores y los 49 bits se recuperaron exactamente en las cuatro
+entradas limpias.
+
+| Trama | Slot de canal coincidente (hex) | Mutaciones A / B / C aprobadas |
+|---:|---|---|
+| 0 | D5EE220741B9680B2F | 24 / 23 / 25 |
+| 1 | D56F666340B500A3FB | 24 / 23 / 25 |
+| 2 | 0674E0738E8D184D4D | 24 / 23 / 25 |
+| 3 | 204487423E45C04C49 | 24 / 23 / 25 |
+
+En **188/188** errores simples protegidos (96 en A y 92 en B) OpenDMR y
+dmrgo recuperaron los 49 bits originales. dmrgo indicó una corrección en
+cada caso. En **100/100** inversiones de C ambos devolvieron un solo bit
+de información cambiado, precisamente el correspondiente a esa posición.
+dmrgo indicó cero correcciones, igual que en las cuatro tramas limpias.
+En todos los casos reportó 47 bits protegidos comprobados y
+`Uncorrectable=false`. Primera divergencia: ninguna en los 292 casos.
+El alcance es formato y comportamiento ante un error simple sobre estas
+cuatro tramas. La interoperabilidad de voz sigue pendiente.
+
+[Banco y comandos](../../experiments/vocoder/d2b/README.md) ·
+[Manifiesto](../../experiments/vocoder/evidence/d2b/manifest.json) ·
+[Evidencia por trama y posición](../../experiments/vocoder/evidence/d2b/cases.jsonl).
+
+## Propuesta D2 original (etapas 1 y 2 ejecutadas en D2a y D2b)
 
 1. **Formato, un vector literal.** En un banco offline separado, fijar las
    dos revisiones, toolchain y hashes de entradas. Usar el par de silencio

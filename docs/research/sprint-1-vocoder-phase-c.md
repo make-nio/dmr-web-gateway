@@ -618,6 +618,11 @@ sentidos con OpenDMR corregido y dmrgo. Se comprobó la coincidencia exacta
 de 72 bits en canal y 49 en información. Voz y ensayos con errores siguen
 pendientes. [Informe y evidencia](sprint-1-vocoder-d1.md).
 
+**Actualización D2b.** Coincidencia limpia 4/4, recuperación exacta de los
+49 bits en 188/188 inversiones protegidas y cambio exclusivo del bit esperado
+en 100/100 inversiones sin protección. El [informe D2b](sprint-1-vocoder-d1.md)
+enlaza el banco y los 292 registros. Pendiente de revisión arquitectónica.
+
 ## B. Decode OpenDMR: ganancia y recorte (hipótesis previa a C6)
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),

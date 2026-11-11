@@ -1,0 +1,94 @@
+{
+  "passAll": true,
+  "passed": {
+    "clean": 4,
+    "A": 96,
+    "B": 92,
+    "C": 100
+  },
+  "firstDivergence": null,
+  "attempted": 292,
+  "caseTraceSha256": "7e8388d1538f1248470800f5ab418804d0044d4cd7c9d4278ac616ddd4143f38",
+  "frames": [
+    {
+      "index": 0,
+      "info49": "1011000000110010101110010100111110000010111000101",
+      "adapted72": "b0357c6213d29f05c5",
+      "sha256": "dd59f8bf8c3936d9c992ef67c5b8bde87a7001e1dd9e96503bc45033ff242e7b"
+    },
+    {
+      "index": 1,
+      "info49": "1001000000100010110110010001111110100010011000111",
+      "adapted72": "9022ffa423f23f44c7",
+      "sha256": "bbfb39160c0a354d9617fe674e7e0585d793ec7047d8f041d46aa18de8c81f3b"
+    },
+    {
+      "index": 2,
+      "info49": "0000100011111101000100110000000001000110001100101",
+      "adapted72": "08f55e94f6b4008c65",
+      "sha256": "cc8bc6f70add8e9cfc9b35f5facbe2a8948546ee6f429aca54c9f9649cfc17ed"
+    },
+    {
+      "index": 3,
+      "info49": "0000100001000000101010100000000000001001001000001",
+      "adapted72": "08494d9ee85c001241",
+      "sha256": "cb626b84dab470cdc1c18afa70781663eb575995bbc1ef833562ca0d5fa11b71"
+    }
+  ],
+  "C5commit": "e21200f411cefcef3ba4ac09bfbf26a881882714",
+  "C5traceSha256": "263371c9be6f9ec41ede2316e161cec6e51f8f78c22651e4eb4bc0375a363a54",
+  "C5manifestSha256": "c0f91b29ca138b93efe550862f12b5ab280f5c95c8a52ae849e98eaf9c682f5b",
+  "D2acommit": "02d69d99c7bb1a740c58c9144654437f45ee7757",
+  "D2amanifestSha256": "0dd5a533db0d551de98884fa26580031b53e4daf801c780d11c233786d4895f4",
+  "runnerSha256": "2291aa4acbf943fd739bed903983342c45a5c2fcf7057e7393153fde78cf2d47",
+  "builds": [
+    [
+      "/tmp/go/bin/go",
+      "build",
+      "-trimpath",
+      "-buildvcs=false",
+      "-o",
+      "/tmp/ref",
+      "/d2a/main.go"
+    ],
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-Wall",
+      "-fPIC",
+      "-I/lab/opendmr",
+      "-I/lab/opendmr/encoder",
+      "-I/lab/opendmr/decoder",
+      "/d2a/native.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-lm",
+      "-o",
+      "/tmp/native"
+    ]
+  ],
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "environment": {
+    "go": "go version go1.27.4 linux/amd64",
+    "cpp": "12.2.0",
+    "python": "3.11.2 (main, Nov 30 2024, 21:22:50) [GCC 12.2.0]",
+    "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+    "sha256": {
+      "/lab/opendmr/libopendmr.a": "ae3b85afe75f77e222eec9114a874dd00f70ee2416dd6ad74bf357f908399590",
+      "/lab/opendmr/opendmr.cpp": "2d16bfa4305dbc08c40fcdc8d88a2e27e54740f20b8f740a153255caa427b83a",
+      "/c5/pack.cpp": "884b90b44531ccf237b0f247857d477dc72b92086dcf112dc92a21312da2a2c9",
+      "/tmp/dmrgo/v2/internal/fecref/ambe/tables_gen.go": "acc17a1585d7e2c03603c164c98b32b3c2d56fcc891a5797d6eb9edf8d7b2ea6",
+      "/tmp/dmrgo/v2/internal/fec/ambe/ambe.go": "bdd677ab15aba39637fdf7fa557d80b4cc037974a4a910c6eb21970914007a60",
+      "/tmp/dmrgo/v2/vocoder/frame.go": "adf0f7f32f849b5b98e82e70dc6f18d076508274efcef95f905e6d1fbcc0631c",
+      "/tmp/dmrgo/v2/go.mod": "8c2b7be0820fe6c40f202a663f563dc9ed3070bfc8dddd529ae33d3c772ebc23",
+      "/d2a/run.py": "9e3375d0ec4534ad2c1461aef397afca61861c704200f41542d35a83ab4a77cb",
+      "/d2a/main.go": "7b78bb4c44b6e1afa89ccb00e83cec7c21a1e84f2739cc9f971e42585ed13dd8",
+      "/d2a/native.cpp": "33eb03e7920692dc47eb2b69f49f99d170e74bb74427c1cbbc9a01ded68861d3",
+      "/tmp/native": "ac79ecb0b5a352e6b8d6e100ba532e298f258d44f49a893a1a69f84e549bdf96",
+      "/tmp/ref": "0add59c4a27027e2c52f835982a9ffe157e961636c2c7050422f763b1f634ff7"
+    }
+  },
+  "openDMR": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+  "dmrgo": "f78e033e90559995213498973fe9d75e9bd45b93",
+  "goArchiveSha256": "7226736c2339719cda28fbf3a54d71aa63bcefe376e98cef00034268dab24840"
+}
