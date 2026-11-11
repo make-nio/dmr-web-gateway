@@ -109,3 +109,8 @@ dos pasajes offline. Escucha exploratoria en español positiva; prueba formal
 inglesa pendiente. Ambos motores continúan como candidatos experimentales.
 La interfaz común y su ensayo aislado esperan aprobación arquitectónica.
 [Cierre consolidado, evidencia, riesgos y siguiente objetivo](docs/research/sprint-1-vocoder-d3-cierre.md).
+
+**Actualización D4.** El banco aislado implementa un contrato TypeScript por
+flujo, selección de simulado/OpenDMR/BLIP25 y comprobación de fixtures D3b.
+Las 12 pruebas offline pasaron. D4 queda en revisión arquitectónica.
+[Informe técnico, reproducción y evidencia](experiments/vocoder/d4/README.md).
