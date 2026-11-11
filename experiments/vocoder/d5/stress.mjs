@@ -7,6 +7,8 @@ import { PCM, LOCAL } from '/tmp/js/contract.js';
 
 const name = process.argv[2];
 assert(['opendmr','blip25'].includes(name));
+const mode = process.argv[3] ?? 'duplex';
+assert(['encode','decode','duplex'].includes(mode));
 const out = '/results/'+name;
 const factory = configure(name,1000);
 const pcm = read('/tmp/d4.s16le');
@@ -69,7 +71,7 @@ async function recovery(){
 }
 async function stage(n){
   const ss=[], pending=new Map(), errs=[];
-  const lat={encodeFromTick:[],decodeFromDispatch:[],duplexFromTick:[],dispatchLag:[]};
+  const lat={encodeFromTick:[],decodeFromDispatch:[],duplexFromTick:[],decodeFromTick:[],dispatchLag:[]};
   let done=0,late=0,encLate=0,decLate=0,drops=0,errors=0,reason=null;
   const start=now();
   try {
@@ -108,14 +110,22 @@ async function stage(n){
         const input=tick+37*i;
         const task=(async()=>{
           lat.dispatchLag.push(now()-due);
-          await ss[i].encode(packet(input));
-          const td=now();
-          lat.encodeFromTick.push(td-due);
-          if(td-due>20)encLate++;
-          await ss[i].decode(channel(input+251));
-          const end=now();
-          lat.decodeFromDispatch.push(end-td);lat.duplexFromTick.push(end-due);
-          if(end-td>20)decLate++;
+          let end;
+          if(mode !== 'decode'){
+            await ss[i].encode(packet(input));
+            end=now();
+            lat.encodeFromTick.push(end-due);
+            if(end-due>20)encLate++;
+          }
+          if(mode !== 'encode'){
+            const dispatch=end??now();
+            await ss[i].decode(channel(input+251));
+            end=now();
+            lat.decodeFromDispatch.push(end-dispatch);
+            if(end-dispatch>20)decLate++;
+            if(mode==='duplex')lat.duplexFromTick.push(end-due);
+            else lat.decodeFromTick.push(end-due);
+          }
           if(end-due>20)late++;
           done++;
         })().catch(e=>{errors++;if(errs.length<8)errs.push({tick,i,code:e.code??e.message});})
@@ -140,7 +150,7 @@ async function stage(n){
       latencyMs:Object.fromEntries(Object.entries(lat).map(([k,v])=>[k,summary(v)]))};
   } finally { await Promise.allSettled(ss.map(s=>s.close())); }
 }
-const report={provider:name,node:process.version,cpuMax:cg('cpu.max'),memoryMax:cg('memory.max'),
+const report={provider:name,mode,node:process.version,cpuMax:cg('cpu.max'),memoryMax:cg('memory.max'),
   swapMax:cg('memory.swap.max'),decoderFixtureHash:refs.routes[rx].bitstreamSha256,started:new Date().toISOString(),stages:[]};
 assert.equal(report.memoryMax,String(512*1024*1024));
 const [quota,period]=report.cpuMax.split(' ').map(Number);
@@ -149,7 +159,7 @@ writeFileSync(out+'-samples.jsonl','');
 const save=()=>writeFileSync(out+'.json',JSON.stringify(report,null,2)+'\n');
 report.recovery=await recovery();save();
 for(const n of [1,2,5,10,15,20,25]){
-  console.log('START',name,n,new Date().toISOString());
+  console.log('START',name,mode,n,new Date().toISOString());
   const result=await stage(n);
   report.stages.push(result);save();
   console.log('END',name,n,result.seconds,result.missed,result.reason);

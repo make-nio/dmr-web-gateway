@@ -7,6 +7,8 @@ imágenes locales fijadas en validate.sh:
 
 ```sh
 bash experiments/vocoder/d5/validate.sh experiments/vocoder/results/d5-nueva-corrida
+bash experiments/vocoder/d5/validate.sh experiments/vocoder/results/d5-nueva-corrida/encode encode
+bash experiments/vocoder/d5/validate.sh experiments/vocoder/results/d5-nueva-corrida/decode decode
 ```
 
 Usar un destino nuevo. Los dos proveedores se ejecutan en serie. Cada uno
@@ -29,7 +31,11 @@ trama de 9 octetos **independiente** de la salida del encoder. El PCM OSR
 de D3b y sus bitstreams archivados se repiten cíclicamente con fases distintas
 por canal y por sentido. En RX OpenDMR consume tramas producidas por BLIP25;
 en RX BLIP25 consume las de OpenDMR. Un tick de 25 canales equivale a 25
-encode + 25 decode sobre 25 sesiones.
+encode + 25 decode sobre 25 sesiones. Las dos escaleras adicionales ejecutan
+solo una de esas operaciones por tick. En solo decode, decodeFromTick mide
+el tiempo extremo a extremo desde el tick nominal. Cada combinación de
+modo y proveedor arranca desde un contenedor limpio y tiene su propia guarda.
+Ejecutar las tres órdenes en serie, para un máximo de 84 minutos cronometrados.
 
 El trabajo nativo, la serialización por pipes, la planificación y la memoria
 son reales. El origen de la carga es un generador local con llegadas
@@ -85,4 +91,10 @@ workerRSS solo incluye los hijos del proveedor. La cota cgroup incluye
 tmpfs y cachés, por lo que difiere de RSS. El JSON por proveedor guarda los
 resultados de cada escalón; el JSONL guarda ventanas, procesos, memoria, CPU y
 eventos de memoria. Comprobar los JSON de estado del contenedor al interpretar
-un resultado parcial.
+un resultado parcial. Para auditar los conteos y generar los cuadros:
+
+```sh
+for sub in '' /encode /decode; do
+  python3 experiments/vocoder/d5/summarize.py "experiments/vocoder/results/d5-nueva-corrida$sub"
+done
+```
