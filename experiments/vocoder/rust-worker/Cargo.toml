@@ -1,0 +1,7 @@
+[package]
+name = "vocoder-spike-worker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+blip25-vocoder = { path = "../blip25" }

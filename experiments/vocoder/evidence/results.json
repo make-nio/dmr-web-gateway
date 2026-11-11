@@ -1,0 +1,352 @@
+{
+  "environment": {
+    "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+    "machine": "x86_64",
+    "cpu": ": AMD Ryzen 7 9800X3D 8-Core Processor",
+    "python": "3.11.2"
+  },
+  "corpus": {
+    "source": "Open Speech Repository",
+    "url": "https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0010_8k.wav",
+    "sha256": "a4bf9becd046d7aedb6d05b6e12347a6294a44f74d263089c636fb0a2b1e6561"
+  },
+  "functional": {
+    "opendmr-to-opendmr-silence": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 2.6761913235043564,
+        "dc": -0.00025,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.345625
+      }
+    },
+    "opendmr-to-blip25-silence": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 0.47407805264534236,
+        "dc": 0.043,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.83325
+      }
+    },
+    "opendmr-to-opendmr-tone": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 20215.924906425873,
+        "dc": 7.9155,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.019875
+      }
+    },
+    "opendmr-to-blip25-tone": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 4509.0980996065055,
+        "dc": 0.094125,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.035625
+      }
+    },
+    "opendmr-to-opendmr-noise": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 5487.192941773598,
+        "dc": 188.995,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.028875
+      }
+    },
+    "opendmr-to-blip25-noise": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 441.66054173426,
+        "dc": 0.019125,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.062625
+      }
+    },
+    "opendmr-to-opendmr-speech": {
+      "frames": 1000,
+      "outputBytes": 320000,
+      "signal": {
+        "rms": 5638.549313191071,
+        "dc": 6.139525,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.08186875
+      }
+    },
+    "opendmr-to-blip25-speech": {
+      "frames": 1000,
+      "outputBytes": 320000,
+      "signal": {
+        "rms": 983.3309519053084,
+        "dc": 0.05715,
+        "clippedFraction": 1.875e-05,
+        "zeroFraction": 0.17358125
+      }
+    },
+    "blip25-to-opendmr-silence": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 0.5818075283115542,
+        "dc": 0.01925,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.796125
+      }
+    },
+    "blip25-to-blip25-silence": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 0.17356554957709783,
+        "dc": -0.000625,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.985125
+      }
+    },
+    "blip25-to-opendmr-tone": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 1767.107265915117,
+        "dc": 26.2535,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.017625
+      }
+    },
+    "blip25-to-blip25-tone": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 847.759784446632,
+        "dc": -0.562375,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.0235
+      }
+    },
+    "blip25-to-opendmr-noise": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 9091.301401827739,
+        "dc": 162.969375,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.01725
+      }
+    },
+    "blip25-to-blip25-noise": {
+      "frames": 50,
+      "outputBytes": 16000,
+      "signal": {
+        "rms": 1213.03080200999,
+        "dc": 0.217125,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.024625
+      }
+    },
+    "blip25-to-opendmr-speech": {
+      "frames": 1000,
+      "outputBytes": 320000,
+      "signal": {
+        "rms": 11129.799978251518,
+        "dc": 40.5606875,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.00145625
+      }
+    },
+    "blip25-to-blip25-speech": {
+      "frames": 1000,
+      "outputBytes": 320000,
+      "signal": {
+        "rms": 1659.7542354310322,
+        "dc": -0.00805625,
+        "clippedFraction": 0.0,
+        "zeroFraction": 0.0051625
+      }
+    }
+  },
+  "throughput": {
+    "opendmr": {
+      "roundtripFramesPerSecond": 2346.069087333938,
+      "encodeCodec": {
+        "count": 1000,
+        "p50Ms": 0.175002,
+        "p95Ms": 0.210352,
+        "p99Ms": 0.351443,
+        "maxMs": 0.543198
+      },
+      "decodeCodec": {
+        "count": 1000,
+        "p50Ms": 0.00508,
+        "p95Ms": 0.00594,
+        "p99Ms": 0.01114,
+        "maxMs": 0.113941
+      },
+      "encodeIPC": {
+        "count": 1000,
+        "p50Ms": 0.250931,
+        "p95Ms": 0.299412,
+        "p99Ms": 0.473733,
+        "maxMs": 0.674145
+      },
+      "decodeIPC": {
+        "count": 1000,
+        "p50Ms": 0.152281,
+        "p95Ms": 0.180541,
+        "p99Ms": 0.260762,
+        "maxMs": 0.650755
+      }
+    },
+    "blip25": {
+      "roundtripFramesPerSecond": 3185.883051402539,
+      "encodeCodec": {
+        "count": 1000,
+        "p50Ms": 0.06707,
+        "p95Ms": 0.08811,
+        "p99Ms": 0.138031,
+        "maxMs": 0.183101
+      },
+      "decodeCodec": {
+        "count": 1000,
+        "p50Ms": 0.0152,
+        "p95Ms": 0.01715,
+        "p99Ms": 0.03248,
+        "maxMs": 0.047241
+      },
+      "encodeIPC": {
+        "count": 1000,
+        "p50Ms": 0.132171,
+        "p95Ms": 0.164282,
+        "p99Ms": 0.248492,
+        "maxMs": 0.304683
+      },
+      "decodeIPC": {
+        "count": 1000,
+        "p50Ms": 0.161071,
+        "p95Ms": 0.190742,
+        "p99Ms": 0.286832,
+        "maxMs": 0.465524
+      }
+    }
+  },
+  "soak": {
+    "opendmr": {
+      "elapsedSeconds": 600.0019133579917,
+      "framesPerDirection": 30001,
+      "failures": 0,
+      "deadlineMisses": 0,
+      "cpuPercentOneCore": 2.1399931757115915,
+      "peakSampledRssMiB": 1.8671875,
+      "initialRssBytes": 1957888,
+      "finalRssBytes": 970752,
+      "encodeCodec": {
+        "count": 30001,
+        "p50Ms": 0.342762,
+        "p95Ms": 0.572234,
+        "p99Ms": 0.721624,
+        "maxMs": 0.960706
+      },
+      "decodeCodec": {
+        "count": 30001,
+        "p50Ms": 0.00933,
+        "p95Ms": 0.020311,
+        "p99Ms": 0.03025,
+        "maxMs": 0.306671
+      },
+      "encodeIPC": {
+        "count": 30001,
+        "p50Ms": 0.433673,
+        "p95Ms": 0.691574,
+        "p99Ms": 0.855046,
+        "maxMs": 1.108608
+      },
+      "decodeIPC": {
+        "count": 30001,
+        "p50Ms": 0.165621,
+        "p95Ms": 0.265351,
+        "p99Ms": 0.320272,
+        "maxMs": 0.651624
+      },
+      "queueDelay": {
+        "count": 30001,
+        "p50Ms": 0.383244,
+        "p95Ms": 0.609172,
+        "p99Ms": 0.751791,
+        "maxMs": 2.020457
+      },
+      "scheduledRoundtrip": {
+        "count": 30001,
+        "p50Ms": 0.882245,
+        "p95Ms": 1.314272,
+        "p99Ms": 1.534334,
+        "maxMs": 2.920908
+      }
+    },
+    "blip25": {
+      "elapsedSeconds": 600.0019133579917,
+      "framesPerDirection": 30001,
+      "failures": 0,
+      "deadlineMisses": 0,
+      "cpuPercentOneCore": 0.9483303091743736,
+      "peakSampledRssMiB": 1.265625,
+      "initialRssBytes": 1327104,
+      "finalRssBytes": 1044480,
+      "encodeCodec": {
+        "count": 30001,
+        "p50Ms": 0.08274,
+        "p95Ms": 0.154521,
+        "p99Ms": 0.179401,
+        "maxMs": 0.540944
+      },
+      "decodeCodec": {
+        "count": 30001,
+        "p50Ms": 0.02206,
+        "p95Ms": 0.04188,
+        "p99Ms": 0.050581,
+        "maxMs": 0.462756
+      },
+      "encodeIPC": {
+        "count": 30001,
+        "p50Ms": 0.161291,
+        "p95Ms": 0.275621,
+        "p99Ms": 0.323192,
+        "maxMs": 1.210701
+      },
+      "decodeIPC": {
+        "count": 30001,
+        "p50Ms": 0.176991,
+        "p95Ms": 0.282552,
+        "p99Ms": 0.356502,
+        "maxMs": 0.934848
+      },
+      "queueDelay": {
+        "count": 30001,
+        "p50Ms": 0.461793,
+        "p95Ms": 0.922061,
+        "p99Ms": 1.160217,
+        "maxMs": 2.922248
+      },
+      "scheduledRoundtrip": {
+        "count": 30001,
+        "p50Ms": 0.794975,
+        "p95Ms": 1.323421,
+        "p99Ms": 1.544993,
+        "maxMs": 3.606112
+      }
+    }
+  },
+  "omitted": [
+    "Independent DVSI/DMR reference vectors unavailable; no interoperability certification",
+    "Human listening not yet performed; no MOS",
+    "No patent clearance or redistribution authorization",
+    "No sanitizer run in this baseline experiment"
+  ],
+  "completed": true
+}

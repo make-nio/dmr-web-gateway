@@ -1,0 +1,212 @@
+{
+  "source": "Es-Rosario (Argentina) Parte 1-article.ogg",
+  "reader": "Gabriel Quagliano",
+  "license": "CC BY-SA 3.0",
+  "sourceSha256": "3dc79a7f99002ec5a922aa89f91da486d0a7a00e740795e8fb0e6c7dfd7b0165",
+  "intervalSeconds": [
+    15,
+    35
+  ],
+  "sourceWavSha256": "264a57670fa7f75b0d09cde8b527e4eb6df6ab2e61c25987fb2ef71efec64e0a",
+  "inputPcmSha256": "f95a96c94e86a140f1f8afc2fec4f51d37aa2f343890d6df0ab00f44111d18bc",
+  "inputMetrics": {
+    "n": 160000,
+    "rms": 5114.602088153461,
+    "min": -26317,
+    "max": 27025,
+    "absAmplitude": {
+      "p50": 2001,
+      "p90": 8934,
+      "p95": 11223,
+      "p99": 15669,
+      "p100": 27025
+    },
+    "abovePositiveLimit": 0,
+    "belowNegativeLimit": 0,
+    "atIntLimit": 0,
+    "boundaryJumps": {
+      "n": 999,
+      "above12000": 0,
+      "p50": 346,
+      "p90": 1713,
+      "p95": 2687,
+      "p99": 5025,
+      "p100": 10830
+    },
+    "withinJumps": {
+      "n": 159000,
+      "above12000": 31,
+      "p50": 347,
+      "p90": 1615,
+      "p95": 2263,
+      "p99": 4413,
+      "p100": 28696
+    }
+  },
+  "revisions": {
+    "opendmr": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+    "blip25": "d1762813b7142c021f4105c832bf7f060d1249fa"
+  },
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "builds": [
+    [
+      "rustc",
+      "--edition=2021",
+      "-O",
+      "-L",
+      "dependency=/lab/rust-worker/target/release/deps",
+      "--extern",
+      "blip25_vocoder=/lab/rust-worker/target/release/deps/libblip25_vocoder-5c042adddf75e192.rlib",
+      "/bank/d3b/check.rs",
+      "-o",
+      "/tmp/check-blip"
+    ],
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-I/lab/opendmr",
+      "-I/lab/opendmr/encoder",
+      "-I/lab/opendmr/decoder",
+      "/bank/d3b/check.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-lm",
+      "-o",
+      "/tmp/check-open"
+    ],
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-Wall",
+      "-fPIC",
+      "-I/lab/opendmr",
+      "/lab/opendmr/dmr_codec.cpp",
+      "/bank/c6/tap.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-Wl,--wrap=mbe_floattoshort",
+      "-lm",
+      "-o",
+      "/tmp/cli-tap"
+    ],
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-I/lab/opendmr",
+      "-I/lab/opendmr/encoder",
+      "-I/lab/opendmr/decoder",
+      "/bank/c5/pack.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-lm",
+      "-o",
+      "/tmp/enc"
+    ]
+  ],
+  "routes": {
+    "RX": {
+      "wav": "Rosario-01.wav",
+      "wavSha256": "a75ac333a6d3b5489f82e604c7d13ddcff5dbf8310db8b1a2cc67b136adc8206",
+      "framesSha256": "47277e5195658beb502a92fcf62d0e77057c2beb5f4737a6f3c9f80f05cda024",
+      "outputPcmSha256": "dd785e7da24791a38455e1daba90a65bb2c18662602d5f685569662eff592527",
+      "traceSha256": "2ae38e755af79c295d8f3297189c8cf6a415a6baf82d04065132c962e6b96fe8",
+      "frames": 1000,
+      "sampleRate": 8000,
+      "channels": 1,
+      "samples": 160000,
+      "durationSeconds": 20,
+      "formatMatches": 1000,
+      "blipFecErrors": 0,
+      "executionErrors": 0,
+      "outputMetrics": {
+        "n": 160000,
+        "rms": 4577.184805823608,
+        "min": -28643,
+        "max": 29467,
+        "absAmplitude": {
+          "p50": 1050,
+          "p90": 8089,
+          "p95": 10646,
+          "p99": 15838,
+          "p100": 29467
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 272,
+          "p90": 1622,
+          "p95": 2436,
+          "p99": 4877,
+          "p100": 8814
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 95,
+          "p50": 246,
+          "p90": 1414,
+          "p95": 2138,
+          "p99": 4632,
+          "p100": 32451
+        }
+      },
+      "outputInt16Rails": 0,
+      "unityClips": 0,
+      "exploratoryListening": "pending"
+    },
+    "TX": {
+      "wav": "Rosario-02.wav",
+      "wavSha256": "0e9d3b0d98d0d01f6740396a871cc95186474f221a7b02e8db1dfc43198493c5",
+      "framesSha256": "082a49d392f03307f2fc660921b415d6de9a63cfc42dc898d5582be254ecaec5",
+      "outputPcmSha256": "6cd7d64df574195d0192cda8265dd5b28bedf74c04a8ef1bbefb97b45674c3bd",
+      "traceSha256": "8e074c24a158b53c91ffef9ca13e4e6579ad5227f316023b06660cbd4913ddb8",
+      "frames": 1000,
+      "sampleRate": 8000,
+      "channels": 1,
+      "samples": 160000,
+      "durationSeconds": 20,
+      "formatMatches": 1000,
+      "blipFecErrors": 0,
+      "executionErrors": 0,
+      "outputMetrics": {
+        "n": 160000,
+        "rms": 8206.68539919094,
+        "min": -32768,
+        "max": 32767,
+        "absAmplitude": {
+          "p50": 2726,
+          "p90": 13805,
+          "p95": 18752,
+          "p99": 29801,
+          "p100": 32768
+        },
+        "abovePositiveLimit": 1060,
+        "belowNegativeLimit": 273,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 1,
+          "p50": 665,
+          "p90": 3391,
+          "p95": 4978,
+          "p99": 7871,
+          "p100": 15223
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 360,
+          "p50": 639,
+          "p90": 2994,
+          "p95": 4203,
+          "p99": 7900,
+          "p100": 28378
+        }
+      },
+      "outputInt16Rails": 1063,
+      "unityClips": null,
+      "exploratoryListening": "pending"
+    }
+  }
+}

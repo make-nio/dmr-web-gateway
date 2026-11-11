@@ -1,0 +1,28 @@
+{
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-11-10T20:08:27.196758106Z",
+    "FinishedAt": "2026-11-10T20:08:28.769659593Z"
+  },
+  "networkMode": "none",
+  "readOnly": true,
+  "user": "1000:1000",
+  "memory": 536870912,
+  "nanoCpus": 1000000000,
+  "capDrop": [
+    "ALL"
+  ],
+  "securityOpt": [
+    "no-new-privileges"
+  ],
+  "portBindings": {}
+}

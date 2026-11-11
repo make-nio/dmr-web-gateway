@@ -1,0 +1,193 @@
+{
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "upstream": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+  "build": [
+    "g++",
+    "-O3",
+    "-std=c++11",
+    "-Wall",
+    "-fPIC",
+    "-I/lab/opendmr",
+    "/lab/opendmr/dmr_codec.cpp",
+    "/c6/tap.cpp",
+    "/lab/opendmr/libopendmr.a",
+    "-Wl,--wrap=mbe_floattoshort",
+    "-lm",
+    "-o",
+    "/tmp/cli-tap"
+  ],
+  "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "corpus": "Open Speech Repository, OSR_us_000_0010_8k.wav, first 20 seconds",
+  "sampleFormat": "8 kHz mono, 160000 samples",
+  "limitF32": 31128.650390625,
+  "preThresholdAtGain8": 3891.081298828125,
+  "inputFramesSha256": "51561a0b64256cfbde739c59893e7614604d64d0927b9c45199aee9c51433ce6",
+  "preFloatSha256": "4a35b70a76dcd7844f3c17f7ef72c835be0c251799c7bba02bc13a594897f737",
+  "c5ClipBExact": true,
+  "allSamplesMatchModeledX8": true,
+  "stages": {
+    "preFloat": {
+      "n": 160000,
+      "rms": 2904.6029129544186,
+      "min": -18212.650390625,
+      "max": 19000.84765625,
+      "absAmplitude": {
+        "p50": 314.7531433105469,
+        "p90": 4965.05712890625,
+        "p95": 7523.0234375,
+        "p99": 11040.70703125,
+        "p100": 19000.84765625
+      },
+      "abovePositiveLimit": 0,
+      "belowNegativeLimit": 0,
+      "atIntLimit": 0,
+      "boundaryJumps": {
+        "n": 999,
+        "above12000": 0,
+        "p50": 105.31564331054688,
+        "p90": 1238.2769470214844,
+        "p95": 1788.369613647461,
+        "p99": 3145.582962036133,
+        "p100": 8441.5341796875
+      },
+      "withinJumps": {
+        "n": 159000,
+        "above12000": 21,
+        "p50": 111.94816589355469,
+        "p90": 1271.253662109375,
+        "p95": 1910.1220703125,
+        "p99": 3754.56103515625,
+        "p100": 15454.78759765625
+      }
+    },
+    "scaledX8BeforeLimit": {
+      "n": 160000,
+      "rms": 23236.82330363535,
+      "min": -145701.203125,
+      "max": 152006.78125,
+      "absAmplitude": {
+        "p50": 2518.025146484375,
+        "p90": 39720.45703125,
+        "p95": 60184.1875,
+        "p99": 88325.65625,
+        "p100": 152006.78125
+      },
+      "abovePositiveLimit": 10685,
+      "belowNegativeLimit": 10615,
+      "atIntLimit": 0,
+      "boundaryJumps": {
+        "n": 999,
+        "above12000": 76,
+        "p50": 842.525146484375,
+        "p90": 9906.215576171875,
+        "p95": 14306.956909179688,
+        "p99": 25164.663696289062,
+        "p100": 67532.2734375
+      },
+      "withinJumps": {
+        "n": 159000,
+        "above12000": 12370,
+        "p50": 895.5853271484375,
+        "p90": 10170.029296875,
+        "p95": 15280.9765625,
+        "p99": 30036.48828125,
+        "p100": 123638.30078125
+      }
+    },
+    "controlInt16": {
+      "n": 160000,
+      "rms": 13995.606942828077,
+      "min": -31128,
+      "max": 31128,
+      "absAmplitude": {
+        "p50": 2518,
+        "p90": 31128,
+        "p95": 31128,
+        "p99": 31128,
+        "p100": 31128
+      },
+      "abovePositiveLimit": 0,
+      "belowNegativeLimit": 0,
+      "atIntLimit": 21300,
+      "boundaryJumps": {
+        "n": 999,
+        "above12000": 34,
+        "p50": 481,
+        "p90": 5933,
+        "p95": 9807,
+        "p99": 18685,
+        "p100": 35997
+      },
+      "withinJumps": {
+        "n": 159000,
+        "above12000": 5928,
+        "p50": 509,
+        "p90": 6384,
+        "p95": 10242,
+        "p99": 21664,
+        "p100": 62256
+      }
+    },
+    "unityInt16": {
+      "n": 160000,
+      "rms": 2904.3476449830778,
+      "min": -18212,
+      "max": 19000,
+      "absAmplitude": {
+        "p50": 314,
+        "p90": 4965,
+        "p95": 7523,
+        "p99": 11040,
+        "p100": 19000
+      },
+      "abovePositiveLimit": 0,
+      "belowNegativeLimit": 0,
+      "atIntLimit": 0,
+      "boundaryJumps": {
+        "n": 999,
+        "above12000": 0,
+        "p50": 105,
+        "p90": 1238,
+        "p95": 1788,
+        "p99": 3145,
+        "p100": 8442
+      },
+      "withinJumps": {
+        "n": 159000,
+        "above12000": 21,
+        "p50": 112,
+        "p90": 1271,
+        "p95": 1910,
+        "p99": 3755,
+        "p100": 15454
+      }
+    }
+  },
+  "limiterErrorAtX8": {
+    "rms": 11639.719083307098,
+    "peak": 120878.130859375,
+    "rmsRelativeToUnclipped": 0.5009169683485131
+  },
+  "truncationErrorAtX8Rms": 0.5880127374619107,
+  "trueClipsX8": 21300,
+  "trueClipsUnity": 0,
+  "files": {
+    "control": {
+      "wav": "Toma-02.wav",
+      "wavSha256": "e3c774d55bd646feeb9f03190a6ab1da0cb5f80c758c900c61ca65defed9958e",
+      "pcmSha256": "76c782a8160f5f843d269e676268d05b6bc8da438ac441c8d17c4fa43a5466a5"
+    },
+    "unity": {
+      "wav": "Toma-01.wav",
+      "wavSha256": "0035192d8e55cf815c3504c6fe8d3d33b04b82c690d5a4ecbd0215570622e3d9",
+      "pcmSha256": "bab233e4f2af646a39eacb8f726d7424f0736144f111e041270517b377e13bf8"
+    }
+  },
+  "hashes": {
+    "/lab/opendmr/libopendmr.a": "ae3b85afe75f77e222eec9114a874dd00f70ee2416dd6ad74bf357f908399590",
+    "/lab/opendmr/decoder/mbelib.c": "7c4f86a22187a54a8741a7b8c456651fe9c959631298f412a322b4dfb2783c93",
+    "/lab/opendmr/dmr_codec.cpp": "174554719a2071fbe8c2a7cbb76f308bdfa33a9908f6484b04288cb82d79ce3b",
+    "/c6/tap.cpp": "9e97881cfa21570de9f2f433cedf7403a13f6a6612699b8dafc2bb3b44fefa4f",
+    "/c6/run.py": "66fbf4606e34bc4e98899649b1e55a9480823a7a2c6265ed9df13eb7940e5444"
+  }
+}

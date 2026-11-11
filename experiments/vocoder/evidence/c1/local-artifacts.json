@@ -1,0 +1,82 @@
+[
+  {
+    "file": "cli-1.ambe",
+    "bytes": 9000,
+    "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+  },
+  {
+    "file": "cli-1.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "cli-1.stdout",
+    "bytes": 36,
+    "sha256": "5589a9a6e5e3a27c88ef89f3bfb0714dd9843bb19f8200778a29fffed287778f"
+  },
+  {
+    "file": "cli-2.ambe",
+    "bytes": 9000,
+    "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+  },
+  {
+    "file": "cli-2.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "cli-2.stdout",
+    "bytes": 36,
+    "sha256": "5589a9a6e5e3a27c88ef89f3bfb0714dd9843bb19f8200778a29fffed287778f"
+  },
+  {
+    "file": "container.json",
+    "bytes": 639,
+    "sha256": "1458c377c3c34c4a0997cf971eee8010fb741b0d024a890d074e71ff940e1036"
+  },
+  {
+    "file": "frames.jsonl",
+    "bytes": 236890,
+    "sha256": "6523055f2eb8204a22efe38d05e18052d1423ddd33518d9719331f2c594f7f1e"
+  },
+  {
+    "file": "input.s16le",
+    "bytes": 320000,
+    "sha256": "677d09d1c91e7cae74c0a5dc3e5e3bcd3ded3634ed471bcbca6dd65ea82e2279"
+  },
+  {
+    "file": "results.json",
+    "bytes": 8487,
+    "sha256": "53572902b2e4462c6cda4133a4452b8c28ac91c13bfb6fc906e093ad1b2cf31f"
+  },
+  {
+    "file": "wrapper-1.ambe",
+    "bytes": 9000,
+    "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+  },
+  {
+    "file": "wrapper-1.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "wrapper-1.stdout",
+    "bytes": 26000,
+    "sha256": "933eaea576dd2d39ef2c44cd47da0f4576f29cb5e802c6a64b84b750feb8b7c9"
+  },
+  {
+    "file": "wrapper-2.ambe",
+    "bytes": 9000,
+    "sha256": "60cbd71393bf36ed274e48908007289c3a529d8399574569e7763717c2ff2717"
+  },
+  {
+    "file": "wrapper-2.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "wrapper-2.stdout",
+    "bytes": 26000,
+    "sha256": "0a7176432041322311adcb650bc52da3d8c113f335efbf648a353fcd99e66df5"
+  }
+]
