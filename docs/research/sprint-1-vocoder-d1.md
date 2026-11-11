@@ -99,7 +99,37 @@ corta por la mitad el segundo tramo. D2 puede trabajar con tramos aislados.
 | Captura voice.bin en dmrgo | Tramas tomadas como entrada por tests de ráfaga y FEC | La prueba extrae tramos y reencoda los considerados limpios. El archivo carece en esa prueba de PCM conocido, transcripción y procedencia/permiso individual comprobados. La licencia del código no establece derechos sobre voces de terceros. Excluir del mínimo. [Fixture](https://github.com/USA-RedDragon/dmrgo/blob/f78e033e90559995213498973fe9d75e9bd45b93/v2/layer2/testdata/voice.bin) · [Uso concreto](https://github.com/USA-RedDragon/dmrgo/blob/f78e033e90559995213498973fe9d75e9bd45b93/v2/vocoder/ambe72_test.go) |
 | BLIP25 y sus goldens | Comparador secundario de voz en ambas direcciones | Otro motor ya estudiado. Sus goldens internos detectan regresiones; los externos DVSI no se distribuyen en el repositorio. Si se consiguieran, contarían como evidencia de su fuente DVSI. Código declarado MIT, procedencia de ingeniería inversa y advertencias de patentes. [README fijado](https://github.com/OpenBLIP25/blip25-vocoder/blob/d1762813b7142c021f4105c832bf7f060d1249fa/README.md) · [Evaluación previa](sprint-1-vocoder-plan.md) |
 
-## D2 propuesto para aprobación
+## D2a ejecutada · contraste externo de un silencio limpio
+
+Se ejecutó la primera etapa aprobada. Coincidieron **72/72 bits de canal
+y 49/49 de información** en las dos implementaciones, con el siguiente
+registro hexadecimal (el último octeto de información contiene siete
+ceros de relleno).
+
+| Frontera | OpenDMR experimental | dmrgo | Referencia literal |
+|---|---|---|---|
+| Información de entrada | F801A99F8CE080 | F801A99F8CE080 | F801A99F8CE080 |
+| A, B enmascarado y C concatenados | F80148A82A1B3F19C1 | — | F80148A82A1B3F19C1 al desintercalar |
+| Canal producido | B9E881526173002A6B | B9E881526173002A6B | B9E881526173002A6B |
+| Información recuperada desde el canal literal | F801A99F8CE080 | F801A99F8CE080 | F801A99F8CE080 |
+
+La permutación cubrió 72 posiciones distintas, su inversa las recuperó
+todas y el mapa completo coincidió con las tablas A/B/C publicadas por
+dmrgo. Se verificó el padding del literal y de la salida Go. El unpack
+nativo entrega directamente los 49 bits. Todas las listas de diferencias
+están vacías. dmrgo reportó 47 bits protegidos comprobados, cero errores
+corregidos y estado recuperable (Uncorrectable=false).
+
+La evidencia valida el formato para este único vector limpio. La capacidad
+de corregir errores introducidos y la interoperabilidad de voz siguen
+pendientes. La primera preparación se detuvo al verificar el árbol de
+trabajo Windows bajo Linux, antes de comparar bits. La corrida final
+extrajo con git archive los objetos del commit fijado y compiló ambas rutas
+en Docker sin red. El manifiesto registra los hashes y herramientas reales.
+[Banco y reproducción](../../experiments/vocoder/d2a/README.md) ·
+[Manifiesto de la comparación](../../experiments/vocoder/evidence/d2a/manifest.json).
+
+## Propuesta D2 original (solo la primera etapa ejecutada en D2a)
 
 1. **Formato, un vector literal.** En un banco offline separado, fijar las
    dos revisiones, toolchain y hashes de entradas. Usar el par de silencio

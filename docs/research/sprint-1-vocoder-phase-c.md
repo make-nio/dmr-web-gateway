@@ -613,6 +613,11 @@ El [informe D1](sprint-1-vocoder-d1.md) documenta las representaciones de
 49/72 bits, el par de silencio y las referencias candidatas. D2 queda propuesto
 para revisión arquitectónica. La interoperabilidad de voz sigue pendiente.
 
+**Actualización D2a.** La etapa del literal de silencio pasó en ambos
+sentidos con OpenDMR corregido y dmrgo. Se comprobó la coincidencia exacta
+de 72 bits en canal y 49 en información. Voz y ensayos con errores siguen
+pendientes. [Informe y evidencia](sprint-1-vocoder-d1.md).
+
 ## B. Decode OpenDMR: ganancia y recorte (hipótesis previa a C6)
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),
