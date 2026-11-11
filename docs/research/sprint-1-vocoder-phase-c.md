@@ -524,6 +524,83 @@ En la corrida publicada se montó `evidence/c6` como salida. La revisión
 upstream, el argumento de enlace, las fuentes y la biblioteca están
 identificados en el manifiesto. C6 queda en revisión auditiva.
 
+## C7 — Dos voces, tres niveles y silencios
+
+**Escucha de C6.** El usuario puntuó la Toma 01 (×1) con 7,5/9: voz clara,
+inteligible y sin saturación perceptible. Oyó distorsionada la Toma 02 (×8).
+La puntuación corresponde a la voz 0010 y al nivel 1×. La escucha adicional
+de C7 está pendiente.
+
+Se reutilizaron los archivos de C5 para la alineación Golay B y la
+permutación, y la sonda y la conversión float → int16 ×1 de C6. El ensayo
+comprobó sus hashes antes de compilar. Cada caso usó un proceso nuevo de
+encoder y otro de decoder, con estado continuo hasta su última trama.
+**6300/6300** vectores de nueve parámetros recuperados coincidieron con
+los originales y se verificaron los 49 bits adaptados por trama. En Par-01
+coincidieron el PCM de entrada de C5, la secuencia AMBE de C6 y el SHA-256
+del WAV de Toma 01: `0035192d8e55cf815c3504c6fe8d3d33b04b82c690d5a4ecbd0215570622e3d9`.
+
+Los niveles se aplicaron solo al PCM de entrada, antes del encoder, con
+redondeo al entero más próximo (empate al par) y recorte al rango s16.
+La columna de recorte de salida cuenta floats que excedieron el límite de
+C6 antes de convertir a entero. Los saltos son diferencias absolutas >12000
+entre la última muestra de una trama y la primera de la siguiente.
+
+| Par | Estímulo | Duración | Recortes entrada | Recortes salida | RMS salida | Pico salida | Saltos entre tramas |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 01 | 0010 ×1, referencia C6 | 20 s | 0 | 0 | 2904,35 | 19000 | 0/999 |
+| 02 | 0030 ×0,25 | 20 s | 0 | 0 | 719,62 | 8817 | 0/999 |
+| 03 | 0010 ×2 | 20 s | 0 | 87 | 5843,63 | 31128 | 5/999 |
+| 04 | 0030 ×1 | 20 s | 0 | 15 | 2812,25 | 31128 | 5/999 |
+| 05 | 0010 ×0,25 | 20 s | 0 | 0 | 734,80 | 4868 | 0/999 |
+| 06 | 0030 ×2 | 20 s | 14 | 704 | 5497,46 | 31128 | 7/999 |
+| 07 | Silencio digital | 1 s | 0 | 0 | 5,64 | 32 | 0/49 |
+| 08 | Voz 0030 / silencio / voz 0030, ×1 | 5 s | 0 | 11 | 3146,55 | 31128 | 1/249 |
+
+Cada caso de voz completa usa las primeras 160000 muestras del archivo fuente.
+Los 704 recortes de salida en Par-06 representan el 0,44 % de esa secuencia.
+En Par-08 las muestras [0,16000) proceden de los segundos [2,4) de 0030,
+[16000,24000) son ceros y [24000,40000) proceden de [4,6) de 0030. Las
+transiciones ocurren antes de las tramas 100 y 150, numeradas desde cero.
+En el segundo silencioso intercalado la salida tuvo RMS 18,02 y pico 282.
+El manifiesto incluye el salto exacto en cada unión, el RMS por segmento y
+las métricas de amplitud y discontinuidades de entrada y salida de cada caso.
+
+### Reproducción y paquete de escucha
+
+Experimento [c7/run.py](../../experiments/vocoder/c7/run.py);
+[WAVs y manifiesto](../../experiments/vocoder/evidence/c7). Para cada par
+hay dos WAV mono de 8 kHz con la misma duración y sus niveles conservados:
+estímulo y salida del vocoder. Consultar el manifiesto para la correspondencia.
+Los nombres neutrales facilitan la comparación informal.
+
+Fuentes atribuidas a **Open Speech Repository**:
+[voz 0010](https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0010_8k.wav)
+y [voz 0030](https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0030_8k.wav).
+El manifiesto contiene los hashes completos de ambas fuentes y, por caso,
+del PCM preparado, secuencia AMBE, PCM final y los dos WAV. La imagen
+local de C6 contiene 0010. Montar el WAV completo de 0030, previamente
+obtenido y verificado, leyendo la copia local durante la ejecución.
+
+Desde la raíz del checkout en WSL2 (fuentes de los experimentos con finales
+de línea LF para verificar los hashes históricos):
+
+```sh
+v="$PWD/experiments/vocoder"
+second="$(realpath ../vocoder-male.wav)"
+mkdir -p "$v/results/c7"
+docker run --rm --pull never --network none --read-only --user 1000:1000 \
+  --cap-drop ALL --security-opt no-new-privileges --cpus 1 --memory 512m \
+  --tmpfs /tmp:rw,exec,size=32m -v "$v:/bank:ro" \
+  -v "$second:/second.wav:ro" -v "$v/results/c7:/results" \
+  sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab \
+  python3 -B /bank/c7/run.py
+```
+
+La corrida publicada escribió en `evidence/c7`. La conservación de los
+parámetros quedó verificada para el corpus ensayado; la valoración perceptual
+de la segunda voz, los niveles y los silencios requiere escuchar los pares.
+
 ## B. Decode OpenDMR: ganancia y recorte (hipótesis previa a C6)
 
 En [mbelib.c](https://github.com/MW0MWZ/OpenDMR/blob/d28164b39ba4d91ad5948ff22707937f8944f70f/decoder/mbelib.c),

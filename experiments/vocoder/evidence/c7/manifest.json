@@ -1,0 +1,775 @@
+{
+  "upstream": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "builds": [
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-Wall",
+      "-fPIC",
+      "-I/lab/opendmr",
+      "-I/lab/opendmr/decoder",
+      "-I/lab/opendmr/encoder",
+      "/bank/c5/pack.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-lm",
+      "-o",
+      "/tmp/enc"
+    ],
+    [
+      "g++",
+      "-O3",
+      "-std=c++11",
+      "-Wall",
+      "-fPIC",
+      "-I/lab/opendmr",
+      "/lab/opendmr/dmr_codec.cpp",
+      "/bank/c6/tap.cpp",
+      "/lab/opendmr/libopendmr.a",
+      "-Wl,--wrap=mbe_floattoshort",
+      "-lm",
+      "-o",
+      "/tmp/dec"
+    ]
+  ],
+  "source": "Open Speech Repository, OSR_us_000_{id}_8k.wav",
+  "sourceWavSha256": {
+    "0010": "a4bf9becd046d7aedb6d05b6e12347a6294a44f74d263089c636fb0a2b1e6561",
+    "0030": "d3e1cfba98a44ddfc6e99508e663794c8dc41bdb2baced224f779c453143b622"
+  },
+  "format": "mono PCM s16le 8000 Hz",
+  "state": "new encoder and decoder processes for every case; continuous within case",
+  "rounding": "nearest integer, ties to even; clamp signed int16 after scaling",
+  "initialization": "first 20 s from sample 0 for each full voice case",
+  "cases": {
+    "Par-01": {
+      "gain": 1,
+      "durationSeconds": 20.0,
+      "frames": 1000,
+      "matchingParameterVectors": 1000,
+      "exceptions": [],
+      "inputPreparationClips": 0,
+      "inputRails": 0,
+      "outputTrueClips": 0,
+      "input": {
+        "n": 160000,
+        "rms": 1570.7552517360082,
+        "min": -7651,
+        "max": 10751,
+        "absAmplitude": {
+          "p50": 328,
+          "p90": 2624,
+          "p95": 3729,
+          "p99": 6056,
+          "p100": 10751
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 52,
+          "p90": 807,
+          "p95": 1167,
+          "p99": 2168,
+          "p100": 3455
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 0,
+          "p50": 56,
+          "p90": 773,
+          "p95": 1125,
+          "p99": 1964,
+          "p100": 7136
+        }
+      },
+      "output": {
+        "n": 160000,
+        "rms": 2904.3476449830778,
+        "min": -18212,
+        "max": 19000,
+        "absAmplitude": {
+          "p50": 314,
+          "p90": 4965,
+          "p95": 7523,
+          "p99": 11040,
+          "p100": 19000
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 105,
+          "p90": 1238,
+          "p95": 1788,
+          "p99": 3145,
+          "p100": 8442
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 21,
+          "p50": 112,
+          "p90": 1271,
+          "p95": 1910,
+          "p99": 3755,
+          "p100": 15454
+        }
+      },
+      "inputPcmSha256": "677d09d1c91e7cae74c0a5dc3e5e3bcd3ded3634ed471bcbca6dd65ea82e2279",
+      "ambeSha256": "51561a0b64256cfbde739c59893e7614604d64d0927b9c45199aee9c51433ce6",
+      "outputPcmSha256": "bab233e4f2af646a39eacb8f726d7424f0736144f111e041270517b377e13bf8",
+      "inputWav": "Par-01-B.wav",
+      "outputWav": "Par-01-A.wav",
+      "inputWavSha256": "033c2316aafef3cc6faccbd706f194066c328fdaf2f36106759d6258d3c38221",
+      "outputWavSha256": "0035192d8e55cf815c3504c6fe8d3d33b04b82c690d5a4ecbd0215570622e3d9",
+      "stimulus": "0010",
+      "referenceC6Exact": true
+    },
+    "Par-02": {
+      "gain": 0.25,
+      "durationSeconds": 20.0,
+      "frames": 1000,
+      "matchingParameterVectors": 1000,
+      "exceptions": [],
+      "inputPreparationClips": 0,
+      "inputRails": 0,
+      "outputTrueClips": 0,
+      "input": {
+        "n": 160000,
+        "rms": 389.26594063377803,
+        "min": -3250,
+        "max": 4436,
+        "absAmplitude": {
+          "p50": 48,
+          "p90": 568,
+          "p95": 863,
+          "p99": 1576,
+          "p100": 4436
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 19,
+          "p90": 227,
+          "p95": 413,
+          "p99": 1020,
+          "p100": 2133
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 0,
+          "p50": 19,
+          "p90": 244,
+          "p95": 394,
+          "p99": 969,
+          "p100": 4316
+        }
+      },
+      "output": {
+        "n": 160000,
+        "rms": 719.6214142215683,
+        "min": -8812,
+        "max": 8817,
+        "absAmplitude": {
+          "p50": 54,
+          "p90": 1025,
+          "p95": 1663,
+          "p99": 2927,
+          "p100": 8817
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 38,
+          "p90": 366,
+          "p95": 615,
+          "p99": 1416,
+          "p100": 1800
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 0,
+          "p50": 39,
+          "p90": 383,
+          "p95": 637,
+          "p99": 1630,
+          "p100": 7564
+        }
+      },
+      "inputPcmSha256": "ae550f2d983e8522c1b8ac08534fcb29a742a6d95dcedc1fcf116d26a03b3c44",
+      "ambeSha256": "32d1622f411ae4232e5c4fd9f9366b8a4a7ef3a1fa1061c2474a0e8170b33a4b",
+      "outputPcmSha256": "4473d9412084afef3c8eab2c97efcfa883aad98cdbf5a9319fa753bf882af337",
+      "inputWav": "Par-02-A.wav",
+      "outputWav": "Par-02-B.wav",
+      "inputWavSha256": "dadc4464df3ffdfff0194bd08fbfec35a1243f60e31c2625f546010d6812fbcd",
+      "outputWavSha256": "6794e9c4e3c41e2a0f327fa3cddb0804a83900a82580941cec10ad1d60361581",
+      "stimulus": "0030"
+    },
+    "Par-03": {
+      "gain": 2,
+      "durationSeconds": 20.0,
+      "frames": 1000,
+      "matchingParameterVectors": 1000,
+      "exceptions": [],
+      "inputPreparationClips": 0,
+      "inputRails": 0,
+      "outputTrueClips": 87,
+      "input": {
+        "n": 160000,
+        "rms": 3141.5105034720164,
+        "min": -15302,
+        "max": 21502,
+        "absAmplitude": {
+          "p50": 656,
+          "p90": 5248,
+          "p95": 7458,
+          "p99": 12112,
+          "p100": 21502
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 104,
+          "p90": 1614,
+          "p95": 2334,
+          "p99": 4336,
+          "p100": 6910
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 17,
+          "p50": 112,
+          "p90": 1546,
+          "p95": 2250,
+          "p99": 3928,
+          "p100": 14272
+        }
+      },
+      "output": {
+        "n": 160000,
+        "rms": 5843.633017205564,
+        "min": -31128,
+        "max": 31128,
+        "absAmplitude": {
+          "p50": 630,
+          "p90": 9948,
+          "p95": 15023,
+          "p99": 22341,
+          "p100": 31128
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 87,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 5,
+          "p50": 209,
+          "p90": 2400,
+          "p95": 4154,
+          "p99": 8927,
+          "p100": 25445
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 416,
+          "p50": 218,
+          "p90": 2531,
+          "p95": 3820,
+          "p99": 7620,
+          "p100": 32008
+        }
+      },
+      "inputPcmSha256": "f4cae9384ba5dba6ce661df9bb939974f068c7c74427554967376a4184dd1f77",
+      "ambeSha256": "35e3c5fc4ccede9ccac65878b3c25ee2475910bfee5f274de7b30afbe5f5bd66",
+      "outputPcmSha256": "3168d7fc5a1fd854f87482be76d58b1ddd73aed4abb703e2e30c378c3b134c02",
+      "inputWav": "Par-03-B.wav",
+      "outputWav": "Par-03-A.wav",
+      "inputWavSha256": "e336449227dde2587ee2af5e6d2039ed5cf705721368cc298434a850b9c6d035",
+      "outputWavSha256": "fab2366e793d43a467e741aaf03c80123f973869aeaa6ff8bcc9276aa5b21272",
+      "stimulus": "0010"
+    },
+    "Par-04": {
+      "gain": 1,
+      "durationSeconds": 20.0,
+      "frames": 1000,
+      "matchingParameterVectors": 1000,
+      "exceptions": [],
+      "inputPreparationClips": 0,
+      "inputRails": 0,
+      "outputTrueClips": 15,
+      "input": {
+        "n": 160000,
+        "rms": 1557.0632343112306,
+        "min": -12998,
+        "max": 17744,
+        "absAmplitude": {
+          "p50": 193,
+          "p90": 2274,
+          "p95": 3451,
+          "p99": 6304,
+          "p100": 17744
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 74,
+          "p90": 911,
+          "p95": 1651,
+          "p99": 4080,
+          "p100": 8532
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 12,
+          "p50": 77,
+          "p90": 975,
+          "p95": 1577,
+          "p99": 3874,
+          "p100": 17264
+        }
+      },
+      "output": {
+        "n": 160000,
+        "rms": 2812.247209241659,
+        "min": -31128,
+        "max": 31128,
+        "absAmplitude": {
+          "p50": 213,
+          "p90": 3958,
+          "p95": 6462,
+          "p99": 11652,
+          "p100": 31128
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 15,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 5,
+          "p50": 123,
+          "p90": 1441,
+          "p95": 2679,
+          "p99": 7160,
+          "p100": 18735
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 361,
+          "p50": 128,
+          "p90": 1439,
+          "p95": 2392,
+          "p99": 6235,
+          "p100": 33655
+        }
+      },
+      "inputPcmSha256": "a5661f4d775bf3f0d146a1b4165d79fe7f08e716c7799a253b434aea682b761e",
+      "ambeSha256": "2dcceaa528f0a348c318ce2f8bd73be11650f7ddb4b7e4805cb11706546b702e",
+      "outputPcmSha256": "c175403f40ce6a8570c7510befe51f1be84fb37c9ab6c0a00af6fe89656b47a8",
+      "inputWav": "Par-04-A.wav",
+      "outputWav": "Par-04-B.wav",
+      "inputWavSha256": "989309fc5d59ca8be127ead9aabd290e730e26adb3ca07a667d54b1e4cd677c8",
+      "outputWavSha256": "24a36a2c843530be351f4ae43de467d07ae46a87e3f89357d3546111013264be",
+      "stimulus": "0030"
+    },
+    "Par-05": {
+      "gain": 0.25,
+      "durationSeconds": 20.0,
+      "frames": 1000,
+      "matchingParameterVectors": 1000,
+      "exceptions": [],
+      "inputPreparationClips": 0,
+      "inputRails": 0,
+      "outputTrueClips": 0,
+      "input": {
+        "n": 160000,
+        "rms": 392.68825661235405,
+        "min": -1913,
+        "max": 2688,
+        "absAmplitude": {
+          "p50": 82,
+          "p90": 656,
+          "p95": 932,
+          "p99": 1514,
+          "p100": 2688
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 13,
+          "p90": 202,
+          "p95": 292,
+          "p99": 542,
+          "p100": 864
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 0,
+          "p50": 14,
+          "p90": 193,
+          "p95": 281,
+          "p99": 491,
+          "p100": 1784
+        }
+      },
+      "output": {
+        "n": 160000,
+        "rms": 734.8008956088037,
+        "min": -4714,
+        "max": 4868,
+        "absAmplitude": {
+          "p50": 75,
+          "p90": 1257,
+          "p95": 1903,
+          "p99": 2796,
+          "p100": 4868
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 0,
+          "p50": 35,
+          "p90": 331,
+          "p95": 502,
+          "p99": 1182,
+          "p100": 1628
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 0,
+          "p50": 36,
+          "p90": 325,
+          "p95": 489,
+          "p99": 947,
+          "p100": 3879
+        }
+      },
+      "inputPcmSha256": "a117aa2074cc27cd10e2285734ab1328de8df557795e93da4a6b49a80f965537",
+      "ambeSha256": "d58e308a3c1f8d9d93b6d2df8fce463463a9da749354f8d0430c3a16345d9780",
+      "outputPcmSha256": "3f96ce31c09668c725eb433d6efc5b66346db0168db9b3f3b9ef547e4b7949d8",
+      "inputWav": "Par-05-B.wav",
+      "outputWav": "Par-05-A.wav",
+      "inputWavSha256": "1b754f1914461ce5b0c6114cb45c571e919621190604da0c23615124a6466b7a",
+      "outputWavSha256": "5369cbab485f1a94755ccceebd5e7734f277cdb2cc7d1eafac05bcccdf89e0bd",
+      "stimulus": "0010"
+    },
+    "Par-06": {
+      "gain": 2,
+      "durationSeconds": 20.0,
+      "frames": 1000,
+      "matchingParameterVectors": 1000,
+      "exceptions": [],
+      "inputPreparationClips": 14,
+      "inputRails": 14,
+      "outputTrueClips": 704,
+      "input": {
+        "n": 160000,
+        "rms": 3112.7575103254508,
+        "min": -25996,
+        "max": 32767,
+        "absAmplitude": {
+          "p50": 386,
+          "p90": 4548,
+          "p95": 6902,
+          "p99": 12608,
+          "p100": 32767
+        },
+        "abovePositiveLimit": 27,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 4,
+          "p50": 148,
+          "p90": 1822,
+          "p95": 3302,
+          "p99": 8160,
+          "p100": 17064
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 520,
+          "p50": 154,
+          "p90": 1950,
+          "p95": 3154,
+          "p99": 7738,
+          "p100": 34528
+        }
+      },
+      "output": {
+        "n": 160000,
+        "rms": 5497.456858636432,
+        "min": -31128,
+        "max": 31128,
+        "absAmplitude": {
+          "p50": 426,
+          "p90": 8112,
+          "p95": 13224,
+          "p99": 24096,
+          "p100": 31128
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 704,
+        "boundaryJumps": {
+          "n": 999,
+          "above12000": 7,
+          "p50": 260,
+          "p90": 3243,
+          "p95": 5430,
+          "p99": 10089,
+          "p100": 29168
+        },
+        "withinJumps": {
+          "n": 159000,
+          "above12000": 1494,
+          "p50": 250,
+          "p90": 2882,
+          "p95": 4730,
+          "p99": 11714,
+          "p100": 62256
+        }
+      },
+      "inputPcmSha256": "b6b5e93b8d7e039276d17cf66279e69f155804ccdf8c2af271217c844370e727",
+      "ambeSha256": "a86ef3f29423be12150b10abcd7dcc5409d491f0d2fc17d52867164018b3ea4e",
+      "outputPcmSha256": "b0cf250425bba9a3c30b55b450f7b3fa20144846113237381069c7842822e570",
+      "inputWav": "Par-06-A.wav",
+      "outputWav": "Par-06-B.wav",
+      "inputWavSha256": "4c26e33582226500465240ed97591ac5717e2e93b17f9c4694c52b846a0d261f",
+      "outputWavSha256": "78f4b36ac21b9187e91baadcb0d35e77449df84eefc73156d216fa13de7611d6",
+      "stimulus": "0030"
+    },
+    "Par-07": {
+      "gain": 1,
+      "durationSeconds": 1.0,
+      "frames": 50,
+      "matchingParameterVectors": 50,
+      "exceptions": [],
+      "inputPreparationClips": 0,
+      "inputRails": 0,
+      "outputTrueClips": 0,
+      "input": {
+        "n": 8000,
+        "rms": 0.0,
+        "min": 0,
+        "max": 0,
+        "absAmplitude": {
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "p99": 0,
+          "p100": 0
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 49,
+          "above12000": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "p99": 0,
+          "p100": 0
+        },
+        "withinJumps": {
+          "n": 7950,
+          "above12000": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "p99": 0,
+          "p100": 0
+        }
+      },
+      "output": {
+        "n": 8000,
+        "rms": 5.635224041686364,
+        "min": -28,
+        "max": 32,
+        "absAmplitude": {
+          "p50": 1,
+          "p90": 10,
+          "p95": 16,
+          "p99": 19,
+          "p100": 32
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 49,
+          "above12000": 0,
+          "p50": 2,
+          "p90": 3,
+          "p95": 4,
+          "p99": 24,
+          "p100": 24
+        },
+        "withinJumps": {
+          "n": 7950,
+          "above12000": 0,
+          "p50": 2,
+          "p90": 14,
+          "p95": 19,
+          "p99": 31,
+          "p100": 50
+        }
+      },
+      "inputPcmSha256": "f85f2c34eb2843d2aa5951ee6e8e76985655b2e3ae2cbdd76bdfd654ecf19997",
+      "ambeSha256": "a3323d48fbdb305d0a412eff017ed2a2e05b88383b152a381c279f09ba75f51f",
+      "outputPcmSha256": "3ce7a8ce18b2717c541761198236056f03c83234ada8ed340f17960daa59b549",
+      "inputWav": "Par-07-B.wav",
+      "outputWav": "Par-07-A.wav",
+      "inputWavSha256": "56d4af65701c26df20bd4021eda95b6e830348ce3a746086079fe89285548dc9",
+      "outputWavSha256": "574738f8ea80ca98906844853ca8f0092d33fdd0378a174d66bcb43d9572fe76",
+      "stimulus": "silence"
+    },
+    "Par-08": {
+      "gain": 1,
+      "durationSeconds": 5.0,
+      "frames": 250,
+      "matchingParameterVectors": 250,
+      "exceptions": [],
+      "inputPreparationClips": 0,
+      "inputRails": 0,
+      "outputTrueClips": 11,
+      "input": {
+        "n": 40000,
+        "rms": 1834.851306979669,
+        "min": -12998,
+        "max": 17744,
+        "absAmplitude": {
+          "p50": 119,
+          "p90": 2592,
+          "p95": 3992,
+          "p99": 7851,
+          "p100": 17744
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 0,
+        "boundaryJumps": {
+          "n": 249,
+          "above12000": 0,
+          "p50": 46,
+          "p90": 1551,
+          "p95": 2810,
+          "p99": 5107,
+          "p100": 7166
+        },
+        "withinJumps": {
+          "n": 39750,
+          "above12000": 12,
+          "p50": 43,
+          "p90": 1134,
+          "p95": 2024,
+          "p99": 5523,
+          "p100": 17264
+        }
+      },
+      "output": {
+        "n": 40000,
+        "rms": 3146.551828490197,
+        "min": -31128,
+        "max": 31128,
+        "absAmplitude": {
+          "p50": 123,
+          "p90": 4061,
+          "p95": 6806,
+          "p99": 13644,
+          "p100": 31128
+        },
+        "abovePositiveLimit": 0,
+        "belowNegativeLimit": 0,
+        "atIntLimit": 11,
+        "boundaryJumps": {
+          "n": 249,
+          "above12000": 1,
+          "p50": 66,
+          "p90": 1626,
+          "p95": 4062,
+          "p99": 9071,
+          "p100": 12781
+        },
+        "withinJumps": {
+          "n": 39750,
+          "above12000": 199,
+          "p50": 65,
+          "p90": 1576,
+          "p95": 2900,
+          "p99": 8473,
+          "p100": 31614
+        }
+      },
+      "inputPcmSha256": "b5ccf504bd9d43b8be0f4ee09aedd4970e7082e10a365df876e1b9ed1841a58a",
+      "ambeSha256": "0168a7c2976fe73ac438c6eea8c8b90fbd5640b86a0dd0fdc1e7f90d52b758fe",
+      "outputPcmSha256": "99ec61f32b360a233df5bf8566f99d0dd3c98503bfad5b36bd1c339246a91b66",
+      "inputWav": "Par-08-A.wav",
+      "outputWav": "Par-08-B.wav",
+      "inputWavSha256": "58b3bc6a8ea7b8d8e4550187bdd3270110e4ddbb4fe9d5d3988c4c7e698a3044",
+      "outputWavSha256": "6c3cd93abb28268944427b797821cf11ce1373da8ced4ee762228dd6fa42621c",
+      "stimulus": "transition",
+      "segments": [
+        {
+          "startSample": 0,
+          "endExclusive": 16000,
+          "source": "0030 [2,4) s",
+          "inputRms": 2120.320272240729,
+          "outputRms": 3661.915994803813,
+          "outputPeak": 31128
+        },
+        {
+          "startSample": 16000,
+          "endExclusive": 24000,
+          "source": "silence",
+          "inputRms": 0.0,
+          "outputRms": 18.017689224759096,
+          "outputPeak": 282
+        },
+        {
+          "startSample": 24000,
+          "endExclusive": 40000,
+          "source": "0030 [4,6) s",
+          "inputRms": 1980.136419527074,
+          "outputRms": 3367.8153084566557,
+          "outputPeak": 31128
+        }
+      ],
+      "joinAbsoluteJumps": [
+        {
+          "atSample": 16000,
+          "input": 462,
+          "output": 1
+        },
+        {
+          "atSample": 24000,
+          "input": 604,
+          "output": 0
+        }
+      ]
+    }
+  }
+}
