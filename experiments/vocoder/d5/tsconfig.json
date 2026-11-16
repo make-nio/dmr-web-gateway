@@ -1,0 +1,5 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": { "rootDir": "..", "outDir": "../results/d5-js" },
+  "include": ["*.ts", "../d4/config.ts", "../d4/contract.ts", "../d4/simulated.ts", "../d4/worker.ts"]
+}
