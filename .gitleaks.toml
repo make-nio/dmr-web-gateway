@@ -1,0 +1,44 @@
+# gitleaks configuration for this repository (tested with gitleaks 8.16.0).
+# Run:   gitleaks detect --source . --redact
+# Check: scripts/test-gitleaks-config.sh   (repeat it whenever gitleaks is upgraded)
+#
+# It keeps every default gitleaks rule and adds one rule the defaults miss:
+# plain "NAME=value" / "NAME: value" assignments whose name looks like a secret
+# (for example a DB_PASSWORD line in a .env file).
+
+title = "dmr-web-gateway gitleaks config"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "env-secret-assignment"
+description = "Secret-looking variable assigned a literal value"
+# A line like  DB_PASSWORD=value  /  export API_TOKEN: "value"  /  client_secret = value
+# - the name must contain PASSWORD, PASSWD, PASSPHRASE, SECRET, TOKEN, API_KEY, PRIVATE_KEY or CREDENTIAL;
+# - the value must be at least 8 characters and must not start with `$`, `<` or `{`
+#   (so ${VAR} interpolations and <placeholders> are not values);
+# - a leading `+` is accepted because gitleaks scans git patches line by line.
+regex = '''(?im)^\+?\s*(?:export\s+)?[A-Z0-9_]*(?:PASSWORD|PASSWD|PASSPHRASE|SECRET|TOKEN|API_?KEY|PRIVATE_KEY|CREDENTIAL)[A-Z0-9_]*\s*[=:]\s*['"]?([^\s'"$<{][^\s'"]{7,})'''
+secretGroup = 1
+keywords = ["password", "passwd", "passphrase", "secret", "token", "apikey", "api_key", "private_key", "credential"]
+
+[rules.allowlist]
+# Each exclusion below matches the whole LINE and is deliberately narrow. gitleaks 8.16.0 allows
+# a single allowlist per rule with a single target, so all of them are line patterns.
+description = "Non-secret references and explicit placeholders"
+regexTarget = "line"
+regexes = [
+  # 1. Docker/Compose `secrets:` blocks. They only NAME a secret that Docker mounts from a file at
+  #    /run/secrets/<name>; the value is never in the repository. A real value cannot hide here:
+  #    the line must start with the key `secrets:` followed by names, not by an assignment.
+  '''(?i)^\+?\s*secrets\s*:''',
+  # 2. Variables whose NAME ends in _FILE (e.g. DB_PASSWORD_FILE=/run/secrets/x). By convention they
+  #    hold the PATH of a file with the secret, not the secret. A secret pasted into a *_FILE
+  #    variable would be missed: reviewers must keep the convention.
+  '''(?i)_FILE\s*[=:]''',
+  # 3. Placeholder values, an explicit and short list, only when the placeholder is the WHOLE value
+  #    (anchored to the end of the line): changeme, example, placeholder, xxxx..., your-..., <...>.
+  #    "changeme123" or "example-real-key" are NOT excluded because the match must be the entire value.
+  '''(?i)[=:]\s*['"]?(changeme|example|placeholder|xxxx+|your[-_ ]\S*|<\S*>)['"]?\s*$''',
+]
