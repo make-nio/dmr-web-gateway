@@ -1,0 +1,453 @@
+{
+  "provider": "opendmr",
+  "mode": "duplex",
+  "node": "v22.23.3",
+  "cpuMax": "100000 100000",
+  "memoryMax": "536870912",
+  "swapMax": "0",
+  "decoderFixtureHash": "0f91b335bb99e01e8112faf63224319ba53928f6f23eb21f6bfe678f6fe32ad2",
+  "started": "2026-11-16T22:02:11.143Z",
+  "stages": [
+    {
+      "n": 1,
+      "plannedTicks": 6000,
+      "scheduledTicks": 6000,
+      "scheduledFrames": 6000,
+      "done": 6000,
+      "drops": 0,
+      "late": 0,
+      "encLate": 0,
+      "decLate": 0,
+      "errors": 0,
+      "errs": [],
+      "missed": 0,
+      "reason": null,
+      "seconds": 120.00083187299998,
+      "startupMs": 0.6428440000000037,
+      "closeMs": 0.8304830000124639,
+      "remaining": 0,
+      "avgCpuPct": 3.340121618067254,
+      "throttledUsec": 0,
+      "maxMem": 191819776,
+      "maxRSS": 68382720,
+      "maxWorkerRSS": 1982464,
+      "maxProcs": 2,
+      "latencyMs": {
+        "encodeFromTick": {
+          "n": 6000,
+          "p50": 0.8851589999976568,
+          "p95": 1.5052970000033383,
+          "p99": 2.0393960000001243,
+          "max": 2.8596570000008796
+        },
+        "decodeFromDispatch": {
+          "n": 6000,
+          "p50": 0.11778500000946224,
+          "p95": 0.18323100000270642,
+          "p99": 0.2496210000008432,
+          "max": 0.40032200000132434
+        },
+        "duplexFromTick": {
+          "n": 6000,
+          "p50": 1.0146919999970123,
+          "p95": 1.647237999990466,
+          "p99": 2.182596999999987,
+          "max": 2.9978570000021136
+        },
+        "decodeFromTick": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null
+        },
+        "dispatchLag": {
+          "n": 6000,
+          "p50": 0.41601500000024316,
+          "p95": 0.9967279999982566,
+          "p99": 1.0356849999952829,
+          "max": 1.186701999991783
+        }
+      }
+    },
+    {
+      "n": 2,
+      "plannedTicks": 6000,
+      "scheduledTicks": 6000,
+      "scheduledFrames": 12000,
+      "done": 12000,
+      "drops": 0,
+      "late": 0,
+      "encLate": 0,
+      "decLate": 0,
+      "errors": 0,
+      "errs": [],
+      "missed": 0,
+      "reason": null,
+      "seconds": 120.000265401,
+      "startupMs": 1.589693999994779,
+      "closeMs": 0.5984409999800846,
+      "remaining": 0,
+      "avgCpuPct": 5.899883763736469,
+      "throttledUsec": 0,
+      "maxMem": 168714240,
+      "maxRSS": 70967296,
+      "maxWorkerRSS": 4050944,
+      "maxProcs": 3,
+      "latencyMs": {
+        "encodeFromTick": {
+          "n": 12000,
+          "p50": 0.8956870000110939,
+          "p95": 1.5386100000177976,
+          "p99": 2.0444590000261087,
+          "max": 4.181903999997303
+        },
+        "decodeFromDispatch": {
+          "n": 12000,
+          "p50": 0.10804999998072162,
+          "p95": 0.17257699999026954,
+          "p99": 0.2465809999848716,
+          "max": 0.5787000000127591
+        },
+        "duplexFromTick": {
+          "n": 12000,
+          "p50": 1.0089200000220444,
+          "p95": 1.6716049999959068,
+          "p99": 2.1511000000173226,
+          "max": 4.320773999992525
+        },
+        "decodeFromTick": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null
+        },
+        "dispatchLag": {
+          "n": 12000,
+          "p50": 0.4193010000162758,
+          "p95": 0.9587360000004992,
+          "p99": 1.0539600000192877,
+          "max": 3.7653920000011567
+        }
+      }
+    },
+    {
+      "n": 5,
+      "plannedTicks": 6000,
+      "scheduledTicks": 6000,
+      "scheduledFrames": 30000,
+      "done": 30000,
+      "drops": 0,
+      "late": 0,
+      "encLate": 0,
+      "decLate": 0,
+      "errors": 0,
+      "errs": [],
+      "missed": 0,
+      "reason": null,
+      "seconds": 120.00034171899999,
+      "startupMs": 3.4348790000076406,
+      "closeMs": 0.6117430000449531,
+      "remaining": 0,
+      "avgCpuPct": 12.836980674967531,
+      "throttledUsec": 0,
+      "maxMem": 155934720,
+      "maxRSS": 79040512,
+      "maxWorkerRSS": 9719808,
+      "maxProcs": 6,
+      "latencyMs": {
+        "encodeFromTick": {
+          "n": 30000,
+          "p50": 0.9292479999712668,
+          "p95": 1.6575550000125077,
+          "p99": 2.2220950000046287,
+          "max": 13.221305999963079
+        },
+        "decodeFromDispatch": {
+          "n": 30000,
+          "p50": 0.10197100002551451,
+          "p95": 0.17924100000527687,
+          "p99": 0.2750010000017937,
+          "max": 1.633322000008775
+        },
+        "duplexFromTick": {
+          "n": 30000,
+          "p50": 1.0411129999556579,
+          "p95": 1.7827439999673516,
+          "p99": 2.3511949999956414,
+          "max": 13.492586999956984
+        },
+        "decodeFromTick": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null
+        },
+        "dispatchLag": {
+          "n": 30000,
+          "p50": 0.39802600000984967,
+          "p95": 1.0890079999808222,
+          "p99": 1.1359869999578223,
+          "max": 8.761668999970425
+        }
+      }
+    },
+    {
+      "n": 10,
+      "plannedTicks": 6000,
+      "scheduledTicks": 6000,
+      "scheduledFrames": 60000,
+      "done": 60000,
+      "drops": 0,
+      "late": 0,
+      "encLate": 0,
+      "decLate": 0,
+      "errors": 0,
+      "errs": [],
+      "missed": 0,
+      "reason": null,
+      "seconds": 120.00055408600002,
+      "startupMs": 6.185975999978837,
+      "closeMs": 1.2242269999696873,
+      "remaining": 0,
+      "avgCpuPct": 26.726655892800693,
+      "throttledUsec": 0,
+      "maxMem": 162557952,
+      "maxRSS": 93339648,
+      "maxWorkerRSS": 19636224,
+      "maxProcs": 11,
+      "latencyMs": {
+        "encodeFromTick": {
+          "n": 60000,
+          "p50": 1.17312099999981,
+          "p95": 1.7515240000211634,
+          "p99": 2.612726000021212,
+          "max": 3.309982000035234
+        },
+        "decodeFromDispatch": {
+          "n": 60000,
+          "p50": 0.11854999995557591,
+          "p95": 0.2621219999855384,
+          "p99": 0.3672309999819845,
+          "max": 1.2352869999594986
+        },
+        "duplexFromTick": {
+          "n": 60000,
+          "p50": 1.3100860000122339,
+          "p95": 1.8889210000052117,
+          "p99": 2.8622050000121817,
+          "max": 3.471467000024859
+        },
+        "decodeFromTick": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null
+        },
+        "dispatchLag": {
+          "n": 60000,
+          "p50": 0.653563000028953,
+          "p95": 1.051934999995865,
+          "p99": 1.175232000008691,
+          "max": 1.6811750000342727
+        }
+      }
+    },
+    {
+      "n": 15,
+      "plannedTicks": 6000,
+      "scheduledTicks": 6000,
+      "scheduledFrames": 90000,
+      "done": 90000,
+      "drops": 0,
+      "late": 0,
+      "encLate": 0,
+      "decLate": 0,
+      "errors": 0,
+      "errs": [],
+      "missed": 0,
+      "reason": null,
+      "seconds": 120.00029249700002,
+      "startupMs": 7.671946999966167,
+      "closeMs": 0.8742589999455959,
+      "remaining": 0,
+      "avgCpuPct": 47.58213805419872,
+      "throttledUsec": 0,
+      "maxMem": 166912000,
+      "maxRSS": 104267776,
+      "maxWorkerRSS": 29642752,
+      "maxProcs": 16,
+      "latencyMs": {
+        "encodeFromTick": {
+          "n": 90000,
+          "p50": 1.4173339999979362,
+          "p95": 2.154242000018712,
+          "p99": 2.894788999983575,
+          "max": 4.032498000015039
+        },
+        "decodeFromDispatch": {
+          "n": 90000,
+          "p50": 0.1447199999820441,
+          "p95": 0.3553320000646636,
+          "p99": 0.502693000016734,
+          "max": 2.09859199996572
+        },
+        "duplexFromTick": {
+          "n": 90000,
+          "p50": 1.590228000015486,
+          "p95": 2.312532000010833,
+          "p99": 3.243250000057742,
+          "max": 4.459724000073038
+        },
+        "decodeFromTick": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null
+        },
+        "dispatchLag": {
+          "n": 90000,
+          "p50": 0.6998240000102669,
+          "p95": 1.2356560000916943,
+          "p99": 1.3558740000007674,
+          "max": 1.863586000050418
+        }
+      }
+    },
+    {
+      "n": 20,
+      "plannedTicks": 6000,
+      "scheduledTicks": 6000,
+      "scheduledFrames": 120000,
+      "done": 120000,
+      "drops": 0,
+      "late": 0,
+      "encLate": 0,
+      "decLate": 0,
+      "errors": 0,
+      "errs": [],
+      "missed": 0,
+      "reason": null,
+      "seconds": 120.00073954999993,
+      "startupMs": 9.83285399992019,
+      "closeMs": 1.3561480001080781,
+      "remaining": 0,
+      "avgCpuPct": 60.54665784735595,
+      "throttledUsec": 76968,
+      "maxMem": 173453312,
+      "maxRSS": 137879552,
+      "maxWorkerRSS": 61001728,
+      "maxProcs": 21,
+      "latencyMs": {
+        "encodeFromTick": {
+          "n": 120000,
+          "p50": 1.605000999988988,
+          "p95": 2.427523000049405,
+          "p99": 2.986648999969475,
+          "max": 4.1126640000147745
+        },
+        "decodeFromDispatch": {
+          "n": 120000,
+          "p50": 0.21874699997715652,
+          "p95": 0.5833460000576451,
+          "p99": 0.8191720000468194,
+          "max": 10.920303000020795
+        },
+        "duplexFromTick": {
+          "n": 120000,
+          "p50": 1.865146000054665,
+          "p95": 2.6578620000509545,
+          "p99": 3.4814369999803603,
+          "max": 12.966301999986172
+        },
+        "decodeFromTick": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null
+        },
+        "dispatchLag": {
+          "n": 120000,
+          "p50": 0.714689000044018,
+          "p95": 1.2731249999487773,
+          "p99": 1.4386230000527576,
+          "max": 1.9833009999711066
+        }
+      }
+    },
+    {
+      "n": 25,
+      "plannedTicks": 6000,
+      "scheduledTicks": 6000,
+      "scheduledFrames": 150000,
+      "done": 150000,
+      "drops": 0,
+      "late": 0,
+      "encLate": 0,
+      "decLate": 0,
+      "errors": 0,
+      "errs": [],
+      "missed": 0,
+      "reason": null,
+      "seconds": 120.00047182600002,
+      "startupMs": 76.38655900000595,
+      "closeMs": 1.468237999943085,
+      "remaining": 0,
+      "avgCpuPct": 74.38335427629886,
+      "throttledUsec": 0,
+      "maxMem": 183730176,
+      "maxRSS": 139980800,
+      "maxWorkerRSS": 51077120,
+      "maxProcs": 26,
+      "latencyMs": {
+        "encodeFromTick": {
+          "n": 150000,
+          "p50": 1.737842999980785,
+          "p95": 2.6785150000359863,
+          "p99": 3.2071869999635965,
+          "max": 4.791920999996364
+        },
+        "decodeFromDispatch": {
+          "n": 150000,
+          "p50": 0.2593319999286905,
+          "p95": 0.7042160000419244,
+          "p99": 0.962567999958992,
+          "max": 2.6970919999293983
+        },
+        "duplexFromTick": {
+          "n": 150000,
+          "p50": 2.0425929999910295,
+          "p95": 2.9653290000278503,
+          "p99": 3.75726800004486,
+          "max": 6.010269999969751
+        },
+        "decodeFromTick": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null
+        },
+        "dispatchLag": {
+          "n": 150000,
+          "p50": 0.7306719999760389,
+          "p95": 1.3820299999788404,
+          "p99": 1.5121700000017881,
+          "max": 2.106508999946527
+        }
+      }
+    }
+  ],
+  "recovery": {
+    "failure": "WORKER",
+    "detectedMs": 1.1795609999999996,
+    "timeToFreshFrameMs": 2.580530000000003,
+    "siblingContinued": true
+  },
+  "finished": "2026-11-16T22:16:11.806Z"
+}

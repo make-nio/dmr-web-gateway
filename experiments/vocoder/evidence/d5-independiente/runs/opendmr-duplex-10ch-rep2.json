@@ -1,0 +1,85 @@
+{
+ "provider": "opendmr",
+ "mode": "duplex",
+ "channels": 10,
+ "seconds": 20,
+ "periodMs": 20,
+ "framesPlanned": 10000,
+ "framesDelivered": 10000,
+ "stopReason": null,
+ "failures": 0,
+ "failureCodes": {},
+ "limits": {
+  "maxLateRatio": 0.5,
+  "maxTickP99Ms": 200,
+  "maxMemMiB": 450,
+  "maxPids": 200,
+  "maxFailures": 0
+ },
+ "latencyMs": {
+  "encode": {
+   "count": 10000,
+   "p50": 0.641314,
+   "p95": 1.047867,
+   "p99": 1.176063,
+   "max": 1.670761
+  },
+  "decode": {
+   "count": 10000,
+   "p50": 0.13321,
+   "p95": 0.299172,
+   "p99": 0.442132,
+   "max": 0.786015
+  },
+  "delivery": {
+   "count": 10000,
+   "p50": 1.526881,
+   "p95": 2.171939,
+   "p99": 2.491499,
+   "max": 2.872641
+  },
+  "timerLateness": {
+   "count": 10000,
+   "p50": 0.696793,
+   "p95": 1.210203,
+   "p99": 1.349348,
+   "max": 1.895891
+  }
+ },
+ "lateFrames": 0,
+ "lateRatio": 0,
+ "cpuPercentOfOneCpu": 34.053786246474424,
+ "memMaxMiB": 177.89453125,
+ "cpuThrottledUsec": 0,
+ "memBaselineMiB": 169.37890625,
+ "memDeltaMaxMiB": 8.515625,
+ "memPeakMiBCgroup": null,
+ "pidsMax": 18,
+ "startupMs": {
+  "mean": 0.5685074,
+  "max": 0.987576,
+  "slowest": [
+   {
+    "session": 3,
+    "ms": 0.987576
+   },
+   {
+    "session": 8,
+    "ms": 0.618993
+   },
+   {
+    "session": 1,
+    "ms": 0.614513
+   }
+  ]
+ },
+ "closeMs": {
+  "mean": 0.2350079,
+  "max": 0.303532
+ },
+ "environment": {
+  "node": "v22.23.3",
+  "platform": "linux/x64",
+  "cgroupV2": true
+ }
+}
