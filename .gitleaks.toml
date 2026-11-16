@@ -25,20 +25,23 @@ keywords = ["password", "passwd", "passphrase", "secret", "token", "apikey", "ap
 
 [rules.allowlist]
 # Each exclusion below matches the whole LINE and is deliberately narrow. gitleaks 8.16.0 allows
-# a single allowlist per rule with a single target, so all of them are line patterns.
+# a single allowlist per rule with a single target, so all of them are line patterns. All three are
+# anchored to the start of the line, so text later in the line (e.g. a trailing comment) cannot
+# trigger an exclusion.
 description = "Non-secret references and explicit placeholders"
 regexTarget = "line"
 regexes = [
   # 1. Docker/Compose `secrets:` blocks. They only NAME a secret that Docker mounts from a file at
-  #    /run/secrets/<name>; the value is never in the repository. A real value cannot hide here:
-  #    the line must start with the key `secrets:` followed by names, not by an assignment.
-  '''(?i)^\+?\s*secrets\s*:''',
-  # 2. Variables whose NAME ends in _FILE (e.g. DB_PASSWORD_FILE=/run/secrets/x). By convention they
-  #    hold the PATH of a file with the secret, not the secret. A secret pasted into a *_FILE
+  #    /run/secrets/<name>; the value is never in the repository. Only the two Compose forms are
+  #    excluded: the bare key `secrets:` (names follow on the next lines) and a bracketed list
+  #    `secrets: [a, b]`. `secrets: <anything else>` is NOT excluded and is still reported.
+  '''(?im)^\+?[ \t]*secrets[ \t]*:[ \t]*(?:$|\[[^\]\n]*\][ \t]*$)''',
+  # 2. Assignments whose NAME ends in _FILE (e.g. DB_PASSWORD_FILE=/run/secrets/x). By convention
+  #    they hold the PATH of a file with the secret, not the secret. A secret pasted into a *_FILE
   #    variable would be missed: reviewers must keep the convention.
-  '''(?i)_FILE\s*[=:]''',
-  # 3. Placeholder values, an explicit and short list, only when the placeholder is the WHOLE value
-  #    (anchored to the end of the line): changeme, example, placeholder, xxxx..., your-..., <...>.
-  #    "changeme123" or "example-real-key" are NOT excluded because the match must be the entire value.
-  '''(?i)[=:]\s*['"]?(changeme|example|placeholder|xxxx+|your[-_ ]\S*|<\S*>)['"]?\s*$''',
+  '''(?i)^\+?\s*(?:export\s+)?[A-Z0-9_]*_FILE\s*[=:]''',
+  # 3. Placeholder values, an explicit and short list: changeme, example, placeholder, xxxx...,
+  #    your-..., <...>. The placeholder must be the WHOLE value of the assignment: "changeme123",
+  #    "example-real-key" or a real value followed by a "# e.g.: example" comment are NOT excluded.
+  '''(?i)^\+?\s*(?:export\s+)?[A-Z0-9_]+\s*[=:]\s*['"]?(changeme|example|placeholder|xxxx+|your[-_ ]\S*|<\S*>)['"]?\s*$''',
 ]
