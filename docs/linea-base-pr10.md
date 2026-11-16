@@ -4,7 +4,7 @@ Base: commit `3a7deaf54f4d0ebddb45bae444e3cf9867515379` (HEAD del PR #10, banco 
 Rama de trabajo: `dev/linea-base-pr10`. No se modificó ningún fixture: `git diff` sobre
 `experiments/vocoder/evidence/` vacío.
 
-Estado: **PARCIAL**. Lo que no se corrió está listado al final y no se da por probado.
+Estado: **casi completo** (ver el final). Lo que no se corrió está listado al final y no se da por probado.
 
 ## Entorno donde se midió
 
@@ -90,9 +90,25 @@ no capacidad de 25 canales.
 - `validate.sh` no corre en una máquina sin las dos imágenes locales (usa `--pull never`).
 - Desde Git Bash hay que cerrar la entrada estándar del comando de WSL2 (`</dev/null`).
 
+## Suite Docker y soak (imagen base cargada localmente por digest)
+
+Con `node:22-alpine` ya presente por digest (`sha256:0e175475…af8202`), en WSL2:
+
+```bash
+wsl -e bash -lc 'cd <ruta-del-clon> && python3 scripts/validate-docker.py' </dev/null
+wsl -e bash -lc 'cd <ruta-del-clon> && python3 scripts/validate-docker.py --soak' </dev/null
+```
+
+| Paso | Resultado medido | Tiempo |
+|---|---|---|
+| `validate-docker.py` | salida 0; uid/capacidades/red/solo lectura/secreto PASS (gateway y simulador); arranque sano; pérdida del master: proceso sano y readiness caída; reconexión sana; sin marcadores en logs; SIGTERM con salida 0 | 67 s |
+| `validate-docker.py --soak` (600 s) | salida 0; `passed: true`; 0 reconexiones inesperadas; 60 muestras; memoria máx. gateway 50,3 MiB y simulador 37,2 MiB; CPU máx. 1,12 % y 0,83 % | ~11 min |
+
+El soak reescribe `docs/docker-soak.json` (archivo versionado): se restauró con `git restore`
+y `git diff` sobre `evidence/` sigue vacío. El build corre `npm ci` dentro de Docker, por lo
+que necesita acceso al registro de npm.
+
 ## Lo que NO se corrió (no se da por probado)
 
-- `python3 scripts/validate-docker.py` (con y sin `--soak`) y `npm run soak`: requieren
-  construir las imágenes del `Dockerfile`, cuya base `node:22-alpine` (fijada por digest) no
-  está en esta máquina y habría que descargarla.
+- `npm run soak` por separado.
 - El banco original del vocoder (`experiments/vocoder`, `bench.py`).
