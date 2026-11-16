@@ -1,0 +1,19 @@
+BORRADOR — a completar por el titular antes de publicar.
+
+dmr-web-gateway
+Copyright (c) [AÑO] [TITULAR DEL COPYRIGHT]
+
+Este producto es un prototipo experimental de laboratorio. No es un producto terminado,
+no tiene conformidad DVSI ni pruebas con una red DMR real, y no debe presentarse como
+libre de restricciones.
+
+Terceros: el detalle de licencias, versiones y atribuciones está en THIRD_PARTY_NOTICES.md
+y en el inventario de docs/licencias/.
+
+Este repositorio no incluye ni redistribuye los motores de vocoder OpenDMR ni BLIP25: el
+banco de pruebas los descarga al construirse. Los motores AMBE+2 pueden estar cubiertos por
+patentes; usar, compilar o distribuir ejecutables derivados de ellos es responsabilidad de
+quien lo haga. Ver THIRD_PARTY_NOTICES.md, secciones OpenDMR y BLIP25.
+
+Audio: las grabaciones de evidence/ derivan de terceros y mantienen sus propias condiciones
+(ver THIRD_PARTY_NOTICES.md).
