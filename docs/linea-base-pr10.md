@@ -52,10 +52,47 @@ No verificables desde este repo (no son archivos versionados): `inputPcmSha256` 
 `evidence/d4/offline-validation.txt` no contiene hashes SHA-256: es el log de 12 casos
 (12 ok, 0 fallos). Los fixtures D3b los verifican los propios casos 11 y 12 al correr D4.
 
+## Build y D4 en WSL2 (Linux)
+
+Se corren de a un comando, desde Git Bash en Windows. El `</dev/null` va **afuera** de las
+comillas: sin él, el comando de WSL2 no termina.
+
+```bash
+wsl -e bash -lc 'cd <ruta-del-clon> && npm run build' </dev/null
+wsl -e bash -lc 'cd <ruta-del-clon> && bash experiments/vocoder/d4/validate.sh' </dev/null
+```
+
+| Paso | Resultado medido | Tiempo |
+|---|---|---|
+| `npm run build` (`tsc`) | salida 0, sin cambios en git | 3 s |
+| `validate.sh` de D4 | salida 0; **12/12** casos (0 fallos, 0 omitidos); `bench CLI simulated/opendmr/blip25: 9 bytes` | 11 s |
+
+D4 usa el Docker de WSL2 con dos imágenes que ya deben estar **localmente**, fijadas por
+digest en el script: `dmr-vocoder-spike` (`sha256:30e7ca9f…7edab`) y `node:22`
+(`sha256:363e1587…2d7`). Corre sin red, de sólo lectura y sin privilegios. No hizo falta
+ningún cambio de configuración de git.
+
+Latencias de D4 en esta máquina (p95 total, ms; 1.000 tramas por motor, 1 CPU y 512 MiB):
+
+| Motor | encode | decode |
+|---|---|---|
+| OpenDMR | 0,585 (traspaso: 0,510) | 0,213 (traspaso: 0,169) |
+| BLIP25 | 0,273 (traspaso: 0,231) | 0,213 (traspaso: 0,187) |
+
+Son entre 10 % y 26 % más altas que las del traspaso, en otro equipo. Son latencias de banco,
+no capacidad de 25 canales.
+
+### Problemas de arranque encontrados
+
+- El WSL2 trae Node 20 y el proyecto pide Node 22. El build (`tsc`) y D4 funcionan igual,
+  porque D4 corre con el `node` de la imagen `node:22`. Para `npm ci` y `npm test` se usó
+  Node 22.22.1 en Windows.
+- `validate.sh` no corre en una máquina sin las dos imágenes locales (usa `--pull never`).
+- Desde Git Bash hay que cerrar la entrada estándar del comando de WSL2 (`</dev/null`).
+
 ## Lo que NO se corrió (no se da por probado)
 
-- `npm run soak` y `python3 scripts/validate-docker.py` (con y sin `--soak`).
-- `bash experiments/vocoder/d4/validate.sh` (12 casos, latencias, CLI de los tres proveedores).
+- `python3 scripts/validate-docker.py` (con y sin `--soak`) y `npm run soak`: requieren
+  construir las imágenes del `Dockerfile`, cuya base `node:22-alpine` (fijada por digest) no
+  está en esta máquina y habría que descargarla.
 - El banco original del vocoder (`experiments/vocoder`, `bench.py`).
-
-Este documento se completa con tiempos y problemas de arranque cuando esas corridas se hagan.
