@@ -1,0 +1,197 @@
+{
+  "ladders": [
+    {
+      "provider": "opendmr",
+      "mode": "duplex",
+      "completed": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "zeroMissSteps": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "guard": null,
+      "attemptedTop": 25,
+      "inhibited": [],
+      "missed": 0,
+      "errors": 0,
+      "stages": 7
+    },
+    {
+      "provider": "blip25",
+      "mode": "duplex",
+      "completed": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "zeroMissSteps": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "guard": null,
+      "attemptedTop": 25,
+      "inhibited": [],
+      "missed": 0,
+      "errors": 0,
+      "stages": 7
+    },
+    {
+      "provider": "opendmr",
+      "mode": "encode",
+      "completed": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "zeroMissSteps": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "guard": null,
+      "attemptedTop": 25,
+      "inhibited": [],
+      "missed": 0,
+      "errors": 0,
+      "stages": 7
+    },
+    {
+      "provider": "blip25",
+      "mode": "encode",
+      "completed": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "zeroMissSteps": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "guard": null,
+      "attemptedTop": 25,
+      "inhibited": [],
+      "missed": 0,
+      "errors": 0,
+      "stages": 7
+    },
+    {
+      "provider": "opendmr",
+      "mode": "decode",
+      "completed": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "zeroMissSteps": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "guard": null,
+      "attemptedTop": 25,
+      "inhibited": [],
+      "missed": 0,
+      "errors": 0,
+      "stages": 7
+    },
+    {
+      "provider": "blip25",
+      "mode": "decode",
+      "completed": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "zeroMissSteps": [
+        1,
+        2,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "guard": null,
+      "attemptedTop": 25,
+      "inhibited": [],
+      "missed": 0,
+      "errors": 0,
+      "stages": 7
+    }
+  ],
+  "filesSha256": {
+    "blip25-container.json": "7840f5f510740e611deea81e85940e5911e9aa3abde67ef426182b607cad130d",
+    "blip25-samples.jsonl": "6014d43463321835286b373847a0aaca8e0292cbfdc77c1f7a6f76704dcc9d76",
+    "blip25.json": "b15dc611c556d5e784d6b20b3d36d5af9aeeebc7dc4ae7101b2b1764cbc3a4b6",
+    "capacity.md": "d099316c426c9498fd57cd78fc2f05d0907f4b582ea41d686acd406781632cdb",
+    "decode/blip25-container.json": "fbca675328458bf334b91eed45013664d4eebf4654944748afbb5186c52a85e9",
+    "decode/blip25-samples.jsonl": "50f92ee8afa923c9738540bf659f9a2587e993373c48ef89ca98b21ae9fa17ed",
+    "decode/blip25.json": "a8b784c1632f9988ecf0c3516b592f973b656ff4719735247db0746364a0af40",
+    "decode/opendmr-container.json": "8fda8b59981194e2755a335060ba37ebde6bafb01fe450d3d70a288bd6e3c335",
+    "decode/opendmr-samples.jsonl": "773f414857e11fa5e62f40abfe78e8e8e625ae5e099b85df675b862215164145",
+    "decode/opendmr.json": "17baa829e27e66395ef8f0094b900238437bcec46405b3a3f376e2d33bd3bf6e",
+    "decode/summary.md": "a83f1cc535e642963abf14998585d4ac848e912380d144f858ac89a94fdc5164",
+    "encode/blip25-container.json": "55a052e3de578d756bbdcc3e4e9d1ac54d7ce722dd932b28ee994cdc930f59fa",
+    "encode/blip25-samples.jsonl": "55777680229960e14e26bf960237f363dfeea0a56a7e5ab212b491d57fcc294a",
+    "encode/blip25.json": "46b808b530a92e9427790dde5fd59d4ebc968ffb53d3b0d354991207b4af6880",
+    "encode/opendmr-container.json": "e0307ef681b9fcbc5e28373819a60fa7ee3dd3dc9ec4102cf65def4d018a6ee8",
+    "encode/opendmr-samples.jsonl": "c6d8e39ac74b8b5d744c5fc10b10436af1ddb9c2ea3abe7df5520c50773a7d09",
+    "encode/opendmr.json": "ae8257f42a562532916e4c55b9d1d92f83b93a1dc483e82e131efadfd9b5a47a",
+    "encode/summary.md": "0f102c02fb3c2d164e4a3b502acf4b34cef99e39779e4eb2b7920394ebe77db0",
+    "environment.json": "c9777fc5d84ceb75e6cdd99a2b559cd9e4e30e8358ada712123bf64781140367",
+    "opendmr-container.json": "226778ad72998ebd009f8434f14c2fa1498009b20296957481748ddd8e3ef8a7",
+    "opendmr-samples.jsonl": "a09e1484e49bb4f17ea6e975d3046271d7730feb6a160104c485b1bc178c5a43",
+    "opendmr.json": "7890315c2cff7a27b32deee9d343a732380269248d2cb182fbf66112e367164d",
+    "summary.md": "521111989a196fa071a5d447c68b88fda8f395f981eee11e0a37dd86c8e2f829"
+  }
+}
