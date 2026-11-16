@@ -2,7 +2,7 @@
 **Corte de contexto:** 2026-11-09. **Fuente de verdad:** GitHub; verificar HEAD de PR #10 antes de actuar. Este documento no sustituye las evidencias técnicas.
 
 ## 1. Objetivo de producto y alcance
-Crear un gateway DMR accesible desde navegador, con capacidad futura de audio bidireccional/PTT, usando protocolo Homebrew hacia una infraestructura DMR autorizada. Desarrollo incremental, con pruebas offline antes de cualquier conexión real. Usuario: radioaficionado LU8DRU, arquitecto/owner; SRE responsable de despliegue homelab; Codex ejecuta investigación y código; PO Claude debe coordinar continuidad y priorizar tareas. No existe aún interfaz web, audio integrado ni tráfico BrandMeister.
+Crear un gateway DMR accesible desde navegador, con capacidad futura de audio bidireccional/PTT, usando protocolo Homebrew hacia una infraestructura DMR autorizada. Desarrollo incremental, con pruebas offline antes de cualquier conexión real. Usuario: radioaficionado LU8DRU, arquitecto/owner; Codex ejecuta investigación y código; PO Claude debe coordinar continuidad y priorizar tareas. No existe aún interfaz web, audio integrado ni tráfico BrandMeister.
 
 **No prometer que el gateway ya transmite/recibe voz por radio.** El simulador Homebrew es una aproximación local y no demuestra interoperabilidad real.
 
