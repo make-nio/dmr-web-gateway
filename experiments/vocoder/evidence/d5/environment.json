@@ -1,0 +1,23 @@
+{
+  "baseCommit": "3a7deaf54f4d0ebddb45bae444e3cf9867515379",
+  "image": "sha256:30e7ca9f6a5703eb472244d80106f37d5bfd1f5d7413068065faf89224a7edab",
+  "nodeImage": "sha256:363e1587494626837fa7f9a23bdb453d13b0ff3c67c705c2805cfc69c2d2fad7",
+  "user": "1000:1000",
+  "network": "none",
+  "readonlyRoot": true,
+  "memory": 536870912,
+  "memorySwap": 536870912,
+  "nanoCpus": 1000000000,
+  "cpuset": "",
+  "securityOpt": [
+    "no-new-privileges"
+  ],
+  "capDrop": [
+    "ALL"
+  ],
+  "docker": "29.0.0",
+  "kernel": "Linux 5.15.167.4-microsoft-standard-WSL2",
+  "machine": "x86_64",
+  "cpu": "model name\t: AMD Ryzen 7 9800X3D 8-Core Processor",
+  "startUTC": "2026-11-11T20:59:20.747633437Z"
+}

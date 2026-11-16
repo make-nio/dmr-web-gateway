@@ -135,7 +135,10 @@ async function stage(n){
       if(now()-last>=1000)sample();
     }
     await Promise.all([...pending.values()]);
-    if(!reason) await waitUntil(t0+120000);
+    if(!reason) {
+      await waitUntil(t0+120000);
+      while(now()<t0+120000) await sleep(1);
+    }
     const end=now(); sample();
     const final=prev;
     const closeStart=now();

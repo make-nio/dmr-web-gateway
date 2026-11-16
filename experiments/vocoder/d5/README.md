@@ -14,7 +14,10 @@ bash experiments/vocoder/d5/validate.sh experiments/vocoder/results/d5-nueva-cor
 Usar un destino nuevo. Los dos proveedores se ejecutan en serie. Cada uno
 tiene su propio contenedor de medición sin red, UID 1000, raíz read-only,
 capacidades retiradas, cuota de 100000/100000 μs (un núcleo), memoria máxima
-536870912 bytes y sin swap. El tmpfs contiene Node, el adaptador OpenDMR y
+536870912 bytes y sin swap. La cuota no fija afinidad a un único núcleo
+físico: varios hijos pueden usar distintos núcleos hasta consumir el
+presupuesto agregado del período de 100 ms. Esto importa al comparar la
+latencia con una máquina que tenga un único vCPU. El tmpfs contiene Node, el adaptador OpenDMR y
 los artefactos de compilación, que cuentan para el cgroup. La preparación
 (compiler, extracción de PCM) termina antes de medir. Un contenedor auxiliar
 lee el ejecutable Node de una imagen local y termina antes de la escalera.
@@ -91,10 +94,9 @@ workerRSS solo incluye los hijos del proveedor. La cota cgroup incluye
 tmpfs y cachés, por lo que difiere de RSS. El JSON por proveedor guarda los
 resultados de cada escalón; el JSONL guarda ventanas, procesos, memoria, CPU y
 eventos de memoria. Comprobar los JSON de estado del contenedor al interpretar
-un resultado parcial. Para auditar los conteos y generar los cuadros:
+un resultado parcial. Para auditar los conteos, comprobar el orden cronológico
+de las seis escaleras y generar cuadros y hashes al final:
 
 ```sh
-for sub in '' /encode /decode; do
-  python3 experiments/vocoder/d5/summarize.py "experiments/vocoder/results/d5-nueva-corrida$sub"
-done
+python3 experiments/vocoder/d5/finalize.py experiments/vocoder/results/d5-nueva-corrida
 ```
