@@ -1,0 +1,147 @@
+{
+  "_nota": "Inventario de terceros que NO están en los lockfiles (npm y Cargo salen de package-lock.json y Cargo.lock). Fuente única: scripts/generate-sbom.py lo lee para el SBOM. 'verificada' = leída contra la fuente enlazada el 16-nov-2026; no es asesoramiento legal.",
+  "terceros": [
+    {
+      "id": "opendmr",
+      "nombre": "OpenDMR",
+      "ref": "d28164b39ba4d91ad5948ff22707937f8944f70f",
+      "fuente": "https://github.com/MW0MWZ/OpenDMR",
+      "rol": "Se descarga y compila en el build del banco (Dockerfile); no está copiado en el repo. experiments/vocoder/d4/native.cpp lo incluye con #include \"opendmr.cpp\" y los workers se enlazan contra libopendmr.a.",
+      "licencia_declarada": "GPL-2.0 (LICENSE de la raíz y CREDITS); GPL-3.0-or-later en encoder/encode.cc; GPL-2.0-or-later en decoder/mbelib.c",
+      "spdx": "GPL-2.0-only AND GPL-3.0-or-later AND GPL-2.0-or-later",
+      "estado": "verificada con conflicto interno",
+      "verificada_en": ["LICENSE (texto GPL v2)", "decoder/CREDITS y encoder/CREDITS: «GPL-2.0»", "encoder/encode.cc: encabezado «GNU GPL, versión 3 o posterior»", "decoder/mbelib.c: SPDX GPL-2.0-or-later"],
+      "problema": "El CREDITS del encoder dice GPL-2.0 pero el encabezado de encoder/encode.cc dice GPL-3.0-or-later. opendmr.cpp y dmr_codec.cpp no traen encabezado. Si algún archivo es GPL-2.0-solo, el conjunto no se puede distribuir (GPL-2.0-solo y GPL-3.0 no se combinan).",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "mbelib-neo",
+      "nombre": "mbelib-neo (decoder de OpenDMR)",
+      "ref": "dentro de OpenDMR d28164b",
+      "fuente": "https://github.com/arancormonk",
+      "rol": "Decoder de OpenDMR (decoder/*.c)",
+      "licencia_declarada": "GPL-2.0-or-later; «partes originalmente bajo ISC» (mbelib, Pavel Yazev 2010)",
+      "spdx": "GPL-2.0-or-later",
+      "estado": "verificada (encabezado SPDX de decoder/mbelib.c)",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "op25-mbeencoder",
+      "nombre": "Encoder MBE derivado de OP25 (KA1RBI) e IMBE de Pavel Yazev",
+      "ref": "dentro de OpenDMR d28164b",
+      "fuente": "https://github.com/osmocom/op25",
+      "rol": "Encoder de OpenDMR (encoder/*.cc, cgolay24128.cpp)",
+      "licencia_declarada": "GPL-3.0-or-later (encabezado de encode.cc); el CREDITS dice GPL-2.0",
+      "spdx": "GPL-3.0-or-later",
+      "estado": "verificada con conflicto interno (ver OpenDMR)",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "pffft-fftpack",
+      "nombre": "PFFFT (Julien Pommier) sobre FFTPACK (NCAR/UCAR)",
+      "ref": "dentro de OpenDMR d28164b (decoder/pffft.*, decoder/fftpack.*)",
+      "fuente": "https://bitbucket.org/jpommier/pffft",
+      "rol": "FFT del decoder",
+      "licencia_declarada": "Licencia tipo BSD de FFTPACK/UCAR (redistribución con aviso y descargo, sin usar los nombres de NCAR/UCAR para promocionar)",
+      "spdx": "LicenseRef-FFTPACK-UCAR",
+      "estado": "verificada (texto en los encabezados de pffft.h y fftpack.h)",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "blip25-vocoder",
+      "nombre": "BLIP25 vocoder (OpenBLIP25)",
+      "ref": "d1762813b7142c021f4105c832bf7f060d1249fa",
+      "fuente": "https://github.com/OpenBLIP25/blip25-vocoder",
+      "rol": "Se descarga en el build (Dockerfile) y se usa como dependencia de ruta del worker Rust; no está copiado en el repo.",
+      "licencia_declarada": "MIT (Cargo.toml y LICENSE, © 2026 Chance Lindsey)",
+      "spdx": "MIT",
+      "estado": "verificada; MIT no resuelve procedencia ni patentes",
+      "problema": "PATENT_NOTICE.md y ATTRIBUTION.md del propio proyecto dicen: el motor de src/engine/ se recuperó por ingeniería inversa de un vocoder de referencia compilado, es «derivado» de él, está «patent-encumbered» (cita US8359197, activa hasta 2028-05-20 según el proyecto, no verificado por mí) y se ofrece sólo para investigación e interoperabilidad. Las tablas de cuantización AMBE+2 provienen del firmware.",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "dmrgo",
+      "nombre": "dmrgo (USA-RedDragon)",
+      "ref": "f78e033e90559995213498973fe9d75e9bd45b93",
+      "fuente": "https://github.com/USA-RedDragon/dmrgo",
+      "rol": "Referencia externa de sólo lectura que importa experiments/vocoder/d2a/main.go; se monta en el contenedor, no está en el repo.",
+      "licencia_declarada": "MIT (© 2023-2026 Jacob McSwain)",
+      "spdx": "MIT",
+      "estado": "verificada",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "mmdvmhost-silencio",
+      "nombre": "Constante de silencio AMBE de MMDVMHost (g4klx)",
+      "ref": "referida en docs/research/sprint-1-vocoder-d1.md",
+      "fuente": "https://github.com/g4klx/MMDVM-Host/blob/master/DMRDefines.h",
+      "rol": "Valor de 9 bytes usado como vector de prueba de silencio",
+      "licencia_declarada": "no leída (el proyecto MMDVMHost declara GPL-2.0, sin verificar)",
+      "spdx": "NOASSERTION",
+      "estado": "sin determinar: no se leyó la licencia de la fuente y no se sabe si una constante de 9 bytes es protegible",
+      "se_distribuye_en_el_repo": true
+    },
+    {
+      "id": "osr-corpus",
+      "nombre": "Open Speech Repository (Telchemy), OSR_us_000_0010_8k.wav y otros OSR_us_000_*_8k",
+      "ref": "SHA-256 a4bf9becd046d7aedb6d05b6e12347a6294a44f74d263089c636fb0a2b1e6561 (0010)",
+      "fuente": "https://www.voiptroubleshooter.com/open_speech/",
+      "rol": "Voz de entrada; se descarga en el build. Los WAV de evidence/c4..c7, d3b (RX/TX, L1/L2) son derivados (pasados por el codec).",
+      "licencia_declarada": "Condiciones de uso propias: uso, copia, modificación y publicación libres «sin restricción», con la única obligación de citar la fuente como «Open Speech Repository».",
+      "spdx": "LicenseRef-OSR-Telchemy",
+      "estado": "verificada contra la página del repositorio",
+      "problema": "No hay una licencia estándar (no es CC ni SPDX). La atribución «Open Speech Repository» figura en README y manifiestos pero no en un NOTICE: hay que agregarla.",
+      "se_distribuye_en_el_repo": true
+    },
+    {
+      "id": "rosario-corpus",
+      "nombre": "Lectura «Rosario (Argentina) Parte 1» de Gabriel Quagliano (Wikimedia Commons, 2011)",
+      "ref": "SHA-1 del OGG original 56448464985566dcf898fb16422d802d19a2b371",
+      "fuente": "https://commons.wikimedia.org/wiki/File:Es-Rosario_(Argentina)_Parte_1-article.ogg",
+      "rol": "Evidencia D3c: Rosario-01.wav y Rosario-02.wav son adaptaciones (recorte, 8 kHz, paso por el codec)",
+      "licencia_declarada": "CC BY-SA 3.0 Unported",
+      "spdx": "CC-BY-SA-3.0",
+      "estado": "verificada contra la página de Commons",
+      "problema": "Share-alike: las adaptaciones deben seguir bajo CC BY-SA 3.0 y no pueden relicenciarse con la licencia del código. Crédito, enlace a la licencia y aviso de cambios ya están en evidence/d3c/LEEME.md. El texto leído es de colaboradores de Wikipedia en español: su licencia no fue verificada acá.",
+      "se_distribuye_en_el_repo": true
+    },
+    {
+      "id": "ffmpeg",
+      "nombre": "FFmpeg 6.1.1-3ubuntu5",
+      "ref": "build de Ubuntu citado en evidence/d3c/LEEME.md",
+      "fuente": "https://ffmpeg.org/legal.html",
+      "rol": "Herramienta de reproducción manual (no se descarga en el build ni se distribuye)",
+      "licencia_declarada": "LGPL-2.1-or-later o GPL-2.0-or-later según las opciones del build",
+      "spdx": "NOASSERTION",
+      "estado": "sin determinar: depende de cómo esté construido el paquete de Ubuntu, que no se inspeccionó",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "imagen-node-alpine",
+      "nombre": "Imagen base node:22-alpine",
+      "ref": "sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202",
+      "fuente": "https://hub.docker.com/_/node",
+      "rol": "Base del Dockerfile raíz",
+      "licencia_declarada": "agregada (Node.js, Alpine/musl y paquetes con licencias propias)",
+      "spdx": "NOASSERTION",
+      "estado": "sin determinar a nivel de paquete: no se generó el inventario de la imagen",
+      "se_distribuye_en_el_repo": false
+    },
+    {
+      "id": "imagen-rust-bookworm",
+      "nombre": "Imagen base rust:1.85-bookworm y paquete python3 de Debian",
+      "ref": "sha256:e51d0265072d2d9d5d320f6a44dde6b9ef13653b035098febd68cce8fa7c0bc4",
+      "fuente": "https://hub.docker.com/_/rust",
+      "rol": "Base del Dockerfile del banco (experiments/vocoder)",
+      "licencia_declarada": "agregada (Debian, Rust, GCC, python3 con licencias propias)",
+      "spdx": "NOASSERTION",
+      "estado": "sin determinar a nivel de paquete: no se generó el inventario de la imagen",
+      "se_distribuye_en_el_repo": false
+    }
+  ],
+  "codigo_propio": {
+    "nombre": "dmr-web-gateway (código propio)",
+    "licencia": "NOASSERTION",
+    "estado": "sin licencia elegida: el repo no tiene LICENSE, NOTICE ni THIRD_PARTY_NOTICES, y los archivos propios no llevan encabezado SPDX. Sin licencia, el código público queda con todos los derechos reservados por defecto."
+  }
+}

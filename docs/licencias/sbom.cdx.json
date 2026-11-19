@@ -1,0 +1,448 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "cargo:blip25-vocoder@1.0.0",
+      "description": "dependencia de ruta (fuera del repo), ref d1762813b7142c021f4105c832bf7f060d1249fa",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "blip25-vocoder",
+      "purl": "pkg:cargo/blip25-vocoder@1.0.0",
+      "type": "library",
+      "version": "1.0.0"
+    },
+    {
+      "bom-ref": "cargo:vocoder-spike-worker@0.1.0",
+      "description": "código propio sin licencia elegida",
+      "licenses": [
+        {
+          "license": {
+            "name": "sin determinar"
+          }
+        }
+      ],
+      "name": "vocoder-spike-worker",
+      "purl": "pkg:cargo/vocoder-spike-worker@0.1.0",
+      "type": "library",
+      "version": "0.1.0"
+    },
+    {
+      "bom-ref": "docker:node:22-alpine@sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202",
+      "description": "imagen base de Dockerfile; inventario de paquetes no generado",
+      "licenses": [
+        {
+          "license": {
+            "name": "sin determinar"
+          }
+        }
+      ],
+      "name": "node:22-alpine",
+      "type": "container",
+      "version": "sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202"
+    },
+    {
+      "bom-ref": "docker:rust:1.85-bookworm@sha256:e51d0265072d2d9d5d320f6a44dde6b9ef13653b035098febd68cce8fa7c0bc4",
+      "description": "imagen base de experiments/vocoder/Dockerfile; inventario de paquetes no generado",
+      "licenses": [
+        {
+          "license": {
+            "name": "sin determinar"
+          }
+        }
+      ],
+      "name": "rust:1.85-bookworm",
+      "type": "container",
+      "version": "sha256:e51d0265072d2d9d5d320f6a44dde6b9ef13653b035098febd68cce8fa7c0bc4"
+    },
+    {
+      "bom-ref": "npm:@types/node@22.20.5",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "536f8336bfb04a3a6c4d2ff0646607abb19cc1fb9298a88abe83ef2b6db3c13951854f75c8e9e2378a914792a1223be27fbcacc3f773fe12a67c31f4462b3868"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@types/node",
+      "purl": "pkg:npm/%40types/node@22.20.5",
+      "scope": "excluded",
+      "type": "library",
+      "version": "22.20.5"
+    },
+    {
+      "bom-ref": "npm:typescript@5.9.3",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8e5d6f6733c38a72ebf5e52ddc9feded5e8580d130f508ef04f772b33f4a7d00c3e357d0ac2d98e2f290762694a454f86d795bd511e12e9a7cc2d9ba3394e04b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "typescript",
+      "purl": "pkg:npm/typescript@5.9.3",
+      "scope": "excluded",
+      "type": "library",
+      "version": "5.9.3"
+    },
+    {
+      "bom-ref": "npm:undici-types@6.21.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8b00d9aa0d10006ae0f516afe47e27d0ceb87379a4479f5c27ac10a7eec2e2723482c984c5a79d6982cd3b8e1e4f802d041c236d38863cc96dd8c7744fd1fd25"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "undici-types",
+      "purl": "pkg:npm/undici-types@6.21.0",
+      "scope": "excluded",
+      "type": "library",
+      "version": "6.21.0"
+    },
+    {
+      "bom-ref": "tercero:blip25-vocoder",
+      "description": "verificada; MIT no resuelve procedencia ni patentes",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/OpenBLIP25/blip25-vocoder"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "BLIP25 vocoder (OpenBLIP25)",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "false"
+        },
+        {
+          "name": "rol",
+          "value": "Se descarga en el build (Dockerfile) y se usa como dependencia de ruta del worker Rust; no está copiado en el repo."
+        }
+      ],
+      "type": "library",
+      "version": "d1762813b7142c021f4105c832bf7f060d1249fa"
+    },
+    {
+      "bom-ref": "tercero:dmrgo",
+      "description": "verificada",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/USA-RedDragon/dmrgo"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "dmrgo (USA-RedDragon)",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "false"
+        },
+        {
+          "name": "rol",
+          "value": "Referencia externa de sólo lectura que importa experiments/vocoder/d2a/main.go; se monta en el contenedor, no está en el repo."
+        }
+      ],
+      "type": "library",
+      "version": "f78e033e90559995213498973fe9d75e9bd45b93"
+    },
+    {
+      "bom-ref": "tercero:ffmpeg",
+      "description": "sin determinar: depende de cómo esté construido el paquete de Ubuntu, que no se inspeccionó",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://ffmpeg.org/legal.html"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "sin determinar"
+          }
+        }
+      ],
+      "name": "FFmpeg 6.1.1-3ubuntu5",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "false"
+        },
+        {
+          "name": "rol",
+          "value": "Herramienta de reproducción manual (no se descarga en el build ni se distribuye)"
+        }
+      ],
+      "type": "application",
+      "version": "build de Ubuntu citado en evidence/d3c/LEEME.md"
+    },
+    {
+      "bom-ref": "tercero:mbelib-neo",
+      "description": "verificada (encabezado SPDX de decoder/mbelib.c)",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/arancormonk"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0-or-later"
+          }
+        }
+      ],
+      "name": "mbelib-neo (decoder de OpenDMR)",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "false"
+        },
+        {
+          "name": "rol",
+          "value": "Decoder de OpenDMR (decoder/*.c)"
+        }
+      ],
+      "type": "library",
+      "version": "dentro de OpenDMR d28164b"
+    },
+    {
+      "bom-ref": "tercero:mmdvmhost-silencio",
+      "description": "sin determinar: no se leyó la licencia de la fuente y no se sabe si una constante de 9 bytes es protegible",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/g4klx/MMDVM-Host/blob/master/DMRDefines.h"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "sin determinar"
+          }
+        }
+      ],
+      "name": "Constante de silencio AMBE de MMDVMHost (g4klx)",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "true"
+        },
+        {
+          "name": "rol",
+          "value": "Valor de 9 bytes usado como vector de prueba de silencio"
+        }
+      ],
+      "type": "application",
+      "version": "referida en docs/research/sprint-1-vocoder-d1.md"
+    },
+    {
+      "bom-ref": "tercero:op25-mbeencoder",
+      "description": "verificada con conflicto interno (ver OpenDMR)",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/osmocom/op25"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-3.0-or-later"
+          }
+        }
+      ],
+      "name": "Encoder MBE derivado de OP25 (KA1RBI) e IMBE de Pavel Yazev",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "false"
+        },
+        {
+          "name": "rol",
+          "value": "Encoder de OpenDMR (encoder/*.cc, cgolay24128.cpp)"
+        }
+      ],
+      "type": "library",
+      "version": "dentro de OpenDMR d28164b"
+    },
+    {
+      "bom-ref": "tercero:opendmr",
+      "description": "verificada con conflicto interno",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/MW0MWZ/OpenDMR"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "GPL-2.0-only AND GPL-3.0-or-later AND GPL-2.0-or-later"
+        }
+      ],
+      "name": "OpenDMR",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "false"
+        },
+        {
+          "name": "rol",
+          "value": "Se descarga y compila en el build del banco (Dockerfile); no está copiado en el repo. experiments/vocoder/d4/native.cpp lo incluye con #include \"opendmr.cpp\" y los workers se enlazan contra libopendmr.a."
+        }
+      ],
+      "type": "library",
+      "version": "d28164b39ba4d91ad5948ff22707937f8944f70f"
+    },
+    {
+      "bom-ref": "tercero:osr-corpus",
+      "description": "verificada contra la página del repositorio",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://www.voiptroubleshooter.com/open_speech/"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "LicenseRef-OSR-Telchemy"
+          }
+        }
+      ],
+      "name": "Open Speech Repository (Telchemy), OSR_us_000_0010_8k.wav y otros OSR_us_000_*_8k",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "true"
+        },
+        {
+          "name": "rol",
+          "value": "Voz de entrada; se descarga en el build. Los WAV de evidence/c4..c7, d3b (RX/TX, L1/L2) son derivados (pasados por el codec)."
+        }
+      ],
+      "type": "data",
+      "version": "SHA-256 a4bf9becd046d7aedb6d05b6e12347a6294a44f74d263089c636fb0a2b1e6561 (0010)"
+    },
+    {
+      "bom-ref": "tercero:pffft-fftpack",
+      "description": "verificada (texto en los encabezados de pffft.h y fftpack.h)",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://bitbucket.org/jpommier/pffft"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "LicenseRef-FFTPACK-UCAR"
+          }
+        }
+      ],
+      "name": "PFFFT (Julien Pommier) sobre FFTPACK (NCAR/UCAR)",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "false"
+        },
+        {
+          "name": "rol",
+          "value": "FFT del decoder"
+        }
+      ],
+      "type": "library",
+      "version": "dentro de OpenDMR d28164b (decoder/pffft.*, decoder/fftpack.*)"
+    },
+    {
+      "bom-ref": "tercero:rosario-corpus",
+      "description": "verificada contra la página de Commons",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://commons.wikimedia.org/wiki/File:Es-Rosario_(Argentina)_Parte_1-article.ogg"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "CC-BY-SA-3.0"
+          }
+        }
+      ],
+      "name": "Lectura «Rosario (Argentina) Parte 1» de Gabriel Quagliano (Wikimedia Commons, 2011)",
+      "properties": [
+        {
+          "name": "se_distribuye_en_el_repo",
+          "value": "true"
+        },
+        {
+          "name": "rol",
+          "value": "Evidencia D3c: Rosario-01.wav y Rosario-02.wav son adaptaciones (recorte, 8 kHz, paso por el codec)"
+        }
+      ],
+      "type": "data",
+      "version": "SHA-1 del OGG original 56448464985566dcf898fb16422d802d19a2b371"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "bom-ref": "dmr-web-gateway",
+      "description": "sin licencia elegida: el repo no tiene LICENSE, NOTICE ni THIRD_PARTY_NOTICES, y los archivos propios no llevan encabezado SPDX. Sin licencia, el código público queda con todos los derechos reservados por defecto.",
+      "licenses": [
+        {
+          "license": {
+            "name": "sin determinar"
+          }
+        }
+      ],
+      "name": "dmr-web-gateway",
+      "type": "application"
+    },
+    "properties": [
+      {
+        "name": "sin_determinar",
+        "value": "cargo:vocoder-spike-worker@0.1.0,docker:node:22-alpine@sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202,docker:rust:1.85-bookworm@sha256:e51d0265072d2d9d5d320f6a44dde6b9ef13653b035098febd68cce8fa7c0bc4,tercero:ffmpeg,tercero:mmdvmhost-silencio"
+      }
+    ]
+  },
+  "serialNumber": "urn:uuid:0e1b72fa-2a6c-5c7b-90b8-ddb26ae00871",
+  "specVersion": "1.5",
+  "version": 1
+}
